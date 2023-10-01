@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Eleccion; // Asegúrate de importar el modelo Eleccion
+use App\Eleccion;
+
 
 class EleccionController extends Controller
 {
@@ -17,10 +18,27 @@ class EleccionController extends Controller
     public function store(Request $request)
     {
         // Valida los datos del formulario según tus necesidades
+        $request->validate([
+            'nombre' => 'required|string',
+            'motivo' => 'required|string',
+            'cargodeautoridad' => 'required|string',
+            'gestion' => 'required|string',
+            'tipodevotantes' => 'required|string',
+            'convocatoria' => 'nullable|mimes:pdf', // Validación para archivos PDF (opcional)
+            'fecha' => 'required|date',
+            'tipodeeleccion' => 'required|string',
+            'descripcion' => 'required|string',
+        ]);
 
         $eleccion = new Eleccion();
         $eleccion->nombre = $request->input('nombre');
-        $eleccion->candidato = $request->input('candidato');
+        $eleccion->motivo = $request->input('motivo');
+        $eleccion->cargodeautoridad = $request->input('cargodeautoridad');
+        $eleccion->gestion = $request->input('gestion');
+        $eleccion->tipodevotantes = $request->input('tipodevotantes');
+        $eleccion->fecha = $request->input('fecha');
+        $eleccion->tipodeeleccion = $request->input('tipodeeleccion');
+        $eleccion->descripcion = $request->input('descripcion');
 
         // Guarda el archivo de convocatoria si se ha proporcionado
         if ($request->hasFile('convocatoria')) {
