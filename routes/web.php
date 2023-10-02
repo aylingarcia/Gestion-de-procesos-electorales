@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ListaEleccionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/registro-eleccion', 'EleccionController@create')->name('layouts.registroeleccion');
 
 Route::post('/registro-eleccion', 'EleccionController@store')->name('layouts.store');
+
+
+Route::get('/elecciones', [ListaEleccionController::class, 'index'])->name('layouts.listaEleccion');
+//Route::post('/elecciones', ['ListaEleccionController@store'])->name('layouts.store');
+
 
 Auth::routes();
 
