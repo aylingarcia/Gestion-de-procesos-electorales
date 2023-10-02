@@ -6,7 +6,11 @@
 <body>
 
 <h2>Registrar una Elección</h2>
-
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 <form method="POST" action="{{ route('layouts.store') }}" enctype="multipart/form-data">
     @csrf
 
@@ -26,7 +30,7 @@
     <input type="text" name="tipo_votantes" id="tipo_votantes" required><br><br>
 
     <label for="convocatoria_pdf">Convocatoria (PDF):</label>
-    <input type="file" name="convocatoria_pdf" id="convocatoria_pdf" required><br><br>
+    <input type="file" name="convocatoria" id="convocatoria" required><br><br>
 
     <label for="fecha">Fecha:</label>
     <input type="date" name="fecha" id="fecha" required><br><br>
