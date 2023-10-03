@@ -24,3 +24,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/registro-eleccion', 'EleccionController@create')->name('layouts.registroeleccion');
 
 Route::post('/registro-eleccion', 'EleccionController@store')->name('layouts.store');
+
+Route::get('/eleciones-Creadas', 'Created_ListController@indexx');
+
