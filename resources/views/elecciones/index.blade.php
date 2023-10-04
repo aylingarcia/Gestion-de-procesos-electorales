@@ -22,7 +22,7 @@ mostrar lista de elecciones
                 
             <a href="{{ url('/elecciones/'.$elecciones->id.'/edit') }}">
                 Editar 
-            </a> | Archivar</td>
+                <a href="{{ url('/elecciones/'.$elecciones->id.'/archivar') }}"> | Archivar</a>
         </tr>
         @endforeach
     </tbody>
