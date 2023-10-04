@@ -27,4 +27,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('elecciones', 'EleccionController');
 
+Route::get('/eleciones-Creadas', 'Created_ListController@indexx');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
