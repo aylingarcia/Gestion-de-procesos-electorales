@@ -24,6 +24,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('/elecciones', 'EleccionController@index');
+Route::get('/elecciones/{id}/archivar', 'EleccionController@archivar');
 
 Route::resource('elecciones', 'EleccionController');
 
