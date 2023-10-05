@@ -15,6 +15,20 @@ class CreatePersonasTable extends Migration
     {
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_eleccion')->nullable()->constrained('eleccions', 'id');
+            $table->foreignId('id_comite')->nullable()->constrained('comites', 'id');
+            $table->string('nombres');	
+            $table->string('apellidoPaterno');
+            $table->string('apellidoMaterno');
+            $table->integer('numeroCelular')->nullable();
+            $table->integer('codSis')->nullable();
+            $table->string('carnetIdentidad')->nullable();
+            $table->string('fechaNacimiento');
+            $table->string('tipo');
+            $table->string('carrera');
+            $table->string('facultad');
+            $table->string('profesion')->nullable();
+            $table->string('cargo')->nullable();
             $table->timestamps();
         });
     }

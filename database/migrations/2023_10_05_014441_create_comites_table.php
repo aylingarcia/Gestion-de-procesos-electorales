@@ -15,6 +15,8 @@ class CreateComitesTable extends Migration
     {
         Schema::create('comites', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_eleccion')->nullable()->constrained('eleccions', 'id');
+            $table->string('tipoComite');
             $table->timestamps();
         });
     }

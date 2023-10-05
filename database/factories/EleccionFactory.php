@@ -1,6 +1,7 @@
 <?php
 
-use App\Eleccion;
+
+use App\Models\Eleccion;
 use Faker\Generator as Faker;
 
 $factory->define(Eleccion::class, function (Faker $faker) {
@@ -14,6 +15,6 @@ $factory->define(Eleccion::class, function (Faker $faker) {
         'fecha' => $faker->date,
         'tipodeeleccion' => $faker->word,
         'descripcion' => $faker->paragraph,
-        'estado' => $faker->boolean,
+        'estado' => 1,
     ];
 });

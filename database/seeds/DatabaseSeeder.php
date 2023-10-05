@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Eleccion;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +12,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        factory(Eleccion::class, 10)->create();
+        factory(App\Models\Eleccion::class, 100)->create();
+        factory(App\Models\Comite::class, 30)->create();
+        factory(App\Models\Persona::class, 100)->create();
+        /*$this->call(EleccionSeeder::class);
+        $this->call(ComiteSeeder::class);
+        $this->call(PersonaSeeder::class);*/
+        
     }
 }
