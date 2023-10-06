@@ -102,7 +102,7 @@
             }
         }
         function confirmarConfirmacion() {
-            var confirmacion = confirm("¿Estas segurro de registrar la eleccion?");
+            var confirmacion = confirm("¿Estas seguro de registrar la eleccion?");
             if (confirmacion) {
 
                 window.location.href = "/home";
