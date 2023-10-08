@@ -52,6 +52,8 @@ body {
 
     max-width: 1400px;
     margin: 0 auto;
+    
+    
 }
 
 .back {
@@ -152,10 +154,13 @@ body {
 .botonesss {
     max-width: max-content;
     /* Ajusta el ancho del contenedor según tus necesidades */
+    
+
 }
 
 /* CSS para todos los botones */
 .botones {
+
     display: inline-block;
     /* Hace que los elementos se muestren en línea (lado a lado) */
     margin-right: 230px;

@@ -37,7 +37,7 @@
                     <ul>
                         <li><a href="#">Salir</a></li>
                         <li><a href="#">Administrador</a></li>
-                 
+
 
                     </ul>
                 </nav>
@@ -55,7 +55,7 @@
         </center>
         <br>
         <br>
-        <br>
+
         <div class="container botonesss">
 
 
@@ -71,8 +71,6 @@
 
         </div>
 
-
-        <br>
         <br>
         <div class="container">
             <div class="row">
@@ -88,18 +86,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach( $eleccionescreadas as $elecciones)
-                            <tr>
-                                <td>{{ $elecciones->id }}</td>
-                                <td>{{ $elecciones->nombre }}</td>
-                                <td>{{ $elecciones->cargodeautoridad }}</td>
-                                <td>{{ $elecciones->gestion }}</td>
-                                <td>
-                                    
-                                <a href="{{ url('/elecciones/'.$elecciones->id.'/edit') }}">
-                                    Editar 
-                                </a> | Archivar</td>
-                            </tr>
+                            @foreach ($eleccionescreadas as $elecciones)
+                                <tr>
+                                    <td>{{ $elecciones->id }}</td>
+                                    <td>{{ $elecciones->nombre }}</td>
+                                    <td>{{ $elecciones->cargodeautoridad }}</td>
+                                    <td>{{ $elecciones->gestion }}</td>
+                                    <td>
+
+                                        <a href="{{ url('/elecciones/' . $elecciones->id . '/edit') }}">
+                                            Editar
+                                        </a> | Archivar
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -110,6 +109,3 @@
 </body>
 
 </html>
-
-
-
