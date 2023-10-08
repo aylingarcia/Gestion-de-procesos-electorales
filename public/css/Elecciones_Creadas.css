@@ -10,7 +10,7 @@
 
 header {
 
-    padding-top: 100px;
+    padding-top: 130px;
     /* Añade espacio en la parte superior del header */
 
     background: linear-gradient(90deg,
@@ -145,7 +145,6 @@ body {
     display: none;
 
 }
-
 
 
 
