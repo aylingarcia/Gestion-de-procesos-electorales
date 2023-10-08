@@ -92,6 +92,24 @@
             padding: 10px;
         }
     </style>
+
+<script>
+        function confirmarCancelacion() {
+            var confirmacion = confirm("¿Seguro que deseas cancelar? Los cambios no se guardarán.");
+            if (confirmacion) {
+
+                window.location.href = "/elecciones";
+            }
+        }
+        function confirmarConfirmacion() {
+            var confirmacion = confirm("Los datos han sido registrados con exito");
+            if (confirmacion) {
+
+                window.location.href = "/home";
+            }
+        }
+    </script>
+
 </head>
 <body>
     <div class="header">
@@ -117,7 +135,7 @@
                     <input type="text" name="cargodeautoridad" value="{{ isset($elecciones) ? $elecciones->cargodeautoridad : '' }}" id="cargodeautoridad" required>
 
                     <label for="gestion">Gestión (Año):</label>
-                    <input type="number" name="gestion" value="{{ isset($elecciones) ? $elecciones->gestion : '' }}" id="gestion" required>
+                    <input type="number" name="gestion" value="{{ isset($elecciones) ? $elecciones->gestion : '2023' }}" id="gestion" min="2023" required>
 
                     <label for="tipodevotantes">Tipo de Votantes:</label>
                     <input type="text" name="tipodevotantes" value="{{ isset($elecciones) ? $elecciones->tipodevotantes : '' }}" id="tipodevotantes" required><br><br>
@@ -141,8 +159,8 @@
                     <textarea name="descripcion" id="descripcion" rows="4">{{ isset($elecciones) ? $elecciones->descripcion : '' }}</textarea>
                 </div>
             </div>
-            <input type="submit" value="{{ isset($elecciones) ? 'Actualizar' : 'Registrar' }}">
-            <input type="reset" value="Cancelar">
+            <input type="submit" value="{{ isset($elecciones) ? 'Actualizar' : 'Registrar' }}" onclick="confirmarConfirmacion()">
+            <input type="reset" value="Cancelar" onclick="confirmarCancelacion()">
         </form>
     </div>
 </body>

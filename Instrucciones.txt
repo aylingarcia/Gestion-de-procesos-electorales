@@ -16,6 +16,9 @@ nombre Admin
 usuario: admindevgenius@gmail.com 
 contraseña: 12345678
 
+comando para crear modelos y controlador:
+php artisan make:model Models\nombre modelo -mcr
+
 Ya hice lo de crear la lista de las elcciones y la de editar una elccion las direciones para entrar son:
 
 Crear

@@ -24,6 +24,7 @@ class CreateEleccionsTable extends Migration
             $table->date('fecha');
             $table->string('tipodeeleccion');
             $table->text('descripcion');
+            $table->boolean('estado');
             $table->timestamps();
         });
     }
