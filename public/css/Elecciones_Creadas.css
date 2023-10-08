@@ -10,14 +10,14 @@
 
 header {
 
-    padding-top: 20px;
+    padding-top: 140px;
     /* Añade espacio en la parte superior del header */
 
     background: linear-gradient(90deg,
-            #E30613 25%,
-            #003770 73%);
+            #003770 55%,
+            #E30613 73%);
 
-    height: 100px;
+    height: 70px;
     /* Cambia este valor según lo grande que quieras que sea tu header */
     display: flex;
     align-items: center;
@@ -25,12 +25,12 @@ header {
 
 
 .company-logo {
+    border-radius: 8%;
 
-    max-width: 15%;
+    max-width: 20%;
     /* Ajusta el ancho máximo de la imagen al 100% del contenedor */
-    height: 40%;
+    height:auto;
     /* Permite que la altura se ajuste automáticamente para mantener la proporción */
-    vertical-align: middle;
     /* Alinea verticalmente la imagen en el medio del texto */
     float: left;
 }
@@ -50,8 +50,10 @@ body {
 
 .container {
 
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 0 auto;
+    
+    
 }
 
 .back {
@@ -72,6 +74,7 @@ body {
     z-index: 1000;
 }
 
+
 .logo {
     display: inline-block;
     /* Alinea los elementos en línea */
@@ -79,8 +82,8 @@ body {
     /* Alinea el texto en el centro horizontalmente */
     text-decoration: none;
     /* Quita la decoración de subrayado en el enlace */
-    font-size: 26px;
-    color: rgb(78, 12, 12);
+    font-size: 20px;
+    color: rgb(255, 255, 255);
     font-weight: 800;
     text-transform: uppercase;
     max-width: 800px;
@@ -124,7 +127,7 @@ body {
 }
 
 .menu .navbar ul li a:hover {
-    color: #E30613;
+    color: #003770;
 
 }
 
@@ -147,14 +150,16 @@ body {
 
 
 
-
 .botonesss {
     max-width: max-content;
     /* Ajusta el ancho del contenedor según tus necesidades */
+    
+
 }
 
 /* CSS para todos los botones */
 .botones {
+
     display: inline-block;
     /* Hace que los elementos se muestren en línea (lado a lado) */
     margin-right: 230px;
@@ -190,6 +195,7 @@ body {
 }
 
 table {
+    color: #000000;
     width: 100%;
     /* Ancho de la tabla al 100% del contenedor */
     border-collapse: collapse;
@@ -199,11 +205,13 @@ table {
     font-family: Arial, sans-serif;
     /* Fuente de texto */
 }
-
+.colorinitabla{
+    color: white;
+}
 table,
 th,
 td {
-    border: 1px solid #003770;
+    border: 2px solid #003770;
     /* Borde de las celdas */
 }
 
@@ -216,6 +224,7 @@ td {
 }
 
 th {
+    
     background-color: #E30613;
     /* Color de fondo para las celdas de encabezado */
 }

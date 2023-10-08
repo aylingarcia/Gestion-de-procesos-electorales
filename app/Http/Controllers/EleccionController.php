@@ -15,7 +15,7 @@ class EleccionController extends Controller
     public function index()
     {
         //
-        $datos['eleccionescreadas']=Eleccion::where('estado', 1)->paginate(5);
+        $datos['eleccionescreadas']=Eleccion::where('estado', 1)->paginate(20);
         return view('elecciones.index', $datos);
     }
 

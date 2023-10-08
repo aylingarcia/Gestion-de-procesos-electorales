@@ -28,6 +28,6 @@ Route::get('/elecciones/{id}/archivar', 'EleccionController@archivar');
 
 Route::resource('elecciones', 'EleccionController');
 
-Route::get('/eleciones-Creadas', 'Created_ListController@indexx');
+//Route::get('/eleciones-creadas', 'EleccionController@index');
 
 Route::get('/home', 'ConfirmacionController@index')->name('confirmacion');
