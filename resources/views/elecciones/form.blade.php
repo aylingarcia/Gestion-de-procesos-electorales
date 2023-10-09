@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,7 +94,7 @@
         }
     </style>
 
-<script>
+    <script>
         function confirmarCancelacion() {
             var confirmacion = confirm("¿Seguro que deseas cancelar? Los cambios no se guardarán.");
             if (confirmacion) {
@@ -101,6 +102,7 @@
                 window.location.href = "/elecciones";
             }
         }
+
         function confirmarConfirmacion() {
             var confirmacion = confirm("Los datos han sido registrados con exito");
             if (confirmacion) {
@@ -108,61 +110,84 @@
                 window.location.href = "/home";
             }
         }
+
     </script>
 
 </head>
+
 <body>
     <div class="header">
         <h1>Administrador de elecciones</h1>
         <h2>UMSS</h2>
     </div>
     <div class="container">
-        <form action="{{ isset($elecciones) ? url('/elecciones/'.$elecciones->id) : url('/elecciones') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ isset($elecciones) ? url('/elecciones/' . $elecciones->id) : url('/elecciones') }}"
+            method="post" enctype="multipart/form-data">
             @csrf
-            @if(isset($elecciones))
+            @if (isset($elecciones))
                 {{ method_field('PATCH') }}
             @endif
             <h2 class="form-title">Registrar Elección</h2>
             <div class="columns">
                 <div class="column">
                     <label for="nombre">Nombre de la Elección:</label>
-                    <input type="text" name="nombre" value="{{ isset($elecciones) ? $elecciones->nombre : '' }}" required>
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')" 
+                     name="nombre" placeholder="Escribe el nombre de la eleccion aqui..."
+                        value="{{ isset($elecciones) ? $elecciones->nombre : '' }}" required>
 
                     <label for="motivo">Motivo de la Elección:</label>
-                    <input type="text" name="motivo" value="{{ isset($elecciones) ? $elecciones->motivo : '' }}" id="motivo" required>
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"  
+                    name="motivo" placeholder="Escribe el motivo de la eleccion aqui..."
+                        value="{{ isset($elecciones) ? $elecciones->motivo : '' }}" id="motivo" required>
 
                     <label for="cargodeautoridad">Cargo de Autoridad:</label>
-                    <input type="text" name="cargodeautoridad" value="{{ isset($elecciones) ? $elecciones->cargodeautoridad : '' }}" id="cargodeautoridad" required>
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"  
+                    name="cargodeautoridad" placeholder="Escribe el cargo de autoridad aqui..."
+                        value="{{ isset($elecciones) ? $elecciones->cargodeautoridad : '' }}" id="cargodeautoridad"
+                        required>
 
                     <label for="gestion">Gestión (Año):</label>
-                    <input type="number" name="gestion" value="{{ isset($elecciones) ? $elecciones->gestion : '2023' }}" id="gestion" min="2023" required>
-
+                    <input type="number" name="gestion" placeholder="Escribe la gestion aqui..."
+                        value="{{ isset($elecciones) ? $elecciones->gestion : '2023' }}" id="gestion" min="2023"
+                        required>
 
                     <label for="tipodevotantes">Tipo de Votantes:</label>
-                    <input type="text" name="tipodevotantes" value="{{ isset($elecciones) ? $elecciones->tipodevotantes : '' }}" id="tipodevotantes" required><br><br>
-                
-                
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"  
+                    name="tipodevotantes" placeholder="Escribe el tipo de votante aqui..."
+                        value="{{ isset($elecciones) ? $elecciones->tipodevotantes : '' }}" id="tipodevotantes"
+                        required><br><br>
+
+
                 </div>
                 <div class="column">
                     <label for="convocatoria">Convocatoria (PDF):</label>
-                    @if(isset($elecciones) && $elecciones->convocatoria)
+                    @if (isset($elecciones) && $elecciones->convocatoria)
                         <p>{{ $elecciones->convocatoria }}</p>
                     @endif
-                    <input type="file" name="convocatoria" {{ isset($elecciones) && $elecciones->convocatoria ? '' : 'required' }}>
+                    <input type="file" accept="application/pdf" name="convocatoria"
+                        {{ isset($elecciones) && $elecciones->convocatoria ? '' : 'required' }}>
 
                     <label for="fecha">Fecha:</label>
-                    <input type="date" name="fecha" value="{{ isset($elecciones) ? $elecciones->fecha : '' }}" id="fecha" required>
+                    <input type="date" name="fecha" value="{{ isset($elecciones) ? $elecciones->fecha : '' }}"
+                        id="fecha" required>
 
                     <label for="tipodeeleccion">Tipo de Elección:</label>
-                    <input type="text" name="tipodeeleccion" value="{{ isset($elecciones) ? $elecciones->tipodeeleccion : '' }}" id="tipodeeleccion" required>
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"  
+                    name="tipodeeleccion" placeholder="Escribe el tipo de eleccion aqui..."
+                        value="{{ isset($elecciones) ? $elecciones->tipodeeleccion : '' }}" id="tipodeeleccion"
+                        required>
 
                     <label for="descripcion">Descripción:</label>
-                    <textarea name="descripcion" id="descripcion" rows="4">{{ isset($elecciones) ? $elecciones->descripcion : '' }}</textarea>
+                    <textarea oninput="this.value = this.value.replace(/[^A-Za-z,.0-9-]+/g, '')"  
+                    name="descripcion" placeholder="Escribe la descripcion de la eleccion aqui..." id="descripcion"
+                        rows="4">{{ isset($elecciones) ? $elecciones->descripcion : '' }}</textarea>
                 </div>
-              </div>
-             <input type="submit" value="{{ isset($elecciones) ? 'Actualizar' : 'Registrar' }}" onclick="confirmarConfirmacion()">
+            </div>
+            <input type="submit" value="{{ isset($elecciones) ? 'Actualizar' : 'Registrar' }}"
+                onclick="confirmarConfirmacion()">
             <input type="reset" value="Cancelar" onclick="confirmarCancelacion()">
         </form>
     </div>
 </body>
+
 </html>

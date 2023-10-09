@@ -72,7 +72,8 @@
 
 
             <div class="botones">
-                <button class="buttons">Crear nueva elección</button>
+            <a href="{{ route('elecciones.create') }}" class="buttons">Crear nueva elección</a>
+
             </div>
 
             <div class="botones">
