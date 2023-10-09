@@ -191,11 +191,10 @@ body {
 }
 
 .buttons:active {
-    background-color: #8b010a;
+    background-color: #8b010a;  
 }
 
 table {
-    color: #000000;
     width: 100%;
     /* Ancho de la tabla al 100% del contenedor */
     border-collapse: collapse;
@@ -205,9 +204,6 @@ table {
     font-family: Arial, sans-serif;
     /* Fuente de texto */
 }
-.colorinitabla{
-    color: white;
-}
 
 table,
 th,
@@ -216,7 +212,9 @@ td {
     border: 2px solid #003770;
     /* Borde de las celdas */
 }
-
+table th:first-child {
+    width: 70px;
+  }
 th,
 td {
     padding: 8px;
@@ -250,9 +248,10 @@ caption {
 }
 
 /* Estilo para la primera columna (si es necesario) */
-td:first-child {
+td:first-child {  
     background-color: #c4babada;
 }
+
 
 /* Estilo para la última columna (si es necesario) */
 /*td:last-child {
