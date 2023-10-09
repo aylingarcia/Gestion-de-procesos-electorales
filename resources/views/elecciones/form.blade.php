@@ -158,8 +158,8 @@
                     <label for="descripcion">Descripción:</label>
                     <textarea name="descripcion" id="descripcion" rows="4">{{ isset($elecciones) ? $elecciones->descripcion : '' }}</textarea>
                 </div>
-            </div>
-            <input type="submit" value="{{ isset($elecciones) ? 'Actualizar' : 'Registrar' }}" onclick="confirmarConfirmacion()">
+              </div>
+             <input type="submit" value="{{ isset($elecciones) ? 'Actualizar' : 'Registrar' }}" onclick="confirmarConfirmacion()">
             <input type="reset" value="Cancelar" onclick="confirmarCancelacion()">
         </form>
     </div>

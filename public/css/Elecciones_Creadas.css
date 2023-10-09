@@ -10,7 +10,7 @@
 
 header {
 
-    padding-top: 140px;
+    padding-top: 130px;
     /* Añade espacio en la parte superior del header */
 
     background: linear-gradient(90deg,
@@ -208,9 +208,11 @@ table {
 .colorinitabla{
     color: white;
 }
+
 table,
 th,
 td {
+    color: #ffffff;
     border: 2px solid #003770;
     /* Borde de las celdas */
 }
@@ -224,7 +226,6 @@ td {
 }
 
 th {
-    
     background-color: #E30613;
     /* Color de fondo para las celdas de encabezado */
 }
