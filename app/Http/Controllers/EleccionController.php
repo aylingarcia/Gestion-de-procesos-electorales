@@ -15,7 +15,7 @@ class EleccionController extends Controller
     public function index()
     {
         //
-        $datos['eleccionescreadas']=Eleccion::paginate(5);
+        $datos['eleccionescreadas']=Eleccion::paginate(20);
         return view('elecciones.index', $datos);
     }
 
@@ -71,7 +71,7 @@ class EleccionController extends Controller
     {
         //
         $elecciones=Eleccion::FindOrFail($id);
-        return view('elecciones.edit', compact('elecciones'));
+        return view('elecciones.edit', compact('eleciones'));
     }
 
     /**

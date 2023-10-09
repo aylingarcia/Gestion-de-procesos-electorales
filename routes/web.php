@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\EleccionController;
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +21,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::get('/elecciones', 'EleccionController@index');
+Route::get('/elecciones-creadas', 'EleccionController@index');
 
 Route::resource('elecciones', 'EleccionController');
+
+Route::get('/elecciones', 'ConfirmacionController@index')->name('confirmacion');
+
+Route::get('/registro-votante', function () {
+    return view('votante.form');
+});
 
 
