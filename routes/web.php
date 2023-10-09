@@ -31,3 +31,7 @@ Route::resource('elecciones', 'EleccionController');
 //Route::get('/eleciones-creadas', 'EleccionController@index');
 
 Route::get('/home', 'ConfirmacionController@index')->name('confirmacion');
+
+Route::get('/registro-votante', function () {
+    return view('votante.form');
+});
