@@ -208,7 +208,7 @@ table {
 table,
 th,
 td {
-    color: #ffffff;
+    color: #000000;
     border: 2px solid #003770;
     /* Borde de las celdas */
 }
