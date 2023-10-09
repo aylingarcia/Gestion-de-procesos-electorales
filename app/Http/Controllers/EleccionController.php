@@ -111,4 +111,5 @@ class EleccionController extends Controller
 
         return redirect('/elecciones');
     }
+    
 }

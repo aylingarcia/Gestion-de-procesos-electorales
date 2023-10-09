@@ -31,3 +31,4 @@ Route::resource('elecciones', 'EleccionController');
 // Route::get('/eleciones-creadas', 'EleccionController@index'); ya no se usa
 
 Route::get('/home', 'ConfirmacionController@index')->name('confirmacion');
+

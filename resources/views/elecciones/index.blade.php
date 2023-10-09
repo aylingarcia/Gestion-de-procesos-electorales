@@ -72,7 +72,8 @@
 
 
             <div class="botones">
-                <button class="buttons">Crear nueva elección</button>
+                <button class="buttons" >Crear nueva elección</button>
+
             </div>
 
             <div class="botones">
