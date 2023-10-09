@@ -100,10 +100,10 @@
                         <tbody>
                             @foreach ($eleccionescreadas as $elecciones)
                                 <tr>
-                                    <td>{{ $elecciones->id }}</td>
-                                    <td>{{ $elecciones->nombre }}</td>
-                                    <td>{{ $elecciones->cargodeautoridad }}</td>
-                                    <td>{{ $elecciones->gestion }}</td>
+                                    <td style="color: black;">{{ $elecciones->id }}</td>
+                                    <td style="color: black;">{{ $elecciones->nombre }}</td>
+                                    <td style="color: black;">{{ $elecciones->cargodeautoridad }}</td>
+                                    <td style="color: black;">{{ $elecciones->gestion }}</td>
                                   
         <td>
                             <button class="buttons" style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" onclick="window.location.href='{{ url('/elecciones/' . $elecciones->id . '/edit') }}'">Editar</button>
