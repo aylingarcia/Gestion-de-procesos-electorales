@@ -15,7 +15,7 @@ class EleccionController extends Controller
     public function index()
     {
         //
-        $datos['eleccionescreadas']=Eleccion::paginate(20);
+        $datos['eleccionescreadas']=Eleccion::where('estado', 1)->paginate(20);
         return view('elecciones.index', $datos);
     }
 
@@ -41,6 +41,7 @@ class EleccionController extends Controller
         //
         //$datosEleccion = request()->all();
         $datosEleccion = request()->except('_token');
+        $datosEleccion['estado'] = $request->input('estado', 1);
         Eleccion::insert($datosEleccion);
 
         if($request->hasFile('convocatoria')){
@@ -71,7 +72,7 @@ class EleccionController extends Controller
     {
         //
         $elecciones=Eleccion::FindOrFail($id);
-        return view('elecciones.edit', compact('eleciones'));
+        return view('elecciones.edit', compact('elecciones'));
     }
 
     /**
@@ -100,5 +101,14 @@ class EleccionController extends Controller
     public function destroy(Eleccion $eleccion)
     {
         //
+    }
+
+    public function archivar($id)
+    {
+        $eleccion = Eleccion::findOrFail($id);
+        $eleccion->estado = 0;
+        $eleccion->save();
+
+        return redirect('/elecciones');
     }
 }

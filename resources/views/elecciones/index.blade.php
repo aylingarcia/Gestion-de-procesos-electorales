@@ -63,7 +63,7 @@
         <br>
         <br>
         <center>
-            <h1>Lista de Eleeciones Creadas</h1>
+            <h1>Lista de Elecciones Creadas</h1>
         </center>
         <br>
         <br>
@@ -72,7 +72,8 @@
 
 
             <div class="botones">
-                <button class="buttons">Crear nueva elección</button>
+            <a href="{{ route('elecciones.create') }}" class="buttons">Crear nueva elección</a>
+
             </div>
 
             <div class="botones">
