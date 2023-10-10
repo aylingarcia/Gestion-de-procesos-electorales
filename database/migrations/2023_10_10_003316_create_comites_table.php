@@ -21,7 +21,7 @@ class CreateComitesTable extends Migration
             $table->string('apellidoMaterno');
             $table->string('CI');
             $table->string('cargoComite');
-            $table->string('profesion')->nullable();
+            $table->string('profesion');
             $table->string('cargoUMSS')->nullable();
             $table->timestamps();
         });
