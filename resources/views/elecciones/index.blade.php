@@ -22,7 +22,7 @@
 
         <div class="logo">
             <a href="#" class="logo2">
-                <img src="images/LogoUMSS2.png" alt="Logo de la Empresa" class="company-logo">
+                <img src="/images/LogoUMSS2.png" alt="Logo de la Empresa" class="company-logo">
             </a>
             <div><a href="#">TRIBUNAL ELECTORAL</a></div>
             <div><a href="#">UNIVERSITARIO</a></div>
