@@ -173,10 +173,10 @@ nav ul li a:hover{
 .botones {
 
     display: inline-block;
-    /* Hace que los elementos se muestren en línea (lado a lado) */
-    margin-right: 230px;
-    /* Espacio entre los botones (ajusta según tus preferencias) */
-    margin-left: 300px;
+    /* Hace que los elementos se muestren en línea (lado a lado) 230px */ 
+    margin-right: auto;
+    /* Espacio entre los botones (ajusta según tus preferencias) 300px*/
+    margin-left: auto;
 }
  /* Botones dentro de la tabla */
     .buttons-dentro-tabla {

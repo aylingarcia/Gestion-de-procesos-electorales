@@ -99,6 +99,19 @@
 
             </div>
 
+            {{-- Votones Momentaneos de Anadir votante y comite electoral --}}
+            <div class="botones">
+                <a href="{{ route('elecciones.create') }}" class="buttons">Añadir Votante</a>
+
+            </div>
+
+            <div class="botones">
+                <a href="{{ route('elecciones.create') }}" class="buttons">Añadir Comite Electoral</a>
+
+            </div>
+            {{-- Fin botones momentaneos --}}
+
+
             <div class="botones">
                 <input type="text" id="search" placeholder="Buscar...">
                 <button class="buttons" onclick="search()">Buscar</button>
@@ -140,17 +153,17 @@
                                             <img src="/images/archivar.png" alt="Archivar" class="formato-imagen" />
                                         </button>
 
-                                        <button class="buttons-dentro-tabla" title="Añadir Votante"
-                                            {{-- onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')" --}}
-                                            >
-                                            <img src="/images/anadirvotante.png" alt="Archivar" class="formato-imagen" />
-                                        </button>
+                                        {{-- <button class="buttons-dentro-tabla" title="Añadir Votante" --}}
+                                            {{-- añadir la funcion que redireccione --}}
+                                            {{-- > --}}
+                                            {{-- <img src="/images/anadirvotante.png" alt="Archivar" class="formato-imagen" /> --}}
+                                        {{-- </button> --}}
 
-                                        <button class="buttons-dentro-tabla" title="Añadir Comite"
-                                            {{-- onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')" --}}
-                                            >
-                                            <img src="/images/anadircomite.png" alt="Archivar" class="formato-imagen" />
-                                        </button>
+                                        {{-- <button class="buttons-dentro-tabla" title="Añadir Comite" --}}
+                                            {{-- añadir la funcion que redireccione --}}
+                                            {{-- > --}}
+                                            {{-- <img src="/images/anadircomite.png" alt="Archivar" class="formato-imagen" /> --}}
+                                        {{-- </button> --}}
 
 
 
