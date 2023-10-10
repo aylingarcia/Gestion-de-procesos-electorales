@@ -5,6 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RegistrarVotante</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing:border-box;
+            font-family: "Uni Sans" , sans-serif;
+        }
+        nav {
+            display:flex;
+            align-items: center;
+            justify-content: space-around;
+            height: 70px;
+            background-image: linear-gradient(to right, #003770, #f80211);
+            border-bottom: 2px solid #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+        nav .logo a {
+            font-size:25px;
+            color:#fff;
+            font-weight: 600;
+            text-decoration:none;
+        }
+        nav .logo a:hover {
+            color: #003770;
+            transition: 0.5s;
+        }
+        nav ul {
+            display: flex;
+            align-items: center;
+            justify-content:center;
+            gap:2.5rem;
+        }
+        nav ul li{
+            list-style: none;
+        }
+        nav ul li a{
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        nav ul li a:hover{
+            color: #003770;
+            transition: 0.5s;
+        }
+        
+        .menu-icon{
+            display: none;
+            width: 25px;
+            height:3px;
+            background: #fff;
+            transform: translateY(-50%);
+            transition: 0.5s;
+            border-radius:5px;
+            cursor: pointer;
+        }
+        .menu-icon::before,
+        .menu-icon::after{
+            content:"";
+            position: absolute;
+            width: 25px;
+            height:3px;
+            background: #fff;
+            transition:0.5s;
+            border-radius: 5px;
+        }
+        .menu-icon::before{
+            top:-8px;
+        }
+        .menu-icon::after{
+            top:-8px;
+        }
+        .menu-icon.active{
+            background: rgba(0,0,0,0);
+        }
+        .menu-icon.active::before{
+            top:0;
+            transform:rotate(45deg);
+        }
+        .menu-icon.active::after{
+            top:0;
+            transform: rotate(135deg);
+        }
+        @media screen and (max-width:992px){
+            nav ul{
+                position:fixed;
+                top: 0px;
+                right:100%;
+                width:100%;
+                height: 90vh;
+                background: #004a92;
+                flex-direction: column;
+                transition: 0.5s ease-in;
+            }
+            nav ul li a{
+                font-size: 24px;
+            }
+            ul.active{
+                right: 0;
+                transition: 0.5s ease-in;
+            }
+            .menu-icon{
+                display: block;
+            }
+        }
+        
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
@@ -12,10 +121,10 @@
             padding: 0;
         }
         .header {
-            background-image: linear-gradient(to right, #003770, #C20000);
+            background-color: white;
             color: white;
             text-align: center;
-            padding: 20px 0;
+            padding: 2px 0;
         }
         
         .votante-form-container {
@@ -53,14 +162,12 @@
         input[type="file"],
        
         select {
-       width: 92%;
+        width: 92%;
         padding: 10px;
         margin-bottom: 10px;
         border: 1px solid #ccc;
-     border-radius: 3px;
-
-     
-}
+        border-radius: 3px;
+        }
 
         
         input[type="submit"]{
@@ -84,15 +191,51 @@
         input[type="reset"]:hover {
             background-color: #0056b3;
         }
+        .footer {
+            background-image: linear-gradient(to right, #003770, #C20000);
+            color: white;
+            text-align: right;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            font-size: 15px;
+            display: flex;
+            flex-direction: column; 
+            align-items: flex-end;
+        }
 
+
+        .content {
+            padding-bottom: 70px;
+        }
+        .footer .second-line {
+            font-size: 14px; 
+        }
     </style>
 
 
 </head>
 <body>
+    <nav>
+        <div class="logo">
+            <div><a href="#">TRIBUNAL ELECTORAL</a></div>
+            <div><a href="#">UNIVERSITARIO</a></div>
+        </div>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Elecciones</a></li>
+            <li><a href="#">Documentación</a></li>
+            <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Contactos</a></li>
+            <li><a href="#">Ingreso</a></li>
+        </ul>
+        <div class="menu-icon"></div>
+    </nav>
     <div class="header">
-        <h1>Registro de Votantes</h1>
-        <h2>UMSS</h2>
+            <label for=""></label><br><br>
+           
     </div>
     <div class="votante-form-container">
     <form action="{{ url('/votante') }}" method="post" enctype="multipart/form-data">
@@ -165,7 +308,14 @@
                 onclick="confirmacion()">
           
         <input type="reset" value="Cancelar" onclick="cancelacion()">
+        <label for=""></label><br><br>
+        <label for=""></label><br><br>
+        
     </form>
+    <div class="footer">
+        <span>Derechos Reservados © 2023</span>
+        <span class="second-line">Tribunal Electoral Universitario DevGenius S.R.L.</span>
+    </div>
     
     <script>
         function cancelacion() {
