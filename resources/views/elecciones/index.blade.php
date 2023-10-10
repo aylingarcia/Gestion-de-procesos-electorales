@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <br>
+    <br>
+    <br>
     <title>Lista de Elecciones Creadas</title>
     <link rel="stylesheet" href="{{ asset('css/Elecciones_Creadas.css') }}">
     <script src="{{ asset('js/Elecciones_Creadas.js') }}"></script>
@@ -14,11 +17,31 @@
 
 
 <body>
+    <nav>
+
+
+        <div class="logo">
+            <a href="#" class="logo2">
+                <img src="/images/LogoUMSS2.png" alt="Logo de la Empresa" class="company-logo">
+            </a>
+            <div><a href="#">TRIBUNAL ELECTORAL</a></div>
+            <div><a href="#">UNIVERSITARIO</a></div>
+        </div>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Elecciones</a></li>
+            <li><a href="#">Documentación</a></li>
+            <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Contactos</a></li>
+            <li><a href="#">Ingreso</a></li>
+        </ul>
+        <div class="menu-icon"></div>
+    </nav>
     <header>
 
-    
 
-        <div class="back">
+
+        {{-- <div class="back">
             <div class="menu container">
 
 
@@ -54,7 +77,7 @@
                     </ul>
                 </nav>
             </div>
-        </div>
+        </div> --}}
     </header>
 
 
@@ -72,9 +95,22 @@
 
 
             <div class="botones">
-            <a href="{{ route('elecciones.create') }}" class="buttons">Crear nueva elección</a>
+                <a href="{{ route('elecciones.create') }}" class="buttons">Crear nueva elección</a>
 
             </div>
+
+            {{-- Votones Momentaneos de Anadir votante y comite electoral --}}
+            <div class="botones">
+                <a href="{{ route('elecciones.create') }}" class="buttons">Añadir Votante</a>
+
+            </div>
+
+            <div class="botones">
+                <a href="{{ route('elecciones.create') }}" class="buttons">Añadir Comite Electoral</a>
+
+            </div>
+            {{-- Fin botones momentaneos --}}
+
 
             <div class="botones">
                 <input type="text" id="search" placeholder="Buscar...">
@@ -105,27 +141,52 @@
                                     <td>{{ $elecciones->nombre }}</td>
                                     <td>{{ $elecciones->cargodeautoridad }}</td>
                                     <td>{{ $elecciones->gestion }}</td>
-                                  
-        <td>
-                            <button class="buttons" style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" onclick="window.location.href='{{ url('/elecciones/' . $elecciones->id . '/edit') }}'">Editar</button>
-                            <button class="buttons" style="background-color: #A70606; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')">Archivar</button>
-</td>
 
-<script>
-    function confirmArchivar(archivarUrl) {
-        // Mostrar un cuadro de diálogo de confirmación
-        var confirmacion = confirm("¿Estás seguro de que deseas archivar esta elección?");
+                                    <td class="celda-botones">
+                                        <button class="buttons-dentro-tabla" title="Editar Elección"
+                                            onclick="window.location.href='{{ url('/elecciones/' . $elecciones->id . '/edit') }}'">
+                                            <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
+                                        </button>
 
-        // Si el usuario hace clic en "Aceptar" en el cuadro de diálogo de confirmación
-        if (confirmacion) {
-            // Redirigir a la URL de archivar
-            window.location.href = archivarUrl;
-        } else {
-            // No se hace nada si el usuario hace clic en "Cancelar"
-        }
-    }
-</script>
+                                        <button class="buttons-dentro-tabla" title="Archivar Elección"
+                                            onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')">
+                                            <img src="/images/archivar.png" alt="Archivar" class="formato-imagen" />
+                                        </button>
 
+                                        {{-- <button class="buttons-dentro-tabla" title="Añadir Votante" --}}
+                                            {{-- añadir la funcion que redireccione --}}
+                                            {{-- > --}}
+                                            {{-- <img src="/images/anadirvotante.png" alt="Archivar" class="formato-imagen" /> --}}
+                                        {{-- </button> --}}
+
+                                        {{-- <button class="buttons-dentro-tabla" title="Añadir Comite" --}}
+                                            {{-- añadir la funcion que redireccione --}}
+                                            {{-- > --}}
+                                            {{-- <img src="/images/anadircomite.png" alt="Archivar" class="formato-imagen" /> --}}
+                                        {{-- </button> --}}
+
+
+
+                                    </td>
+
+                                    <script>
+                                        function confirmArchivar(archivarUrl) {
+                                            // Mostrar un cuadro de diálogo de confirmación
+                                            var confirmacion = confirm("¿Estás seguro de que deseas archivar esta elección?");
+
+                                            // Si el usuario hace clic en "Aceptar" en el cuadro de diálogo de confirmación
+                                            if (confirmacion) {
+                                                // Redirigir a la URL de archivar
+                                                window.location.href = archivarUrl;
+                                            } else {
+                                                // No se hace nada si el usuario hace clic en "Cancelar"
+                                            }
+                                        }
+                                    </script>
+                                    <div class="footer">
+                                        <span>Derechos Reservados © 2023</span>
+                                        <span class="second-line">Tribunal Electoral Universitario DevGeniusSRL</span>
+                                    </div>
 
 
 
@@ -133,8 +194,6 @@
 
 
                                 </tr>
-
-
                             @endforeach
                         </tbody>
                     </table>

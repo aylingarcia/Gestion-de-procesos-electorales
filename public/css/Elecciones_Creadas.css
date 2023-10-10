@@ -1,51 +1,124 @@
 * {
-    
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
-
+    box-sizing:border-box;
+    font-family: "Uni Sans" , sans-serif;
 }
-
-header {
-
-    padding-top: 130px;
-    /* Añade espacio en la parte superior del header */
-
-    background: linear-gradient(90deg,
-            #003770 55%,
-            #E30613 73%);
-
-    height: 70px;
-    /* Cambia este valor según lo grande que quieras que sea tu header */
-    display: flex;
-    align-items: center;
-}
-
-
 .company-logo {
     border-radius: 8%;
 
-    max-width: 20%;
+    max-width: 21%;
     /* Ajusta el ancho máximo de la imagen al 100% del contenedor */
     height:auto;
     /* Permite que la altura se ajuste automáticamente para mantener la proporción */
     /* Alinea verticalmente la imagen en el medio del texto */
     float: left;
+    margin-right: 40px;
 }
 
 
-html,
-body {
 
-    height: 100%;
-    margin: 0;
-    padding: 0;
+nav {
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 70px;
+    background-image: linear-gradient(to right, #003770, #f80211);
+    border-bottom: 2px solid #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+nav .logo a {
+    font-size:25px;
+    color:#fff;
+    font-weight: 600;
+    text-decoration:none;
+}
+nav .logo a:hover {
+    color: #003770;
+    transition: 0.5s;
+}
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    gap:2.5rem;
+}
+nav ul li{
+    list-style: none;
+}
+nav ul li a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+}
+nav ul li a:hover{
+    color: #003770;
+    transition: 0.5s;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
+.menu-icon{
+    display: none;
+    width: 25px;
+    height:3px;
+    background: #fff;
+    transform: translateY(-50%);
+    transition: 0.5s;
+    border-radius:5px;
+    cursor: pointer;
+}
+.menu-icon::before,
+.menu-icon::after{
+    content:"";
+    position: absolute;
+    width: 25px;
+    height:3px;
+    background: #fff;
+    transition:0.5s;
+    border-radius: 5px;
+}
+.menu-icon::before{
+    top:-8px;
+}
+.menu-icon::after{
+    top:-8px;
+}
+.menu-icon.active{
+    background: rgba(0,0,0,0);
+}
+.menu-icon.active::before{
+    top:0;
+    transform:rotate(45deg);
+}
+.menu-icon.active::after{
+    top:0;
+    transform: rotate(135deg);
+}
+@media screen and (max-width:992px){
+    nav ul{
+        position:fixed;
+        top: 0px;
+        right:100%;
+        width:100%;
+        height: 90vh;
+        background: #004a92;
+        flex-direction: column;
+        transition: 0.5s ease-in;
+    }
+    nav ul li a{
+        font-size: 24px;
+    }
+    ul.active{
+        right: 0;
+        transition: 0.5s ease-in;
+    }
+    .menu-icon{
+        display: block;
+    }
 }
 
 .container {
@@ -55,99 +128,38 @@ body {
     
     
 }
+        /* Estilos para las columnas */
+        .columns {
+            display: flex;
+            justify-content: space-between;
+        }
 
-.back {
-
-    padding: 32px 0;
-
-}
-
-.menu {
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
-}
-
-
-.logo {
-    display: inline-block;
-    /* Alinea los elementos en línea */
-    text-align: center;
-    /* Alinea el texto en el centro horizontalmente */
-    text-decoration: none;
-    /* Quita la decoración de subrayado en el enlace */
-    font-size: 20px;
-    color: rgb(255, 255, 255);
-    font-weight: 800;
-    text-transform: uppercase;
-    max-width: 800px;
-    /* Ajusta el ancho máximo de la imagen según tus necesidades */
-    margin-right: 400px;
-    /* Agrega un margen a la derecha de la imagen para ajustar el espaciado */
-    vertical-align: middle;
-    /* Alinea verticalmente la imagen en el medio del texto */
-}
-
-.menu .navbar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    /* Centra horizontalmente los elementos del menú */
-    display: flex;
-    /* Utiliza flexbox para centrar verticalmente */
-    align-items: center;
-    /* Alinea verticalmente los elementos del menú en el centro */
-}
-
-.menu .navbar ul li {
-
-    margin: 20px 0;
-    /* Añade espacio arriba y abajo de cada elemento del menú */
-    text-align: center;
+        .column {
+            flex: 1;
+            padding: 10px;
+        }
+        .footer {
+            background-image: linear-gradient(to right, #003770, #C20000);
+            color: white;
+            text-align: right;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            font-size: 15px;
+            display: flex;
+            flex-direction: column; 
+            align-items: flex-end;
+        }
 
 
-}
-
-.menu .navbar ul li a {
-
-    font-size: 18px;
-    padding: 20px;
-    color: white;
-    display: block;
-    font-family: Arial, sans-serif;
-
-
-}
-
-.menu .navbar ul li a:hover {
-    color: #003770;
-
-}
-
-#menu {
-    display: none;
-
-}
-
-.menu-icono {
-    width: 25px;
-}
-
-.menu label {
-    cursor: pointer;
-    display: none;
-
-}
-
-
-
+        .content {
+            padding-bottom: 70px;
+        }
+        .footer .second-line {
+            font-size: 14px; 
+        }
 
 
 .botonesss {
@@ -161,11 +173,34 @@ body {
 .botones {
 
     display: inline-block;
-    /* Hace que los elementos se muestren en línea (lado a lado) */
-    margin-right: 230px;
-    /* Espacio entre los botones (ajusta según tus preferencias) */
-    margin-left: 300px;
+    /* Hace que los elementos se muestren en línea (lado a lado) 230px */ 
+    margin-right: auto;
+    /* Espacio entre los botones (ajusta según tus preferencias) 300px*/
+    margin-left: auto;
 }
+ /* Botones dentro de la tabla */
+    .buttons-dentro-tabla {
+        /* background-color: #04243C; */
+        color: #FFF;
+        padding: 1px 3px;
+        border: none;
+        cursor: pointer;
+        border-radius: 15%;
+    }
+    
+    /* Estilos para la imagen dentro del botón */
+    .formato-imagen {
+        width: 30px; /* Ajusta el ancho según tus necesidades */
+        height: 30px; /* Ajusta la altura según tus necesidades */
+        display: block;
+        margin: 0 auto;
+    }
+    
+    /* Estilos para centrar verticalmente el contenido en la celda de la tabla */
+    .celda-botones {
+        text-align: center;
+    }
+/* Hasta aca son los botones dentro de la tabla */
 
 .buttons {
     padding: 10px 20px;
