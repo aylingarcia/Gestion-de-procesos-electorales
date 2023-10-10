@@ -130,23 +130,23 @@
                                     <td>{{ $elecciones->gestion }}</td>
 
                                     <td class="celda-botones">
-                                        <button class="buttons-dentro-tabla"
+                                        <button class="buttons-dentro-tabla" title="Editar Elección"
                                             onclick="window.location.href='{{ url('/elecciones/' . $elecciones->id . '/edit') }}'">
                                             <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
                                         </button>
 
-                                        <button class="buttons-dentro-tabla"
+                                        <button class="buttons-dentro-tabla" title="Archivar Elección"
                                             onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')">
                                             <img src="/images/archivar.png" alt="Archivar" class="formato-imagen" />
                                         </button>
 
-                                        <button class="buttons-dentro-tabla"
+                                        <button class="buttons-dentro-tabla" title="Añadir Votante"
                                             {{-- onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')" --}}
                                             >
                                             <img src="/images/anadirvotante.png" alt="Archivar" class="formato-imagen" />
                                         </button>
 
-                                        <button class="buttons-dentro-tabla"
+                                        <button class="buttons-dentro-tabla" title="Añadir Comite"
                                             {{-- onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')" --}}
                                             >
                                             <img src="/images/anadircomite.png" alt="Archivar" class="formato-imagen" />
