@@ -18,8 +18,8 @@
 
 <body>
     <nav>
-        
-        
+
+
         <div class="logo">
             <a href="#" class="logo2">
                 <img src="images/LogoUMSS2.png" alt="Logo de la Empresa" class="company-logo">
@@ -39,7 +39,7 @@
     </nav>
     <header>
 
-    
+
 
         {{-- <div class="back">
             <div class="menu container">
@@ -95,7 +95,7 @@
 
 
             <div class="botones">
-            <a href="{{ route('elecciones.create') }}" class="buttons">Crear nueva elección</a>
+                <a href="{{ route('elecciones.create') }}" class="buttons">Crear nueva elección</a>
 
             </div>
 
@@ -128,30 +128,52 @@
                                     <td>{{ $elecciones->nombre }}</td>
                                     <td>{{ $elecciones->cargodeautoridad }}</td>
                                     <td>{{ $elecciones->gestion }}</td>
-                                  
-        <td>
-                            <button class="buttons" style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" onclick="window.location.href='{{ url('/elecciones/' . $elecciones->id . '/edit') }}'">Editar</button>
-                            <button class="buttons" style="background-color: #A70606; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')">Archivar</button>
-</td>
 
-<script>
-    function confirmArchivar(archivarUrl) {
-        // Mostrar un cuadro de diálogo de confirmación
-        var confirmacion = confirm("¿Estás seguro de que deseas archivar esta elección?");
+                                    <td class="celda-botones">
+                                        <button class="buttons-dentro-tabla"
+                                            onclick="window.location.href='{{ url('/elecciones/' . $elecciones->id . '/edit') }}'">
+                                            <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
+                                        </button>
 
-        // Si el usuario hace clic en "Aceptar" en el cuadro de diálogo de confirmación
-        if (confirmacion) {
-            // Redirigir a la URL de archivar
-            window.location.href = archivarUrl;
-        } else {
-            // No se hace nada si el usuario hace clic en "Cancelar"
-        }
-    }
-</script>
-<div class="footer">
-    <span>Derechos Reservados © 2023</span>
-    <span class="second-line">Tribunal Electoral Universitario DevGeniusSRL</span>
-</div>
+                                        <button class="buttons-dentro-tabla"
+                                            onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')">
+                                            <img src="/images/archivar.png" alt="Archivar" class="formato-imagen" />
+                                        </button>
+
+                                        <button class="buttons-dentro-tabla"
+                                            {{-- onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')" --}}
+                                            >
+                                            <img src="/images/anadirvotante.png" alt="Archivar" class="formato-imagen" />
+                                        </button>
+
+                                        <button class="buttons-dentro-tabla"
+                                            {{-- onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')" --}}
+                                            >
+                                            <img src="/images/anadircomite.png" alt="Archivar" class="formato-imagen" />
+                                        </button>
+
+
+
+                                    </td>
+
+                                    <script>
+                                        function confirmArchivar(archivarUrl) {
+                                            // Mostrar un cuadro de diálogo de confirmación
+                                            var confirmacion = confirm("¿Estás seguro de que deseas archivar esta elección?");
+
+                                            // Si el usuario hace clic en "Aceptar" en el cuadro de diálogo de confirmación
+                                            if (confirmacion) {
+                                                // Redirigir a la URL de archivar
+                                                window.location.href = archivarUrl;
+                                            } else {
+                                                // No se hace nada si el usuario hace clic en "Cancelar"
+                                            }
+                                        }
+                                    </script>
+                                    <div class="footer">
+                                        <span>Derechos Reservados © 2023</span>
+                                        <span class="second-line">Tribunal Electoral Universitario DevGeniusSRL</span>
+                                    </div>
 
 
 
@@ -159,8 +181,6 @@
 
 
                                 </tr>
-
-
                             @endforeach
                         </tbody>
                     </table>

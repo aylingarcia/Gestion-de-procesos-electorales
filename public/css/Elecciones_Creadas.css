@@ -178,6 +178,29 @@ nav ul li a:hover{
     /* Espacio entre los botones (ajusta según tus preferencias) */
     margin-left: 300px;
 }
+ /* Botones dentro de la tabla */
+    .buttons-dentro-tabla {
+        /* background-color: #04243C; */
+        color: #FFF;
+        padding: 1px 3px;
+        border: none;
+        cursor: pointer;
+        border-radius: 15%;
+    }
+    
+    /* Estilos para la imagen dentro del botón */
+    .formato-imagen {
+        width: 30px; /* Ajusta el ancho según tus necesidades */
+        height: 30px; /* Ajusta la altura según tus necesidades */
+        display: block;
+        margin: 0 auto;
+    }
+    
+    /* Estilos para centrar verticalmente el contenido en la celda de la tabla */
+    .celda-botones {
+        text-align: center;
+    }
+/* Hasta aca son los botones dentro de la tabla */
 
 .buttons {
     padding: 10px 20px;
