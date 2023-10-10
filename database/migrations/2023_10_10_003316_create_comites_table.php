@@ -16,13 +16,13 @@ class CreateComitesTable extends Migration
         Schema::create('comites', function (Blueprint $table) {
             $table->id();
             $table->integer('id_eleccion');
-            $table->string('nombres');
+            $table->string('nombreMiembro');
             $table->string('apellidoPaterno');
             $table->string('apellidoMaterno');
-            $table->date('fechaNacimiento');
-            $table->string('carrera');
-            $table->string('cargo');
-            $table->string('tipoComite');
+            $table->string('CI');
+            $table->string('cargoComite');
+            $table->string('profesion')->nullable();
+            $table->string('cargoUMSS')->nullable();
             $table->timestamps();
         });
     }

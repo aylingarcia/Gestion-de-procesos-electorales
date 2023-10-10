@@ -16,13 +16,18 @@ class CreateVotantesTable extends Migration
         Schema::create('votantes', function (Blueprint $table) {
             $table->id();
             $table->integer('id_eleccion');
-            $table->string('codSis');
             $table->string('nombres');
             $table->string('apellidoPaterno');
             $table->string('apellidoMaterno');
-            $table->date('fechaNacimiento');
-            $table->string('carrera');
+            $table->string('codSis');
+            $table->string('CI');
             $table->string('tipoVotante');
+            $table->string('carrera');
+            $table->string('profesion')->nullable();
+            $table->string('facultad');
+            $table->string('cargoAdministrativo');
+            $table->string('celular')->nullable();
+            $table->string('e-mail')->nullable();
             $table->timestamps();
         });
     }
