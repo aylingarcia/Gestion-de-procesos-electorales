@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\EleccionController;
+use App\Http\Controllers\VotanteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,8 @@ Route::resource('elecciones', 'EleccionController');
 
 Route::get('/home', 'ConfirmacionController@index')->name('confirmacion');
 
-Route::get('/registro-votante', function () {
-    return view('votante.form');
-});
+Route::resource('votante', 'VotanteController');
+
+//Route::get('/registro-votante', function () {
+    //return view('votante.form');
+//});

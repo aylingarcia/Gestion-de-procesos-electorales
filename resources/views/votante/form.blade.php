@@ -25,7 +25,7 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            max-width: 1000px;
+            max-width: 700px;
         }
 
         .votante-form-container .form-title {
@@ -51,14 +51,17 @@
         input[type="text"],
         input[type="date"],
         input[type="file"],
+       
         select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            padding-right: 1px; 
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
+       width: 92%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+     border-radius: 3px;
+
+     
+}
+
         
         input[type="submit"]{
             background-color: #04243C;
@@ -92,22 +95,34 @@
         <h2>UMSS</h2>
     </div>
     <div class="votante-form-container">
-    <form action="/registrar_votante" method="post">
+    <form action="{{ url('/votante') }}" method="post" enctype="multipart/form-data">
         @csrf
+
         <h2 class="form-title">Registrar Votante</h2>
         <div class="column">
-            
-                <label for="codigoSis">Código SIS:</label>
-                <input type="text" name="codigoSis" id="codigoSis" required>
 
-                <label for="nombre">Nombre:</label>
-                <input type="text" name="nombre" id="nombre" required>
+        <label for="ideleccion">Elegir Elección:</label>
+         <select name="ideleccion" id="ideleccion" required>
+                <option value="">Selecciona una elección</option>
+                      @foreach ($elecciones as $eleccion)
+                          <option value="{{ $eleccion->id }}">{{ $eleccion->nombre }}</option>
+                      @endforeach
+         </select>
+
+                <label for="nombres">Nombre:</label>
+                <input type="text" name="nombres" required><br><br>
 
                 <label for="apellidoPaterno">Apellido Paterno:</label>
-                <input type="text" name="apellidoPaterno" id="apellidoPaterno" required>
+                <input type="text" name="apellidoPaterno" id="apellidoPaterno" required><br><br>
 
                 <label for="apellidoMaterno">Apellido Materno:</label>
-                <input type="text" name="apellidoMaterno" id="apellidoMaterno" required>
+                <input type="text" name="apellidoMaterno" id="apellidoMaterno" required><br><br>
+
+                <label for="codSis">Codigo Sis:</label>
+                <input type="codSis" name="codSis" id="codSis" required><br><br>
+
+                <label for="CI"> CI:</label>
+                <input type="text" name="CI" required><br><br>
             
                 <label for="tipoVotante">Tipo de Votante:</label>
                 <select name="tipoVotante" id="tipoVotante" required>
@@ -115,35 +130,64 @@
                     <option value="Docente">Docente</option>
                     <option value="Administrativo">Administrativo</option>
                 </select>
-                <div class="campo-adicional" id="campoFacultad">
-                    <label for="facultad">Facultad:</label>
-                    <input type="text" name="facultad" id="facultad">
+
+                <div class="campo-adicional" id="campoCarrera">
+                <label for="carrera">Carrera:</label>
+                <input type="text" name="carrera" id="carrera" ><br><br>
                 </div>
 
                 <div class="campo-adicional" id="campoProfesion">
-                    <label for="profesion">Profesión:</label>
-                    <input type="text" name="profesion" id="profesion">
+                <label for="profesion">Profesion:</label>
+                <input type="text" name="profesion" id="profesion" ><br><br>
+                </div>
+
+                <div class="campo-adicional" id="campoFacultad">
+                <label for="facultad">Facultad:</label>
+                <input type="text" name="facultad" id="facultad" ><br><br>
                 </div>
 
                 <div class="campo-adicional" id="campoCargo">
-                    <label for="cargo">Cargo:</label>
-                    <input type="text" name="cargo" id="cargo">
+                <label for="cargoAdministrativo">Cargo Administrativo:</label>
+                <input type="text" name="cargoAdministrativo" id="cargoAdministrativo" ><br><br>
                 </div>
-                <div class="campo-adicional" id="campoCarrera">
-                    <label for="carrera">Carrera:</label>
-                    <input type="text" name="carrera" id="carrera">
-                </div>
+                
+                <label for="celular">Celular:</label>
+                <input type="number" name="celular" id="celular" required><br><br>
 
-                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-                <input type="date" name="fechaNacimiento" id="fechaNacimiento" required>
+                <label for="e-mail">e-mail:</label>
+                <input type="email" name="e-mail" id="e-mail" required><br><br>
 
-                <label for="cargarLista">Cargar Lista:</label>
-                <input type="file" name="cargarLista" id="cargarLista" required>
+                <label for="cargarLista">Cargar lista de votantes:</label>
+                <input type="file" name="cargarLista" id="cargarLista">
             
         </div>
-        <input type="submit" value="Registrar Votante">
-        <input type="reset" value="Cancelar">
+        <input type="submit" value="Registrar"
+                onclick="confirmacion()">
+          
+        <input type="reset" value="Cancelar" onclick="cancelacion()">
     </form>
+    
+    <script>
+        function cancelacion() {
+            var confirmacion = confirm("¿Seguro que deseas cancelar? Los cambios no se guardarán.");
+            if (confirmacion) {
+
+                window.location.href = "/elecciones";
+            }
+        }
+
+        function confirmacion() {
+            var confirmacion = confirm("Los datos han sido registrados con exito");
+            if (confirmacion) {
+
+                window.location.href = "/votante";
+            }
+        }
+
+    </script>
+
+
+
 </div>
     <script>
         function mostrarCampoAdicional() {

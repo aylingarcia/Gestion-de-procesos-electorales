@@ -63,7 +63,7 @@
         <br>
         <br>
         <center>
-            <h1>Lista de Eleeciones Creadas</h1>
+            <h1>Lista de Elecciones Creadas</h1>
         </center>
         <br>
         <br>
