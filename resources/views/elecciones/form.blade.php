@@ -83,8 +83,8 @@
                         required>
 
                     <label for="gestion">Gestión (Año):</label>
-                    <input type="number" name="gestion" placeholder="Escribe la gestión aquí..."
-                        value="{{ isset($elecciones) ? $elecciones->gestion : '2023' }}" id="gestion" min="2023" max="2050"
+                    <input type="text" name="gestion" placeholder="Ejemplo: 2023 - 2028"
+                        value="{{ isset($elecciones) ? $elecciones->gestion : '' }}" id="gestion" min="2023" max="2150"
                         required>
 
                     <label for="tipodevotantes">Tipo de Votantes:</label>
