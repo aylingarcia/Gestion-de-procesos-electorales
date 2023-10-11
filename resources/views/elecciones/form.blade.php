@@ -67,12 +67,12 @@
             <div class="columns">
                 <div class="column">
                     <label for="nombre">Nombre de la Elección:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')" name="nombre" maxlength="40"
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z0-9,. ]+/g, '')" name="nombre" maxlength="40"
                         placeholder="Escribe el nombre de la elección aquí..."
                         value="{{ isset($elecciones) ? $elecciones->nombre : '' }}" required>
 
                     <label for="motivo">Motivo de la Elección:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')" name="motivo" maxlength="60"
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z0-9,. ]+/g, '')" name="motivo" maxlength="60"
                         placeholder="Escribe el motivo de la elección aquí..."
                         value="{{ isset($elecciones) ? $elecciones->motivo : '' }}" id="motivo" required>
 
