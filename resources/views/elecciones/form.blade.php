@@ -67,29 +67,29 @@
             <div class="columns">
                 <div class="column">
                     <label for="nombre">Nombre de la Elección:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')" name="nombre"
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')" name="nombre" maxlength="40"
                         placeholder="Escribe el nombre de la elección aquí..."
                         value="{{ isset($elecciones) ? $elecciones->nombre : '' }}" required>
 
                     <label for="motivo">Motivo de la Elección:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')" name="motivo"
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')" name="motivo" maxlength="60"
                         placeholder="Escribe el motivo de la elección aquí..."
                         value="{{ isset($elecciones) ? $elecciones->motivo : '' }}" id="motivo" required>
 
                     <label for="cargodeautoridad">Cargo de Autoridad:</label>
                     <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
-                        name="cargodeautoridad" placeholder="Escribe el cargo de autoridad aquí..."
+                        name="cargodeautoridad" placeholder="Escribe el cargo de autoridad aquí..." maxlength="30"
                         value="{{ isset($elecciones) ? $elecciones->cargodeautoridad : '' }}" id="cargodeautoridad"
                         required>
 
                     <label for="gestion">Gestión (Año):</label>
                     <input type="number" name="gestion" placeholder="Escribe la gestión aquí..."
-                        value="{{ isset($elecciones) ? $elecciones->gestion : '2023' }}" id="gestion" min="2023"
+                        value="{{ isset($elecciones) ? $elecciones->gestion : '2023' }}" id="gestion" min="2023" max="2050"
                         required>
 
                     <label for="tipodevotantes">Tipo de Votantes:</label>
                     <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
-                        name="tipodevotantes" placeholder="Escribe el tipo de votante aquí..."
+                        name="tipodevotantes" placeholder="Escribe el tipo de votante aquí..." maxlength="40"
                         value="{{ isset($elecciones) ? $elecciones->tipodevotantes : '' }}" id="tipodevotantes"
                         required><br><br>
 
@@ -109,12 +109,12 @@
 
                     <label for="tipodeeleccion">Tipo de Elección:</label>
                     <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
-                        name="tipodeeleccion" placeholder="Escribe el tipo de elección aquí..."
+                        name="tipodeeleccion" placeholder="Escribe el tipo de elección aquí..." maxlength="40"
                         value="{{ isset($elecciones) ? $elecciones->tipodeeleccion : '' }}" id="tipodeeleccion"
                         required>
 
                     <label for="descripcion">Descripción:</label>
-                    <textarea oninput="this.value = this.value.replace(/[^A-Za-z,.0-9-]+/g, '')" name="descripcion"
+                    <textarea oninput="this.value = this.value.replace(/[^A-Za-z,.0-9-]+/g, '')" name="descripcion" maxlength="70"
                         placeholder="Escribe la descripción de la elección aquí..." id="descripcion" rows="4">{{ isset($elecciones) ? $elecciones->descripcion : '' }}</textarea>
                 </div>
             </div>

@@ -128,7 +128,7 @@
                         <thead>
                             <tr>
                                 <th>Numero</th>
-                                <th>Nombre de eleccion</th>
+                                <th>Nombre de elección</th>
                                 <th>Cargo de Autoridad</th>
                                 <th>Gestion</th>
                                 <th>Acciones</th>

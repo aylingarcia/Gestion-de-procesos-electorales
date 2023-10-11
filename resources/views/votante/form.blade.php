@@ -253,19 +253,28 @@
          </select>
 
                 <label for="nombres">Nombre:</label>
-                <input type="text" name="nombres" required><br><br>
+                <input type="text" placeholder="Escribe el nombre aqui..." maxlength="40" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                name="nombres" required><br><br>
 
                 <label for="apellidoPaterno">Apellido Paterno:</label>
-                <input type="text" name="apellidoPaterno" id="apellidoPaterno" required><br><br>
+                <input type="text" placeholder="Escribe el Apellido Paterno aquí..." maxlength="40"
+                oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                 name="apellidoPaterno" id="apellidoPaterno" required><br><br>
 
                 <label for="apellidoMaterno">Apellido Materno:</label>
-                <input type="text" name="apellidoMaterno" id="apellidoMaterno" required><br><br>
+                <input type="text" placeholder="Escribe el Apellido Materno aquí..." maxlength="40"
+                oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                name="apellidoMaterno" id="apellidoMaterno" required><br><br>
 
                 <label for="codSis">Codigo Sis:</label>
-                <input type="codSis" name="codSis" id="codSis" required><br><br>
+                <input type="codSis" placeholder="Escribe el Codigo Sis aquí..." maxlength="9"
+                oninput="this.value = this.value.replace(/[^0-9]+/g, '')"
+                name="codSis" id="codSis" required><br><br>
 
                 <label for="CI"> CI:</label>
-                <input type="text" name="CI" required><br><br>
+                <input type="text" placeholder="Escribe el Carnet de Identidad aquí..." maxlength="10" 
+                oninput="this.value = this.value.replace(/[^A-Za-z,.0-9]+/g, '')"
+                name="CI" required><br><br>
             
                 <label for="tipoVotante">Tipo de Votante:</label>
                 <select name="tipoVotante" id="tipoVotante" required>
@@ -276,33 +285,42 @@
 
                 <div class="campo-adicional" id="campoCarrera">
                 <label for="carrera">Carrera:</label>
-                <input type="text" name="carrera" id="carrera" ><br><br>
+                <input type="text" placeholder="Escribe la Carrera aquí..." maxlength="40" 
+                oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                name="carrera" id="carrera" ><br><br>
                 </div>
 
                 <div class="campo-adicional" id="campoProfesion">
-                <label for="profesion">Profesion:</label>
-                <input type="text" name="profesion" id="profesion" ><br><br>
+                <label for="profesion">Profesión:</label>
+                <input type="text" placeholder="Escribe la Profesión aquí..." maxlength="40" 
+                oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                name="profesion" id="profesion" ><br><br>
                 </div>
 
                 <div class="campo-adicional" id="campoFacultad">
                 <label for="facultad">Facultad:</label>
-                <input type="text" name="facultad" id="facultad" ><br><br>
+                <input type="text" placeholder="Escribe la Facultad aquí..." maxlength="40" 
+                oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                name="facultad" id="facultad" ><br><br>
                 </div>
 
                 <div class="campo-adicional" id="campoCargo">
                 <label for="cargoAdministrativo">Cargo Administrativo:</label>
-                <input type="text" name="cargoAdministrativo" id="cargoAdministrativo" ><br><br>
+                <input type="text" placeholder="Escribe el Cargo Administrativo aquí..." maxlength="40"
+                oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                name="cargoAdministrativo" id="cargoAdministrativo" ><br><br>
                 </div>
                 
                 <label for="celular">Celular:</label>
-                <input type="number" name="celular" id="celular" required><br><br>
+                <input type="number" placeholder="Escribe el Número de Celular aquí..." min="60000000" max=""79999999 name="celular" id="celular" required><br><br>
 
                 <label for="e-mail">e-mail:</label>
-                <input type="email" name="e-mail" id="e-mail" required><br><br>
+                <input type="email" placeholder="Escribe el E-Mail aquí..." maxlength="40" 
+                name="e-mail" id="e-mail" required><br><br>
 
                 <label for="cargarLista">Cargar lista de votantes:</label>
-                <input type="file" name="cargarLista" id="cargarLista">
-            
+                <input type="file" title="Subir Archivo CSV o Excel" name="cargarLista" id="cargarLista" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                
         </div>
         <input type="submit" value="Registrar"
                 onclick="confirmacion()">
