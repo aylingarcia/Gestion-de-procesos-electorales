@@ -1,4 +1,4 @@
-{{-- mostrar lista de elecciones --}}
+{{-- mostrar lista de miembros del comite --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +9,7 @@
     <br>
     <br>
     <br>
-    <title>Lista de Elecciones Creadas</title>
+    <title>Miembros del Comite</title>
     <link rel="stylesheet" href="{{ asset('css/Elecciones_Creadas.css') }}">
     <script src="{{ asset('js/Elecciones_Creadas.js') }}"></script>
 
@@ -86,7 +86,7 @@
         <br>
         <br>
         <center>
-            <h1>Lista de Elecciones Creadas</h1>
+            <h1>Miembros del Comite</h1>
         </center>
         <br>
         <br>
@@ -95,26 +95,8 @@
 
 
             <div class="botones">
-                <a href="{{ route('elecciones.create') }}" class="buttons">Crear nueva elección</a>
+                <a href="{{ url('comite/create') }}" class="buttons">Añadir miembro de comite</a>
 
-            </div>
-
-            {{-- Votones Momentaneos de Anadir votante y comite electoral --}}
-            <div class="botones">
-                <a href="{{ route('elecciones.create') }}" class="buttons">Añadir Votante</a>
-
-            </div>
-
-            <div class="botones">
-                <a href="{{ route('elecciones.create') }}" class="buttons">Añadir Comite Electoral</a>
-
-            </div>
-            {{-- Fin botones momentaneos --}}
-
-
-            <div class="botones">
-                <input type="text" id="search" placeholder="Buscar...">
-                <button class="buttons" onclick="search()">Buscar</button>
             </div>
 
 
@@ -127,31 +109,25 @@
                     <table id="eleccionesTable" class="vistatabla">
                         <thead>
                             <tr>
-                                <th>Numero</th>
-                                <th>Nombre de eleccion</th>
-                                <th>Cargo de Autoridad</th>
-                                <th>Gestion</th>
+                                <th>Id Eleccion</th>
+                                <th>Nombre de Miembro</th>
+                                <th>Apellido Paterno</th>
+                                <th>Apellido Materno</th>
+                                <th>Cargo en Comite</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($eleccionescreadas as $elecciones)
+                            @foreach ($comitecreado as $comite)
                                 <tr>
-                                    <td>{{ $elecciones->id }}</td>
-                                    <td>{{ $elecciones->nombre }}</td>
-                                    <td>{{ $elecciones->cargodeautoridad }}</td>
-                                    <td>{{ $elecciones->gestion }}</td>
+                                    <td>{{ $comite->id }}</td>
+                                    <td>{{ $comite->nombreMiembro }}</td>
+                                    <td>{{ $comite->apellidoPaterno }}</td>
+                                    <td>{{ $comite->apellidoMaterno }}</td>
+                                    <td>{{ $comite->cargoComite }}</td>
 
                                     <td class="celda-botones">
-                                        <button class="buttons-dentro-tabla" title="Editar Elección"
-                                            onclick="window.location.href='{{ url('/elecciones/' . $elecciones->id . '/edit') }}'">
-                                            <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
-                                        </button>
-
-                                        <button class="buttons-dentro-tabla" title="Archivar Elección"
-                                            onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')">
-                                            <img src="/images/archivar.png" alt="Archivar" class="formato-imagen" />
-                                        </button>
+                                    <button class="buttons" style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" onclick="window.location.href='{{ url('/comite/' . $comite->id . '/edit') }}'">Editar</button>
 
                                         {{-- <button class="buttons-dentro-tabla" title="Añadir Votante" --}}
                                             {{-- añadir la funcion que redireccione --}}
@@ -169,20 +145,7 @@
 
                                     </td>
 
-                                    <script>
-                                        function confirmArchivar(archivarUrl) {
-                                            // Mostrar un cuadro de diálogo de confirmación
-                                            var confirmacion = confirm("¿Estás seguro de que deseas archivar esta elección?");
-
-                                            // Si el usuario hace clic en "Aceptar" en el cuadro de diálogo de confirmación
-                                            if (confirmacion) {
-                                                // Redirigir a la URL de archivar
-                                                window.location.href = archivarUrl;
-                                            } else {
-                                                // No se hace nada si el usuario hace clic en "Cancelar"
-                                            }
-                                        }
-                                    </script>
+                                    
                                     <div class="footer">
                                         <span>Derechos Reservados © 2023</span>
                                         <span class="second-line">Tribunal Electoral Universitario DevGenius S.R.L.</span>

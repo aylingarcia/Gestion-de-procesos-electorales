@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Eleccion;
 use App\Models\Comite;
+use App\Models\Votante;
 use Illuminate\Http\Request;
 
 class ComiteController extends Controller
@@ -15,6 +16,8 @@ class ComiteController extends Controller
     public function index()
     {
         //
+        $datos['comitecreado']=Comite::paginate(20);
+        return view('comite.index', $datos);
     }
 
     /**
@@ -25,6 +28,8 @@ class ComiteController extends Controller
     public function create()
     {
         //
+        $elecciones = Eleccion::where('estado', 1)->get();
+        return view('comite.create', compact('elecciones'));
     }
 
     /**
@@ -36,6 +41,12 @@ class ComiteController extends Controller
     public function store(Request $request)
     {
         //
+        $datosComite = request()->except('_token');
+    
+        // Inserta los datos en la tabla votantes
+        Comite::insert($datosComite);
+    
+        return response()->json($datosComite);
     }
 
     /**
@@ -55,9 +66,12 @@ class ComiteController extends Controller
      * @param  \App\Models\Comite  $comite
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comite $comite)
+    public function edit($id)
     {
         //
+        $comite = Comite::findOrFail($id);
+        $elecciones = Eleccion::where('estado', 1)->get();
+        return view('comite.edit', compact('comite', 'elecciones'));
     }
 
     /**
@@ -67,9 +81,20 @@ class ComiteController extends Controller
      * @param  \App\Models\Comite  $comite
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comite $comite)
+    public function update(Request $request, $id)
     {
         //
+        
+    $datosComite = $request->except(['_token', '_method']);
+   
+    Comite::where('id', $id)->update($datosComite);
+
+    $elecciones = Eleccion::where('estado', 1)->get();
+
+    $comite = Comite::findOrFail($id);
+
+    return view('comite.edit', compact('comite', 'elecciones'));
+    
     }
 
     /**

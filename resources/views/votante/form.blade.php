@@ -314,7 +314,7 @@
     </form>
     <div class="footer">
         <span>Derechos Reservados © 2023</span>
-        <span class="second-line">Tribunal Electoral Universitario DevGeniusSRL</span>
+        <span class="second-line">Tribunal Electoral Universitario DevGenius S.R.L.</span>
     </div>
     
     <script>

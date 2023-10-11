@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <style>
+        .company-logo {
+    border-radius: 8%;
+
+    max-width: 21%;
+    /* Ajusta el ancho máximo de la imagen al 100% del contenedor */
+    height: auto;
+    /* Permite que la altura se ajuste automáticamente para mantener la proporción */
+    /* Alinea verticalmente la imagen en el medio del texto */
+    float: left;
+    margin-right: 40px;
+}
         * {
             margin: 0;
             padding: 0;
@@ -16,7 +27,11 @@
             align-items: center;
             justify-content: space-around;
             height: 70px;
-            background-image: linear-gradient(to right, #003770, #f80211);
+            background-color: #003770;
+            /*background-color: #C20000;*/
+            /*background-image: linear-gradient(to right, #003770, #C20000);*/    
+
+           
             border-bottom: 2px solid #fff;
             position: fixed;
             top: 0;
@@ -118,8 +133,12 @@
         body {
             
                 font-family: Arial, sans-serif;
-                background: radial-gradient(circle at 50% 50%, #C20000,#003770), repeating-radial-gradient(circle, transparent 0, transparent 5px, #333 5px, #333 10px);
-    
+                background-image: linear-gradient(to right, #003770, #C20000);
+                /*background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 55, 112, 0.4) 10px, rgba(0, 55, 112, 0.4) 20px);*/
+                /*background: linear-gradient(to bottom, #003770, #C20000);*/
+                /*background: repeating-linear-gradient(60deg, #003770 0px, #003770 10px, #C20000 10px, #C20000 20px);*/    
+                /*background: radial-gradient(circle at 50% 50%, #C20000,#003770), repeating-radial-gradient(circle, transparent 0, transparent 5px, #333 5px, #333 10px);*/
+                
                 margin: 0;
                 padding: 0;
                 color: white;
@@ -156,8 +175,10 @@
         }
 
         .footer {
-            /*background-color: #003770;*/
-            background-image: linear-gradient(to right, #003770, #C20000);
+            background-color: #003770;
+            /*background-color: #C20000;*/
+            /*background-image: linear-gradient(to right, #003770, #C20000);*/    
+
             color: white;
             text-align: right;
             padding: 15px;
@@ -200,6 +221,10 @@
 <body>
     <nav>
         <div class="logo">
+            <a href="#" class="logo2">
+            <img src="/images/LogoUMSS2.png" alt="Logo de Enrique" class="company-logo">
+                
+            </a>
             <div><a href="#">TRIBUNAL ELECTORAL</a></div>
             <div><a href="#">UNIVERSITARIO</a></div>
         </div>
