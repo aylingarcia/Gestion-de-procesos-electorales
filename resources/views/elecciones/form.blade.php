@@ -100,9 +100,12 @@
                     @if (isset($elecciones) && $elecciones->convocatoria)
                         <p>{{ $elecciones->convocatoria }}</p>
                     @endif
-                    <input type="file" accept="application/pdf" name="convocatoria"
+                    <input type="file" accept="application/pdf" title="Subir Archivo PDF" name="convocatoria"
                         {{ isset($elecciones) && $elecciones->convocatoria ? '' : 'required' }}>
-
+<br>
+<br>
+<br>
+<br>
                     <label for="fecha">Fecha:</label>
                     <input type="date" name="fecha" value="{{ isset($elecciones) ? $elecciones->fecha : '' }}"
                         id="fecha" required>
