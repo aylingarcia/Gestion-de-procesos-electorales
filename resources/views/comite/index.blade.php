@@ -24,15 +24,15 @@
             <a href="#" class="logo2">
                 <img src="/images/LogoUMSS2.png" alt="Logo de la Empresa" class="company-logo">
             </a>
-            <div><a href="#">TRIBUNAL ELECTORAL</a></div>
-            <div><a href="#">UNIVERSITARIO</a></div>
+            <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
+            <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
         </div>
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Elecciones</a></li>
+            <li><a href="{{ url('/') }}">Inicio</a></li>
+            <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="#">Documentación</a></li>
             <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Contactos</a></li>
+            <li><a href="#">Contacto</a></li>
             <li><a href="#">Ingreso</a></li>
         </ul>
         <div class="menu-icon"></div>
@@ -109,7 +109,7 @@
                     <table id="eleccionesTable" class="vistatabla">
                         <thead>
                             <tr>
-                                <th>Id Eleccion</th>
+                                <th>IdEleccion</th>
                                 <th>Nombre de Miembro</th>
                                 <th>Apellido Paterno</th>
                                 <th>Apellido Materno</th>
@@ -120,7 +120,7 @@
                         <tbody>
                             @foreach ($comitecreado as $comite)
                                 <tr>
-                                    <td>{{ $comite->id }}</td>
+                                    <td>{{ $comite->id_eleccion }}</td>
                                     <td>{{ $comite->nombreMiembro }}</td>
                                     <td>{{ $comite->apellidoPaterno }}</td>
                                     <td>{{ $comite->apellidoMaterno }}</td>

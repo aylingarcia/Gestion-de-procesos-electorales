@@ -47,7 +47,7 @@ class EleccionController extends Controller
         if($request->hasFile('convocatoria')){
             $datosEleccion['convocatoria']=$request->file('convocatoria')->store('uploads','public');
         }
-        return response()->json($datosEleccion);
+        return redirect('/elecciones')->with('success', 'La elección se ha guardado con éxito.');
 
     }
 
@@ -89,7 +89,7 @@ class EleccionController extends Controller
         Eleccion::where('id','=',$id)->update($datosEleccion);
 
         $elecciones=Eleccion::FindOrFail($id);
-        return view('elecciones.edit', compact('elecciones'));
+        return redirect('/elecciones');
     }
 
     /**

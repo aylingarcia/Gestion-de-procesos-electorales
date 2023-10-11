@@ -15,7 +15,7 @@
             var confirmacion = confirm("¿Seguro que deseas cancelar? Los cambios no se guardarán.");
             if (confirmacion) {
 
-                window.location.href = "/elecciones";
+                window.location.href = "/comite";
             }
         }
 
@@ -23,7 +23,7 @@
             var confirmacion = confirm("Los datos han sido registrados con éxito");
             if (confirmacion) {
 
-                window.location.href = "/elecciones";
+                window.location.href = "/comite";
             }
         }
     </script>
@@ -37,23 +37,23 @@
                 <img src="/images/LogoUMSS2.png" alt="Logo de Enrique" class="company-logo">
                 
             </a>
-            <div><a href="#">TRIBUNAL ELECTORAL</a></div>
+            <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
             
-            <div><a href="#">UNIVERSITARIO</a></div>
+            <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
         </div>
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Elecciones</a></li>
+        <li><a href="{{ url('/') }}">Inicio</a></li>
+            <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="#">Documentación</a></li>
             <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Contactos</a></li>
+            <li><a href="#">Contacto</a></li>
             <li><a href="#">Ingreso</a></li>
         </ul>
         <div class="menu-icon"></div>
     </nav>
     <header></header>
     <div class="header">
-        <label for=""></label><br><br>
+    <label for=""></label><br><br>
     </div>
     <div class="container">
         <form action="{{ isset($comite) ? url('/comite/' . $comite->id) : url('/comite') }}"
@@ -95,27 +95,27 @@
 
                         <label for="CI">CI:</label>
                     <input type="text" 
-                        name="CI" placeholder="Escribe el aCArnet de identidad aquí..."
+                        name="CI" placeholder="Escribe el carnet de identidad"
                         value="{{ isset($comite) ? $comite->CI : '' }}" id="CI"
                         required>
 
-                    <label for="cargoComite">Cargo en Comite:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
-                        name="cargoComite" placeholder="Escribe el cargo aquí..."
-                        value="{{ isset($comite) ? $comite->cargoComite : '' }}" id="cargoComite"
-                        required><br><br>
+                   
 
                 </div>
                 <div class="column">
-
+                <label for="cargoComite">Cargo en Comite:</label>
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
+                        name="cargoComite" placeholder="Escribe el cargo aquí..."
+                        value="{{ isset($comite) ? $comite->cargoComite : '' }}" id="cargoComite"
+                        required><br><br>
                     <label for="profesion">Profesion:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
                         name="profesion" placeholder="Escribe la profesion aquí..."
                         value="{{ isset($comite) ? $comite->profesion : '' }}" id="profesion"
                         required>
 
                         <label for="cargoUMSS">Cargo en UMSS:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
                         name="cargoUMSS" placeholder="Escribe el cargo que ejerce en la universidad"
                         value="{{ isset($comite) ? $comite->cargoUMSS : '' }}" id="cargoUMSS">
 
@@ -124,7 +124,7 @@
             <input type="submit" value="{{ isset($comite) ? 'Actualizar' : 'Registrar' }}"
                 onclick="confirmarConfirmacion()">
             <input type="reset" value="Cancelar" onclick="confirmarCancelación()">
-            <label for=""></label><br><br>
+            
             <label for=""></label><br><br>
         </form>
         <div class="footer">

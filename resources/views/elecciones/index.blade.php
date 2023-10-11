@@ -24,12 +24,12 @@
             <a href="#" class="logo2">
                 <img src="/images/LogoUMSS2.png" alt="Logo de la Empresa" class="company-logo">
             </a>
-            <div><a href="#">TRIBUNAL ELECTORAL</a></div>
-            <div><a href="#">UNIVERSITARIO</a></div>
+            <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
+            <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
         </div>
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Elecciones</a></li>
+        <li><a href="{{ url('/') }}">Inicio</a></li>
+            <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="#">Documentación</a></li>
             <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contactos</a></li>
@@ -101,12 +101,12 @@
 
             {{-- Votones Momentaneos de Anadir votante y comite electoral --}}
             <div class="botones">
-                <a href="{{ route('elecciones.create') }}" class="buttons">Añadir Votante</a>
+                <a href="{{ route('votante.create') }}" class="buttons">Añadir Votantes</a>
 
             </div>
 
             <div class="botones">
-                <a href="{{ route('elecciones.create') }}" class="buttons">Añadir Comite Electoral</a>
+                <a href="{{ route('comite.create') }}" class="buttons">Añadir Comite Electoral</a>
 
             </div>
             {{-- Fin botones momentaneos --}}
@@ -128,7 +128,7 @@
                         <thead>
                             <tr>
                                 <th>Numero</th>
-                                <th>Nombre de eleccion</th>
+                                <th>Nombre de elección</th>
                                 <th>Cargo de Autoridad</th>
                                 <th>Gestion</th>
                                 <th>Acciones</th>

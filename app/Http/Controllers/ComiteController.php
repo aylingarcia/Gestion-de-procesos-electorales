@@ -46,7 +46,7 @@ class ComiteController extends Controller
         // Inserta los datos en la tabla votantes
         Comite::insert($datosComite);
     
-        return response()->json($datosComite);
+        return redirect('/comite')->with('success', 'El miembro del comite se ha guardado con éxito.');
     }
 
     /**
@@ -93,7 +93,7 @@ class ComiteController extends Controller
 
     $comite = Comite::findOrFail($id);
 
-    return view('comite.edit', compact('comite', 'elecciones'));
+    return redirect('/comite');
     
     }
 

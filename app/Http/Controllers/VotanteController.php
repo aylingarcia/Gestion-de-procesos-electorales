@@ -15,6 +15,8 @@ class VotanteController extends Controller
     public function index()
     {
         //
+        $datos['votantescreados']=Votante::paginate(20);
+        return view('votante.index', $datos);
     }
 
     /**
@@ -44,7 +46,7 @@ class VotanteController extends Controller
     // Inserta los datos en la tabla votantes
     Votante::insert($datosVotante);
 
-    return response()->json($datosVotante);
+    return redirect('/votante')->with('success', 'El votante se ha guardado con éxito.');
 }
 
     /**
