@@ -11,6 +11,18 @@
             box-sizing:border-box;
             font-family: "Uni Sans" , sans-serif;
         }
+        .company-logo {
+    border-radius: 8%;
+
+    max-width: 15%;
+    /* Ajusta el ancho máximo de la imagen al 100% del contenedor */
+    height: auto;
+    /* Permite que la altura se ajuste automáticamente para mantener la proporción */
+    /* Alinea verticalmente la imagen en el medio del texto */
+    float: left;
+    margin-right: 40px;
+}
+
         nav {
             display:flex;
             align-items: center;
@@ -220,6 +232,9 @@
 <body>
     <nav>
         <div class="logo">
+            <a href="#" class="logo2">
+                <img src="/images/Logo_TE.png" alt="Logo de la Empresa" class="company-logo">
+            </a>
             <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
             <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
         </div>

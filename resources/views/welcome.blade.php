@@ -8,7 +8,7 @@
         .company-logo {
     border-radius: 8%;
 
-    max-width: 21%;
+    max-width: 15%;
     /* Ajusta el ancho máximo de la imagen al 100% del contenedor */
     height: auto;
     /* Permite que la altura se ajuste automáticamente para mantener la proporción */
@@ -222,7 +222,7 @@
     <nav>
         <div class="logo">
             <a href="#" class="logo2">
-            <img src="/images/LogoUMSS2.png" alt="Logo de Enrique" class="company-logo">
+            <img src="/images/Logo_TE.png" alt="Logo de Enrique" class="company-logo">
                 
             </a>
             <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
