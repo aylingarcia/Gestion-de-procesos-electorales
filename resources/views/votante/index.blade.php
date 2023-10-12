@@ -9,7 +9,7 @@
     <br>
     <br>
     <br>
-    <title>Miembros del Comite</title>
+    <title>Lista de Votantes</title>
     <link rel="stylesheet" href="{{ asset('css/Elecciones_Creadas.css') }}">
     <script src="{{ asset('js/Elecciones_Creadas.js') }}"></script>
 
@@ -22,7 +22,7 @@
 
         <div class="logo">
             <a href="#" class="logo2">
-                <img src="/images/LogoUMSS2.png" alt="Logo de la Empresa" class="company-logo">
+                <img src="/images/Logo_TE.png" alt="Logo de la Empresa" class="company-logo">
             </a>
             <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
             <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
@@ -47,7 +47,7 @@
 
 
                 <a href="#" class="logo">
-                    <img src="images/LogoUMSS2.png" alt="Logo de la Empresa" class="company-logo">
+                    <img src="images/Logo_TE.png" alt="Logo de la Empresa" class="company-logo">
                     Administrador de Elecciones
                     <br>
                     Universidad Mayor de San Simon
@@ -114,6 +114,7 @@
                                 <th>Apellido Paterno</th>
                                 <th>Apellido Materno</th>
                                 <th>Tipo de Votante</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -124,6 +125,27 @@
                                     <td>{{ $votante->apellidoPaterno }}</td>
                                     <td>{{ $votante->apellidoMaterno }}</td>
                                     <td>{{ $votante->tipoVotante }}</td>
+
+                                    <td class="celda-botones">
+                                    <button class="buttons" style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" onclick="window.location.href='{{ url('/votante/' . $votante->id . '/edit') }}'">Editar</button>
+
+                                    
+
+                                        {{-- inicio Funcion borrar --}}
+
+                                        <form action="{{ url('/votante/' .$votante->id ) }}" method="post">
+                                         @csrf 
+                                         {{method_field('DELETE')}}  
+                                         <button class="buttons" onclick="return confirm ('Quieres borrar este votante?')" 
+                                         style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" 
+                                         onclick="window.location.href='{{ url('/votante/' . $votante->id) }}'">Borrar</button>
+                                        </form>
+
+                                        {{-- fin funcion borrar --}}
+
+
+                                    
+                                    </td>
 
 
                                     

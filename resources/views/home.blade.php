@@ -16,7 +16,7 @@
         .company-logo {
             border-radius: 8%;
 
-            max-width: 21%;
+            max-width: 15%;
             /* Ajusta el ancho máximo de la imagen al 100% del contenedor */
             height: auto;
             /* Permite que la altura se ajuste automáticamente para mantener la proporción */
@@ -26,97 +26,85 @@
         }
 
         nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            height: 70px;
-            background-image: linear-gradient(to right, #003770, #f80211);
-            border-bottom: 2px solid #fff;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 999;
-        }
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 70px;
+    background-image: linear-gradient(to right, #003770, #f80211);
+    border-bottom: 2px solid #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+nav .logo a {
+    font-size:25px;
+    color:#fff;
+    font-weight: 600;
+    text-decoration:none;
+}
+nav .logo a:hover {
+    color: #003770;
+    transition: 0.5s;
+}
+nav ul {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    gap:2.5rem;
+}
+nav ul li{
+    list-style: none;
+}
+nav ul li a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+}
+nav ul li a:hover{
+    color: #003770;
+    transition: 0.5s;
+}
 
-        nav .logo a {
-            font-size: 25px;
-            color: #fff;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        nav .logo a:hover {
-            color: #003770;
-            transition: 0.5s;
-        }
-
-        nav ul {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2.5rem;
-        }
-
-        nav ul li {
-            list-style: none;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        nav ul li a:hover {
-            color: #003770;
-            transition: 0.5s;
-        }
-
-        .menu-icon {
-            display: none;
-            width: 25px;
-            height: 3px;
-            background: #fff;
-            transform: translateY(-50%);
-            transition: 0.5s;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .menu-icon::before,
-        .menu-icon::after {
-            content: "";
-            position: absolute;
-            width: 25px;
-            height: 3px;
-            background: #fff;
-            transition: 0.5s;
-            border-radius: 5px;
-        }
-
-        .menu-icon::before {
-            top: -8px;
-        }
-
-        .menu-icon::after {
-            top: -8px;
-        }
-
-        .menu-icon.active {
-            background: rgba(0, 0, 0, 0);
-        }
-
-        .menu-icon.active::before {
-            top: 0;
-            transform: rotate(45deg);
-        }
-
-        .menu-icon.active::after {
-            top: 0;
-            transform: rotate(135deg);
-        }
+.menu-icon{
+    display: none;
+    width: 25px;
+    height:3px;
+    background: #fff;
+    transform: translateY(-50%);
+    transition: 0.5s;
+    border-radius:5px;
+    cursor: pointer;
+}
+.menu-icon::before,
+.menu-icon::after{
+    content:"";
+    position: absolute;
+    width: 25px;
+    height:3px;
+    background: #fff;
+    transition:0.5s;
+    border-radius: 5px;
+}
+.menu-icon::before{
+    top:-8px;
+}
+.menu-icon::after{
+    top:-8px;
+}
+.menu-icon.active{
+    background: rgba(0,0,0,0);
+}
+.menu-icon.active::before{
+    top:0;
+    transform:rotate(45deg);
+}
+.menu-icon.active::after{
+    top:0;
+    transform: rotate(135deg);
+}
 
         @media screen and (max-width: 992px) {
             nav ul {
@@ -160,34 +148,10 @@
 
 
 
-        .header {
-            background-image: linear-gradient(to right, #003770, #C20000);
-            color: white;
-            text-align: center;
-            padding: 40px 0;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        .header h1 {
-            font-size: 36px;
-            font-weight: bold;
-        }
-
-        .header p {
-            font-size: 18px;
-            font-weight: 300;
-        }
-
-        .votante-form-container {
-            padding: 20px;
-            margin-top: 100px;
-        }
 
         .footer {
-            /*background-color: #003770;*/
-            background-image: linear-gradient(to right, #003770, #C20000);
+            background-color: #003770;
+            /*background-image: linear-gradient(to right, #003770, #C20000);*/
             color: white;
             text-align: right;
             padding: 15px;
@@ -234,7 +198,7 @@
     <nav>
         <div class="logo">
             <a href="#" class="logo2">
-                <img src="/images/LogoUMSS2.png" alt="Logo de la Empresa" class="company-logo">
+                <img src="/images/Logo_TE.png" alt="Logo de la Empresa" class="company-logo">
             </a>
             <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
             <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
@@ -244,7 +208,7 @@
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="#">Documentación</a></li>
             <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Contactos</a></li>
+            <li><a href="#">Contacto</a></li>
             <li><a href="#">Ingreso</a></li>
         </ul>
         <div class="menu-icon"></div>
@@ -258,8 +222,33 @@
     </div>
 
     <div class="footer">
-        <span>Derechos Reservados © 2023</span>
-        <span class="second-line">Tribunal Electoral Universitario DevGenius S.R.L.</span>
+    <span>
+            Av. Oquendo y calle Jordán 
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+            Copyright © 2023 Tribunal Electoral Universitario<br> 
+            
+            Mail: Tribunal_electoral@umss.edu 
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+            Todos los derechos Reservados<br>
+        
+            www.umss.edu.bo Cochabamba - Bolivia
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+            Design: DevGenius </span>
     </div>
 </body>
 

@@ -66,9 +66,12 @@ class VotanteController extends Controller
      * @param  \App\Models\Votante  $votante
      * @return \Illuminate\Http\Response
      */
-    public function edit(Votante $votante)
+    public function edit($id)
     {
         //
+        $votante = Votante::findOrFail($id);
+        $elecciones = Eleccion::where('estado', 1)->get();
+        return view('votante.edit', compact('votante', 'elecciones'));
     }
 
     /**
@@ -78,9 +81,18 @@ class VotanteController extends Controller
      * @param  \App\Models\Votante  $votante
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Votante $votante)
+    public function update(Request $request, $id)
     {
         //
+        $datosVotante = $request->except(['_token', '_method']);
+   
+        Votante::where('id', $id)->update($datosVotante);
+
+        $elecciones = Eleccion::where('estado', 1)->get();
+
+        $votante = Votante::findOrFail($id);
+
+        return redirect('/votante');
     }
 
     /**
@@ -89,8 +101,10 @@ class VotanteController extends Controller
      * @param  \App\Models\Votante  $votante
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Votante $votante)
+    public function destroy($id)
     {
         //
+        Votante::destroy($id);
+        return redirect('votante');
     }
 }

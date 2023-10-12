@@ -11,6 +11,17 @@
             box-sizing:border-box;
             font-family: "Uni Sans" , sans-serif;
         }
+        .company-logo {
+    border-radius: 8%;
+
+    max-width: 15%;
+    /* Ajusta el ancho máximo de la imagen al 100% del contenedor */
+    height: auto;
+    /* Permite que la altura se ajuste automáticamente para mantener la proporción */
+    /* Alinea verticalmente la imagen en el medio del texto */
+    float: left;
+    margin-right: 40px;
+}
         nav {
             display:flex;
             align-items: center;
@@ -192,7 +203,7 @@
             background-color: #0056b3;
         }
         .footer {
-            background-image: linear-gradient(to right, #003770, #C20000);
+            background-color: #003770;
             color: white;
             text-align: right;
             padding: 15px;
@@ -220,6 +231,10 @@
 <body>
     <nav>
         <div class="logo">
+        <a href="#" class="logo2">
+            <img src="/images/Logo_TE.png" alt="Logo de Enrique" class="company-logo">
+                
+            </a>
             <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
             <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
         </div>
@@ -240,6 +255,9 @@
     <div class="votante-form-container">
     <form action="{{ url('/votante') }}" method="post" enctype="multipart/form-data">
         @csrf
+        @if (isset($votante))
+                {{ method_field('PATCH') }}
+            @endif
 
         <h2 class="form-title">Registrar Votante</h2>
         <div class="column">
@@ -247,37 +265,39 @@
         <label for="ideleccion">Elegir Elección:</label>
          <select name="ideleccion" id="ideleccion" required>
                 <option value="">Selecciona una elección</option>
+                @if (isset($elecciones))
                       @foreach ($elecciones as $eleccion)
-                          <option value="{{ $eleccion->id }}">{{ $eleccion->nombre }}</option>
+                          <option value="{{ $eleccion->id }}" @if(isset($votante) && $votante->ideleccion == $eleccion->id) selected @endif>{{ $eleccion->nombre }}</option>
                       @endforeach
+                      @endif
          </select>
 
                 <label for="nombres">Nombre:</label>
                 <input type="text" placeholder="Escribe el nombre aqui..." maxlength="40" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                name="nombres" required><br><br>
+                name="nombres" value="{{ isset($votante) ? $votante->nombres : '' }}" required><br><br>
 
                 <label for="apellidoPaterno">Apellido Paterno:</label>
                 <input type="text" placeholder="Escribe el Apellido Paterno aquí..." maxlength="40"
                 oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
-                 name="apellidoPaterno" id="apellidoPaterno" required><br><br>
+                 name="apellidoPaterno" value="{{ isset($votante) ? $votante->apellidoPaterno : '' }}" id="apellidoPaterno" required><br><br>
 
                 <label for="apellidoMaterno">Apellido Materno:</label>
                 <input type="text" placeholder="Escribe el Apellido Materno aquí..." maxlength="40"
                 oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
-                name="apellidoMaterno" id="apellidoMaterno" required><br><br>
+                name="apellidoMaterno" value="{{ isset($votante) ? $votante->apellidoMaterno : '' }}" id="apellidoMaterno" required><br><br>
 
                 <label for="codSis">Codigo Sis:</label>
                 <input type="codSis" placeholder="Escribe el Codigo Sis aquí..." maxlength="9"
                 oninput="this.value = this.value.replace(/[^0-9]+/g, '')"
-                name="codSis" id="codSis" required><br><br>
+                name="codSis" value="{{ isset($votante) ? $votante->codSis : '' }}" id="codSis" required><br><br>
 
                 <label for="CI"> CI:</label>
                 <input type="text" placeholder="Escribe el Carnet de Identidad aquí..." maxlength="10" 
                 oninput="this.value = this.value.replace(/[^A-Za-z,.0-9]+/g, '')"
-                name="CI" required><br><br>
+                name="CI" value="{{ isset($votante) ? $votante->CI : '' }}" required><br><br>
             
                 <label for="tipoVotante">Tipo de Votante:</label>
-                <select name="tipoVotante" id="tipoVotante" required>
+                <select name="tipoVotante" value="{{ isset($votante) ? $votante->tipoVotante : '' }}" id="tipoVotante" required>
                     <option value="Estudiante">Estudiante</option>
                     <option value="Docente">Docente</option>
                     <option value="Administrativo">Administrativo</option>
@@ -287,36 +307,38 @@
                 <label for="carrera">Carrera:</label>
                 <input type="text" placeholder="Escribe la Carrera aquí..." maxlength="40" 
                 oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                name="carrera" id="carrera" ><br><br>
+                name="carrera" value="{{ isset($votante) ? $votante->carrera : '' }}" id="carrera" ><br><br>
                 </div>
 
                 <div class="campo-adicional" id="campoProfesion">
                 <label for="profesion">Profesión:</label>
                 <input type="text" placeholder="Escribe la Profesión aquí..." maxlength="40" 
                 oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                name="profesion" id="profesion" ><br><br>
+                name="profesion" value="{{ isset($votante) ? $votante->profesion : '' }}" id="profesion" ><br><br>
                 </div>
 
                 <div class="campo-adicional" id="campoFacultad">
                 <label for="facultad">Facultad:</label>
                 <input type="text" placeholder="Escribe la Facultad aquí..." maxlength="40" 
                 oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                name="facultad" id="facultad" ><br><br>
+                name="facultad" value="{{ isset($votante) ? $votante->facultad : '' }}" id="facultad" ><br><br>
                 </div>
 
                 <div class="campo-adicional" id="campoCargo">
                 <label for="cargoAdministrativo">Cargo Administrativo:</label>
                 <input type="text" placeholder="Escribe el Cargo Administrativo aquí..." maxlength="40"
                 oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                name="cargoAdministrativo" id="cargoAdministrativo" ><br><br>
+                name="cargoAdministrativo" value="{{ isset($votante) ? $votante->cargoAdministrativo : '' }}" id="cargoAdministrativo" ><br><br>
                 </div>
                 
                 <label for="celular">Celular:</label>
-                <input type="number" placeholder="Escribe el Número de Celular aquí..." min="60000000" max=""79999999 name="celular" id="celular" required><br><br>
+                <input type="number" placeholder="Escribe el Número de Celular aquí..." min="60000000" max=""79999999 
+                name="celular" value="{{ isset($votante) ? $votante->celular : '' }}" id="celular" required><br><br>
 
-                <label for="e-mail">e-mail:</label>
-                <input type="email" placeholder="Escribe el E-Mail aquí..." maxlength="40" 
-                name="e-mail" id="e-mail" required><br><br>
+                <label for="email">e-mail:</label>
+                <input type="email" placeholder="Escribe el e-Mail aquí..." maxlength="40" 
+                name="email" value="{{ isset($votante) ? $votante->email : '' }}" id="email" required><br><br>
+
 
                 <label for="cargarLista">Cargar lista de votantes:</label>
                 <input type="file" title="Subir Archivo CSV o Excel" name="cargarLista" id="cargarLista" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
@@ -331,9 +353,33 @@
         
     </form>
     <div class="footer">
-        <span>Derechos Reservados © 2023</span>
-        <span class="second-line">Tribunal Electoral Universitario DevGenius S.R.L.</span>
-    </div>
+    <span>
+            Av. Oquendo y calle Jordán 
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+            Copyright © 2023 Tribunal Electoral Universitario<br> 
+            
+            Mail: Tribunal_electoral@umss.edu 
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+            Todos los derechos Reservados<br>
+        
+            www.umss.edu.bo Cochabamba - Bolivia
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+            Design: DevGenius </span></div>
     
     <script>
         function cancelacion() {

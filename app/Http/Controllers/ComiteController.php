@@ -103,8 +103,10 @@ class ComiteController extends Controller
      * @param  \App\Models\Comite  $comite
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comite $comite)
+    public function destroy($id)
     {
         //
+        Comite::destroy($id);
+        return redirect('comite');
     }
 }

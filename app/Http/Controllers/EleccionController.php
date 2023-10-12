@@ -98,9 +98,12 @@ class EleccionController extends Controller
      * @param  \App\Models\Eleccion  $eleccion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Eleccion $eleccion)
+    public function destroy($id)
     {
         //
+        Eleccion::destroy($id);
+        return redirect('elecciones');
+
     }
 
     public function archivar($id)
