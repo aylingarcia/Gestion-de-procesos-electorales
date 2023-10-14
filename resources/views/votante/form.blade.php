@@ -205,7 +205,6 @@
         .footer {
             background-color: #003770;
             color: white;
-            text-align: right;
             padding: 15px;
             position: fixed;
             bottom: 0;
@@ -213,16 +212,65 @@
             left: 0;
             font-size: 15px;
             display: flex;
-            flex-direction: column; 
-            align-items: flex-end;
+            justify-content: space-between;
+            align-items: center;
         }
 
+        .footer-izq {
+            flex: 1;
 
-        .content {
-            padding-bottom: 70px;
+            text-align: left;
+            margin-left: 70px;
+            /* Ajusta el valor de margen según cuánto espacio desees agregar */
+
+
         }
-        .footer .second-line {
-            font-size: 14px; 
+
+        .footer-medio {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            /* Evita el retorno de línea */
+            overflow: hidden;
+            /* Oculta el desbordamiento si el contenido es demasiado largo */
+            text-overflow: ellipsis;
+            /* Agrega puntos suspensivos (...) si el contenido es demasiado largo */
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            /* Evita el retorno de línea */
+            overflow: hidden;
+            /* Oculta el desbordamiento si el contenido es demasiado largo */
+            text-overflow: ellipsis;
+            /* Agrega puntos suspensivos (...) si el contenido es demasiado largo */
+            font-size: 18px;
+
+        }
+
+        .footer-der {
+            flex: 1;
+            text-align: center;
+        }
+
+        .footer-der a {
+            color: white;
+            /* Establece el color del texto en blanco por defecto */
+            text-decoration: none;
+            /* Elimina el subrayado predeterminado de los enlaces */
+            transition: color 0.3s;
+            /* Agrega una transición suave para el cambio de color */
+            font-size: 18px;
+            /* Ajusta el tamaño de fuente según tus preferencias */
+
+        }
+
+        .footer-der a:hover {
+            color: red;
+            /* Cambia el color del texto a rojo al pasar el ratón sobre el enlace */
+            font-size: 20px;
+            /* Tamaño de fuente al pasar el ratón sobre el enlace, puedes ajustarlo según tus preferencias */
+
         }
     </style>
 
@@ -346,33 +394,30 @@
         
     </form>
     <div class="footer">
-    <span>
-            Av. Oquendo y calle Jordán 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            Copyright © 2023 Tribunal Electoral Universitario<br> 
-            
-            Mail: Tribunal_electoral@umss.edu 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-            Todos los derechos Reservados<br>
-        
+
+        <div class="footer-izq">
+            Av. Oquendo y calle Jordán asd
+            <br>
+            Mail: Tribunal_electoral@umss.edu
+            <br>
             www.umss.edu.bo Cochabamba - Bolivia
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            Design: DevGenius </span></div>
+            <br>
+            Design: DevGenius
+
+        </div>
+        <div class="footer-medio">
+
+            Copyright © 2023 Tribunal Electoral Universitario Todos los derechos Reservados
+
+        </div>
+        <div class="footer-der">
+            <a href="{{ url('/') }}">Acerca de</a>
+            <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
+            <a href="{{ url('/') }}">Contactos</a>
+
+        </div>
+
+    </div>
     
     <script>
         function cancelacion() {

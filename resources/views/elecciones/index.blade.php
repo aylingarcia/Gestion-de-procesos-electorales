@@ -98,9 +98,9 @@
                 <a href="{{ route('elecciones.create') }}" class="buttons">Crear nueva elección</a>
 
             </div>
+  {{-- Votones Momentaneos de Anadir votante y comite electoral --}}
 
-            {{-- Votones Momentaneos de Anadir votante y comite electoral --}}
-            <div class="botones">
+            {{-- <div class="botones">
                 <a href="{{ route('votante.create') }}" class="buttons">Añadir Votantes</a>
 
             </div>
@@ -108,8 +108,9 @@
             <div class="botones">
                 <a href="{{ route('comite.create') }}" class="buttons">Añadir Comite Electoral</a>
 
-            </div>
-            {{-- Fin botones momentaneos --}}
+            </div> --}}
+
+ {{-- Fin botones momentaneos --}}
 
 
             <div class="botones">
@@ -153,17 +154,15 @@
                                             <img src="/images/archivar.png" alt="Archivar" class="formato-imagen" />
                                         </button>
 
-                                        {{-- <button class="buttons-dentro-tabla" title="Añadir Votante" --}}
-                                            {{-- añadir la funcion que redireccione --}}
-                                            {{-- > --}}
-                                            {{-- <img src="/images/anadirvotante.png" alt="Archivar" class="formato-imagen" /> --}}
-                                        {{-- </button> --}}
+                                        <button class="buttons-dentro-tabla" title="Añadir Votante"
+                                        onclick="window.location.href='{{ url('/votante' . '/create') }}'">
+                                        <img src="/images/anadirvotante.png" alt="Archivar" class="formato-imagen" />
+                                        </button>
 
-                                        {{-- <button class="buttons-dentro-tabla" title="Añadir Comite" --}}
-                                            {{-- añadir la funcion que redireccione --}}
-                                            {{-- > --}}
-                                            {{-- <img src="/images/anadircomite.png" alt="Archivar" class="formato-imagen" /> --}}
-                                        {{-- </button> --}}
+                                        <button class="buttons-dentro-tabla" title="Añadir Comite"
+                                        onclick="window.location.href='{{ url('/comite' . '/create') }}'">
+                                            <img src="/images/anadircomite.png" alt="Archivar" class="formato-imagen" />
+                                        </button>
 
 
 
@@ -183,34 +182,32 @@
                                             }
                                         }
                                     </script>
-                                    <div class="footer">
-                                    <span>
-            Av. Oquendo y calle Jordán 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            Copyright © 2023 Tribunal Electoral Universitario<br> 
-            
-            Mail: Tribunal_electoral@umss.edu 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-            Todos los derechos Reservados<br>
-        
+      
+      <div class="footer">
+
+        <div class="footer-izq">
+            Av. Oquendo y calle Jordán asd
+            <br>
+            Mail: Tribunal_electoral@umss.edu
+            <br>
             www.umss.edu.bo Cochabamba - Bolivia
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            Design: DevGenius </span></div>
+            <br>
+            Design: DevGenius
+
+        </div>
+        <div class="footer-medio">
+
+            Copyright © 2023 Tribunal Electoral Universitario Todos los derechos Reservados
+
+        </div>
+        <div class="footer-der">
+            <a href="{{ url('/') }}">Acerca de</a>
+            <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
+            <a href="{{ url('/') }}">Contactos</a>
+
+        </div>
+
+    </div>
 
 
 
