@@ -28,11 +28,16 @@
             <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
         </div>
         <ul>
+            <li></li><li></li>
+            <li></li><li></li>
+            <li></li><li></li>
+            <li></li><li></li>
+
             <li><a href="{{ url('/') }}">Inicio</a></li>
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="#">Documentación</a></li>
-            <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Contacto</a></li>
+            {{-- <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Contacto</a></li> --}}
             <li><a href="#">Ingreso</a></li>
         </ul>
         <div class="menu-icon"></div>
