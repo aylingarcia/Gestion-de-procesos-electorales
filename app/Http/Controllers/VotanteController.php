@@ -40,7 +40,14 @@ class VotanteController extends Controller
      */
     public function store(Request $request)
 {
-    // Obtiene todos los datos del formulario
+    //
+    $request->validate([
+        'ideleccion' => 'required|unique:votantes,ideleccion',
+        'codSis' => 'required|unique:votantes,codSis',
+        'CI' => 'required|unique:votantes,CI',
+        
+    ]);
+
     $datosVotante = request()->except('_token');
     
     // Inserta los datos en la tabla votantes

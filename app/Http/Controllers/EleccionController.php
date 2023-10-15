@@ -39,7 +39,12 @@ class EleccionController extends Controller
     public function store(Request $request)
     {
         //
-        //$datosEleccion = request()->all();
+        $request->validate([
+            'nombre' => 'required|unique:eleccions,nombre',
+            'motivo' => 'required|unique:eleccions,motivo',
+            'cargodeautoridad' => 'required|unique:eleccions,cargodeautoridad',
+        ]);
+
         $datosEleccion = request()->except('_token');
         $datosEleccion['estado'] = $request->input('estado', 1);
         Eleccion::insert($datosEleccion);

@@ -130,6 +130,31 @@ return [
     */
 
     'custom' => [
+        'nombre' => [
+            'unique' => 'El :attribute ya ha sido registrado anteriormente.',
+        ],
+
+        'motivo' => [
+            'unique' => 'El :attribute ya ha sido registrado anteriormente.',
+        ],
+
+        'cargodeautoridad' => [
+            'unique' => 'El cargo ya ha sido registrado anteriormente.',
+        ],
+
+        'ideleccion' => [
+            'unique' => 'La eleccion ya ha sido asociado al votante anteriormente.',
+        ],
+
+        'codSis' => [
+            'unique' => 'El codigo SIS ya ha sido registrado en la eleccion anteriormente.',
+        ],
+
+        'CI' => [
+            'unique' => 'El C.I. ya ha sido registrado en la eleccion anteriormente.',
+        ],
+
+
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],

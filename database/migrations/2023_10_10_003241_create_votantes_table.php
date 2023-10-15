@@ -27,7 +27,7 @@ class CreateVotantesTable extends Migration
             $table->string('cargoAdministrativo')->nullable();
             $table->string('facultad')->nullable();
             $table->string('celular');
-            $table->string('email');
+            $table->string('e-mail');
             $table->timestamps();
         });
     }
