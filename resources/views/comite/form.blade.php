@@ -68,20 +68,21 @@
                 {{ method_field('PATCH') }}
             @endif
             <h2 class="form-title">Registrar Comite</h2>
-            
+            <br>
             <div class="columns">
                 <div class="column">
 
-                <select name="id_eleccion" required>
-                 <option value="">Selecciona una elección</option>
-                   @if (isset($elecciones))
-                      @foreach ($elecciones as $eleccion)
-                 <option value="{{ $eleccion->id }}" @if(isset($comite) && $comite->id_eleccion == $eleccion->id) selected @endif>{{ $eleccion->nombre }}</option>
-                   @endforeach
-                   @endif
-                </select>
+                
 
                     <label for="nombreMiembro">Nombre Miembro Comite:</label>
+                    <select name="id_eleccion" required>
+                        <option value="">Selecciona una elección</option>
+                          @if (isset($elecciones))
+                             @foreach ($elecciones as $eleccion)
+                        <option value="{{ $eleccion->id }}" @if(isset($comite) && $comite->id_eleccion == $eleccion->id) selected @endif>{{ $eleccion->nombre }}</option>
+                          @endforeach
+                          @endif
+                       </select>
                     <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')" name="nombreMiembro"
                         placeholder="Escribe el nombre del miembro aquí..."
                         value="{{ isset($comite) ? $comite->nombreMiembro : '' }}" id="nombreMiembro" required>

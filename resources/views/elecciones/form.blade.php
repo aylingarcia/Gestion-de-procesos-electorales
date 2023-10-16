@@ -27,7 +27,18 @@
             }
         }
     </script>
-
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+      const selectedDate = new Date(document.getElementById('fecha').value);
+      const currentDate = new Date();
+  
+      if (selectedDate < currentDate) {
+        event.preventDefault(); // Detiene el envío del formulario
+        alert('Selecciona una fecha igual o posterior al día de hoy.');
+      }
+    });
+  </script>
+  
     <style>
         
     .error-message {
@@ -82,7 +93,7 @@
             <div class="columns">
                 <div class="column">
                 <label for="nombre">Nombre de la Elección:</label>
-                   <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. 0-9]+/g, '')" name="nombre" maxlength="40"
+                   <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z]+/g, '')" name="nombre" maxlength="40"
                    placeholder="Escribe el nombre de la elección aquí..."
                    value="{{ isset($elecciones) ? $elecciones->nombre : old('nombre') }}" required>
                    @error('nombre')
@@ -90,7 +101,7 @@
                    @enderror
 
                    <label for="motivo">Motivo de la Elección:</label>
-                   <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. 0-9]+/g, '')" name="motivo" maxlength="60"
+                   <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')" name="motivo" maxlength="60"
                    placeholder="Escribe el motivo de la elección aquí..."
                    value="{{ isset($elecciones) ? $elecciones->motivo : old('motivo') }}" id="motivo" required>
                    @error('motivo')
@@ -136,7 +147,7 @@
 <br>
                     <label for="fecha">Fecha:</label>
                     <input type="date" name="fecha" value="{{ isset($elecciones) ? $elecciones->fecha : '' }}"
-                        id="fecha" required>
+                        id="fecha" required min="<?php echo date('Y-m-d'); ?>">
 
                         <label for="tipodeeleccion">Tipo de Elección:</label>
                          <select name="tipodeeleccion" id="tipodeeleccion" required>

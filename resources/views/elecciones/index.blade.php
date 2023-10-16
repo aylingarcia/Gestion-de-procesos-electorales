@@ -16,6 +16,7 @@
 </head>
 
 
+
 <body>
     <nav>
 
@@ -28,12 +29,16 @@
             <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
         </div>
         <ul>
-            <li></li><li></li>
-            <li></li><li></li>
-            <li></li><li></li>
-            <li></li><li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
 
-        <li><a href="{{ url('/') }}">Inicio</a></li>
+            <li><a href="{{ url('/') }}">Inicio</a></li>
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="#">Documentación</a></li>
             {{-- <li><a href="#">Acerca de</a></li>
@@ -96,24 +101,24 @@
         <br>
         <br>
 
-<div class="container botonesss">
-             <div class="botones">
-                 <a href="{{ route('elecciones.create') }}" class="buttons">Crear nueva elección</a>
-             </div>
-    
-             <div class="botones">
-                 <a href="{{ url('/votante') }}" class="buttons">Lista de votantes</a>
-             </div>
-    
-             <div class="botones">
-                 <a href="{{ url('/comite') }}" class="buttons">Lista Comité Electoral</a>
-             </div>
-    
-     <div class="botones">
-        <input type="text" id="search" placeholder="Buscar...">
-        <button class="buttons" onclick="search()">Buscar</button>
-     </div>
-</div>
+        <div class="container botonesss">
+            <div class="botones">
+                <a href="{{ route('elecciones.create') }}" class="buttons">Crear nueva elección</a>
+            </div>
+
+            <div class="botones">
+                <a href="{{ url('/votante') }}" class="buttons">Lista de votantes</a>
+            </div>
+
+            <div class="botones">
+                <a href="{{ url('/comite') }}" class="buttons">Lista Comité Electoral</a>
+            </div>
+
+            <div class="botones">
+                <input type="text" id="search" placeholder="Buscar...">
+                <button class="buttons" onclick="search()">Buscar</button>
+            </div>
+        </div>
 
 
         <br>
@@ -150,24 +155,36 @@
                                         </button>
 
                                         <button class="buttons-dentro-tabla" title="Añadir Votante"
-                                        onclick="window.location.href='{{ url('/votante' . '/create') }}'">
-                                        <img src="/images/anadirvotante.png" alt="Archivar" class="formato-imagen" />
+                                            onclick="window.location.href='{{ url('/votante' . '/create') }}'">
+                                            <img src="/images/anadirvotante.png" alt="Archivar"
+                                                class="formato-imagen" />
                                         </button>
 
                                         <button class="buttons-dentro-tabla" title="Añadir Comite"
-                                        onclick="window.location.href='{{ url('/comite' . '/create') }}'">
+                                            onclick="window.location.href='{{ url('/comite' . '/create') }}'">
                                             <img src="/images/anadircomite.png" alt="Archivar" class="formato-imagen" />
                                         </button>
 
-                                        {{-- inicio Funcion borrar --}}
+{{-- Inicio Función borrar --}}
+<form id="delete-form-{{ $elecciones->id }}" action="{{ url('/elecciones/' . $elecciones->id) }}" method="post" style="display: inline;">
+    @csrf
+    {{ method_field('DELETE') }}
+    <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="confirmDelete('{{ $elecciones->id }}')">
+        <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
+    </button>
+</form>
 
-                                        <form action="{{ url('/elecciones/' .$elecciones->id ) }}" method="post">
-                                         @csrf 
-                                         {{method_field('DELETE')}}  
-                                         <button class="buttons" onclick="return confirm ('Quieres borrar esta eleccion?')" style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" onclick="window.location.href='{{ url('/elecciones/' . $elecciones->id) }}'">Borrar</button>
-                                        </form>
+<script>
+    function confirmDelete(id) {
+        if (confirm('¿Quieres borrar esta elección?')) {
+            document.getElementById('delete-form-' + id).submit();
+        }
+        // No es necesario un 'else' ya que no se hará nada si el usuario cancela.
+    }
+</script>
+{{-- Fin función borrar --}}
 
-                                        {{-- fin funcion borrar --}}
+
 
 
 
@@ -187,32 +204,33 @@
                                             }
                                         }
                                     </script>
-      
-      <div class="footer">
 
-        <div class="footer-izq">
-            Av. Oquendo y calle Jordán asd
-            <br>
-            Mail: Tribunal_electoral@umss.edu
-            <br>
-            www.umss.edu.bo Cochabamba - Bolivia
-            <br>
-            Design: DevGenius
+                                    <div class="footer">
 
-        </div>
-        <div class="footer-medio">
+                                        <div class="footer-izq">
+                                            Av. Oquendo y calle Jordán asd
+                                            <br>
+                                            Mail: Tribunal_electoral@umss.edu
+                                            <br>
+                                            www.umss.edu.bo Cochabamba - Bolivia
+                                            <br>
+                                            Design: DevGenius
 
-            Copyright © 2023 Tribunal Electoral Universitario Todos los derechos Reservados
+                                        </div>
+                                        <div class="footer-medio">
 
-        </div>
-        <div class="footer-der">
-            <a href="{{ url('/') }}">Acerca de</a>
-            <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
-            <a href="{{ url('/') }}">Contactos</a>
+                                            Copyright © 2023 Tribunal Electoral Universitario Todos los derechos
+                                            Reservados
 
-        </div>
+                                        </div>
+                                        <div class="footer-der">
+                                            <a href="{{ url('/') }}">Acerca de</a>
+                                            <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
+                                            <a href="{{ url('/') }}">Contactos</a>
 
-    </div>
+                                        </div>
+
+                                    </div>
 
 
 

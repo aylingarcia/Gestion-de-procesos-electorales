@@ -234,6 +234,8 @@ nav ul li a:hover{
         border: none;
         cursor: pointer;
         border-radius: 15%;
+        display: inline-block; /* Esto hará que los botones estén en línea horizontal */
+        margin-right: 10px; 
     }
     
     /* Estilos para la imagen dentro del botón */

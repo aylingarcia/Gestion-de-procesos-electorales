@@ -14,7 +14,7 @@
     <script src="{{ asset('js/Elecciones_Creadas.js') }}"></script>
 
 </head>
-
+ 
 
 <body>
     <nav>
@@ -132,22 +132,55 @@
                                     <td>{{ $votante->tipoVotante }}</td>
 
                                     <td class="celda-botones">
-                                    <button class="buttons" style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" onclick="window.location.href='{{ url('/votante/' . $votante->id . '/edit') }}'">Editar</button>
 
+
+
+
+
+                                    {{-- <button class="buttons" style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;"
+                                     onclick="window.location.href='{{ url('/votante/' . $votante->id . '/edit') }}'">Editar
+                                    </button> --}}
+
+                                    <button class="buttons-dentro-tabla" title="Editar Elección"
+                                     onclick="window.location.href='{{ url('/votante/' . $votante->id . '/edit') }}'">
+                                    <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
+                                </button>
                                     
 
                                         {{-- inicio Funcion borrar --}}
 
-                                        <form action="{{ url('/votante/' .$votante->id ) }}" method="post">
+                                        {{-- <form action="{{ url('/votante/' .$votante->id ) }}" method="post">
                                          @csrf 
                                          {{method_field('DELETE')}}  
                                          <button class="buttons" onclick="return confirm ('Quieres borrar este votante?')" 
                                          style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" 
                                          onclick="window.location.href='{{ url('/votante/' . $votante->id) }}'">Borrar</button>
-                                        </form>
+                                        </form> --}}
 
                                         {{-- fin funcion borrar --}}
 
+
+                                 
+    {{-- Inicio Función borrar --}}
+<form id="delete-form-{{ $votante->id }}" action="{{ url('/votante/' . $votante->id) }}" method="post" style="display: inline;">
+    @csrf
+    {{ method_field('DELETE') }}
+    <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="confirmDelete('{{ $votante->id }}')">
+        <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
+    </button>
+</form>
+
+<script>
+    function confirmDelete(id) {
+        if (confirm('¿Quieres borrar esta elección?')) {
+            document.getElementById('delete-form-' + id).submit();
+        }
+        // No es necesario un 'else' ya que no se hará nada si el usuario cancela.
+    }
+</script>
+{{-- Fin función borrar --}}
+  
+                                        
 
                                     
                                     </td>
