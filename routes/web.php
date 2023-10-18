@@ -42,6 +42,8 @@ Route::get('/header', function () {
 
 Route::resource('comite', 'ComiteController');
 
+Route::resource('comunicados', 'ComunicadoController');
+
 //Route::get('/registro-votante', function () {
     //return view('votante.form');
 //});
