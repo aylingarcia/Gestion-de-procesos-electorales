@@ -16,8 +16,9 @@ class ComiteController extends Controller
     public function index()
     {
         //
-        $datos['comitecreado']=Comite::paginate(20);
-        return view('comite.index', $datos);
+        $comitecreado = Comite::orderBy('id_eleccion', 'asc')->paginate(20);
+
+        return view('comite.index', compact('comitecreado'));
     }
 
     /**

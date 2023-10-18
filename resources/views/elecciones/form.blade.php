@@ -27,7 +27,18 @@
             }
         }
     </script>
-
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+      const selectedDate = new Date(document.getElementById('fecha').value);
+      const currentDate = new Date();
+  
+      if (selectedDate < currentDate) {
+        event.preventDefault(); // Detiene el envío del formulario
+        alert('Selecciona una fecha igual o posterior al día de hoy.');
+      }
+    });
+  </script>
+  
     <style>
         
     .error-message {
@@ -106,10 +117,33 @@
                    <span class="error-message">{{ $message }}</span>
                    @enderror
 
-                    <label for="gestion">Gestión (Año):</label>
-                    <input type="text" name="gestion" placeholder="Ejemplo: 2023 - 2028"
-                        value="{{ isset($elecciones) ? $elecciones->gestion : '' }}" id="gestion" min="2023" max="2150"
-                        required>
+                   <label for="gestioninicio">Gestión (Inicio y Fin):</label>
+<select name="gestioninicio" id="gestionicio" required>
+    <option value="">Selecciona un año</option>
+    @for ($year = date('Y'); $year <= 2150; $year++)
+        <option value="{{ $year }}"
+            @if (isset($elecciones) && $elecciones->gestion && $year == explode(' - ', $elecciones->gestioninicio)[0])
+                selected
+            @endif>
+            {{ $year }}
+        </option>
+    @endfor
+</select>
+-
+<select name="gestionfin" id="gestionfin" required>
+    <option value="">Selecciona un año</option>
+    @for ($year = date('Y'); $year <= 2150; $year++)
+        <option value="{{ $year }}"
+            @if (isset($elecciones) && $elecciones->gestion && $year == explode(' - ', $elecciones->gestionfin)[1])
+                selected
+            @endif>
+            {{ $year }}
+        </option>
+    @endfor
+</select>
+
+<br><br>
+
 
                         <label for="tipodevotantes">Tipo de Votantes:</label>
                            <select name="tipodevotantes" id="tipodevotantes" required>
@@ -136,7 +170,7 @@
 <br>
                     <label for="fecha">Fecha:</label>
                     <input type="date" name="fecha" value="{{ isset($elecciones) ? $elecciones->fecha : '' }}"
-                        id="fecha" required>
+                        id="fecha" required min="<?php echo date('Y-m-d'); ?>">
 
                         <label for="tipodeeleccion">Tipo de Elección:</label>
                          <select name="tipodeeleccion" id="tipodeeleccion" required>

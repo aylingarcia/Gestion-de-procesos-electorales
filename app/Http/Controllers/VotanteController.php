@@ -15,8 +15,8 @@ class VotanteController extends Controller
     public function index()
     {
         //
-        $datos['votantescreados']=Votante::paginate(20);
-        return view('votante.index', $datos);
+        $votantescreados = Votante::orderBy('ideleccion', 'asc')->paginate(20);
+        return view('votante.index', compact('votantescreados'));
     }
 
     /**
@@ -42,15 +42,23 @@ class VotanteController extends Controller
 {
     //
     $request->validate([
-        'ideleccion' => 'required|unique:votantes,ideleccion',
-        'codSis' => 'required|unique:votantes,codSis',
-        'CI' => 'required|unique:votantes,CI',
-        
+        'ideleccion' => 'required',
+        'codSis' => 'required',
+        'CI' => 'required',
     ]);
 
-    $datosVotante = request()->except('_token');
     
-    // Inserta los datos en la tabla votantes
+    $existingVotante = Votante::where('ideleccion', $request->ideleccion)
+        ->where('codSis', $request->codSis)
+        ->where('CI', $request->CI)
+        ->first();
+
+    if ($existingVotante) {
+        return redirect('/votante')->with('error', 'Este votante ya está registrado en la misma elección.');
+    }
+
+    $datosVotante = request()->except('_token');
+
     Votante::insert($datosVotante);
 
     return redirect('/votante')->with('success', 'El votante se ha guardado con éxito.');
@@ -89,18 +97,29 @@ class VotanteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-        $datosVotante = $request->except(['_token', '_method']);
-   
-        Votante::where('id', $id)->update($datosVotante);
+{
+    $request->validate([
+        'ideleccion' => 'required',
+        'codSis' => 'required',
+        'CI' => 'required',
+    ]);
 
-        $elecciones = Eleccion::where('estado', 1)->get();
+    $existingVotante = Votante::where('ideleccion', $request->ideleccion)
+        ->where('codSis', $request->codSis)
+        ->where('CI', $request->CI)
+        ->where('id', '!=', $id) // Excluye el registro actual
+        ->first();
 
-        $votante = Votante::findOrFail($id);
-
-        return redirect('/votante');
+    if ($existingVotante) {
+        return redirect('/votante')->with('error', 'Este votante ya está registrado en la misma elección.');
     }
+
+    $datosVotante = request()->except(['_token', '_method']);
+
+    Votante::where('id', $id)->update($datosVotante);
+
+    return redirect('/votante');
+}
 
     /**
      * Remove the specified resource from storage.
