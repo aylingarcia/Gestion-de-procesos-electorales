@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Comunicado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class ComunicadoController extends Controller
 {
@@ -14,9 +16,22 @@ class ComunicadoController extends Controller
      */
     public function index()
     {
-        $datos['comunicados']=Comunicado::paginate(20);
-        return view('comunicado.index', $datos);
-    }
+        $comunicados = Comunicado::where('estado', 1)->get();
+        $fechaActual = Carbon::today('America/La_Paz');
+
+        foreach ($comunicados as $comunicado) {
+            $fechaFinal = Carbon::parse($comunicado->fin);
+            if ($fechaActual->greaterThanOrEqualTo($fechaFinal)) {
+                $comunicado->estado = 0;
+                $comunicado->save();
+            }
+        }
+        $comunicados = Comunicado::where('estado', 1)
+            ->orderBy('inicio', 'asc')
+            ->paginate(5);
+
+        return view('comunicado.index', compact('comunicados'));
+    }    
 
     /**
      * Show the form for creating a new resource.
@@ -38,15 +53,23 @@ class ComunicadoController extends Controller
     {
         $request->validate([
             'titulo' => 'required',
-            'pdf' => 'required',
+            'pdf' => 'required|file|mimes:pdf',
         ]);
 
-        $datos = request()->except('_token');
-        Comunicado::insert($datos);
+        $datos = $request->except('_token');
 
-        if($request->hasFile('pdf')){
-            $pdfs['comunicadoPdf']=$request->file('pdf')->store('uploads','public');
+        if ($request->hasFile('pdf')) {
+            $titulo = Str::slug($request->input('titulo')); 
+            $pdfPath = $request->file('pdf')->storeAs('uploads', $titulo . '.pdf', 'public');
+            $datos['pdf'] = $pdfPath;
         }
+        
+        $fechaActual = Carbon::today('America/La_Paz');
+        $datos['estado'] = $request->input('estado', 1);
+        $datos['inicio'] = $request->input('inicio', $fechaActual);
+
+        Comunicado::create($datos);
+
         return redirect('/comunicados');
     }
 
@@ -95,7 +118,9 @@ class ComunicadoController extends Controller
      */
     public function destroy($id)
     {
-        Comunicado::destroy($id);
+        $comunicado=Comunicado::FindOrFail($id);
+        $comunicado-> estado = 0;
+        $comunicado->save();
         return redirect('/comunicados');
     }
 }

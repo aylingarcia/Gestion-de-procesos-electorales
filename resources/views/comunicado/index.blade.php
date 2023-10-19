@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,8 +38,8 @@
         <div class="menu-icon"></div>
     </nav>
 
-
     <section class="fondoo" id="fondoo">
+        
         <br>
         <br>
         <br>
@@ -64,15 +65,29 @@
                                 <th>Nro</th>
                                 <th>Titulo</th>
                                 <th>Añadido el:</th>
+                                <th>Finaliza el:</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($comunicados as $comunicado)
-
+                                <tr>
                                     <td>{{ $comunicado->id}}</td>
-                                    <td>{{ $comunicado->titulo}}</td>
-                                    <td>{{ $comunicado->titulo }}</td>
+                                    <td>{{ $comunicado->titulo}}
+                                    <td>
+                                        @if ($comunicado->inicio)
+                                            {{ \Carbon\Carbon::parse($comunicado->inicio)->format('d/m/y') }}
+                                        @else
+                                            Sin fecha
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($comunicado->fin)
+                                            {{ \Carbon\Carbon::parse($comunicado->fin)->format('d/m/y') }}
+                                        @else
+                                            Sin fecha de fin
+                                        @endif
+                                    </td>
 
                                     <td class="celda-botones">
                                     <button class="buttons-dentro-tabla" title="Editar Comite" onclick="window.location.href='{{ url('/comunicados/' . $comunicado->id . '/edit') }}'">
@@ -86,11 +101,14 @@
                                             <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
                                         </button>
                                     </form>
+                                </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                    </table> 
+                    <!--{{ $comunicados->links() }}-->
                 </div>
             </div>
+           
         </div>
 
         <div class="footer">

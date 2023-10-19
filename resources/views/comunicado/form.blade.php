@@ -27,9 +27,9 @@
 
                         <label for="titulo">Título:</label>
                             
-                        <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                        <input type="text" oninput="this.value = this.value.replace(/[^'A-Za-z,.0-9-]+/g, '')"
                             name="titulo" placeholder="Escribe el titulo del comunicado..."
-                            value="{{ isset($comunicado) ? $comunicado->titulo : '' }}" id="titulo" required
+                            value="{{ isset($comunicado) ? $comunicado->titulo : '' }}" id="titulo" required 
                         >
 
                         <label for="pdf">Archivo(PDF):</label>
@@ -37,7 +37,17 @@
                             <p>{{ $comunicado->pdf}}</p>
                         @endif
                         <input type="file" accept="application/pdf" title="Subir archivo PDF" name="pdf"
-                            {{ isset($comunicado) && $comunicado->pdf ? '' : 'required' }}
+                            {{ isset($comunicado) && $comunicado->pdf ? '' : 'required' }} 
+                        >
+                        <!--<label for="inicio">Fecha de Inicio:</label>
+                        <input type="date" id="inicio" name="inicio" 
+                        value="{{ isset($comunicado) ? $comunicado->inicio : '' }}" required 
+                        min="{{ now()->subDays(1)->format('Y-m-d') }}">-->
+
+                        <label for="fin">Fecha Fin:</label>
+                        <input type="date" id="fin" name="fin"
+                        value="{{ isset($comunicado) ? $comunicado->fin : '' }}"
+                        min="{{ now()->format('Y-m-d') }}"
                         >
 
                     </div>

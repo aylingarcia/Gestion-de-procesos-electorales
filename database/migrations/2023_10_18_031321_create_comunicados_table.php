@@ -16,7 +16,10 @@ class CreateComunicadosTable extends Migration
         Schema::create('comunicados', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->binary('pdf');
+            $table->string('pdf');
+            $table->date('inicio');
+            $table->date('fin')->nullable();
+            $table->boolean('estado');
             $table->timestamps();
         });
     }

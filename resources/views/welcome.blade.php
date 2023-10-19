@@ -264,6 +264,42 @@
         .title {
             padding-left: 20px;
         }
+
+        .comunicado-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Alinea los elementos a la derecha de la pantalla */
+}
+
+.comunicado {
+    position: relative;
+    margin-bottom: 20px; /* Espacio entre comunicados */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+}
+
+.pdf-box {
+    width: 200px;
+    height: 200px;
+    overflow: hidden; /* Recorta cualquier contenido que se desborde del cuadro */
+    position: relative;
+    z-index: -1;
+}
+
+.pdf-box embed {
+    width: 100%; /* Ancho del embed es igual al 100% del contenedor */
+    height: 100%; /* Altura del embed es igual al 100% del contenedor */
+    transform: scale(0.7); /* Escala el PDF para que quepa dentro del cuadro */
+    transform-origin: center; /* Define el punto de origen de la escala al centro */
+    overflow: hidden; /* Oculta barras de desplazamiento del PDF */
+}
+
+.pdf-overlay {
+    width: 100%; /* Utiliza el 100% del ancho del contenedor principal */
+    text-align: center;
+    background: rgba(255, 255, 255, 0.7); /* Fondo semi-transparente para mejorar la legibilidad del texto */
+}
     </style>
 
 </head>
@@ -302,6 +338,18 @@
                 <h1>Tribunal Electoral Universitario</h1>
                 <p>El TEU es responsable de las elecciones democráticas dentro de la Universidad Mayor de San Simón.</p>
             </div>
+            @foreach($comunicados as $comunicado)
+                <div class="comunicado">
+                    <a href="{{ asset('storage/' . $comunicado->pdf) }}" target="_blank">
+                    <div class="pdf-overlay">
+                        <h2>{{ $comunicado->titulo }}</h2>
+                        <p>{{ $comunicado->created_at->format('d/m/Y') }}</p>
+                    </div>
+                    <div class="pdf-box">
+                        <embed src="{{ asset('storage/' . $comunicado->pdf) }}" type="application/pdf" width="100%" height="100%">
+                    </div>
+                </div>
+            @endforeach
         </div>
 
         <div class="footer">
