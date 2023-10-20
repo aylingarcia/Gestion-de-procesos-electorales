@@ -26,7 +26,7 @@
             justify-content: space-around;
             height: 70px;
             background-image: linear-gradient(to right, #003770, #f80211);
-            border-bottom: 2px solid #fff;
+            /*border-bottom: 2px solid #fff;*/
             position: fixed;
             top: 0;
             left: 0;
@@ -121,7 +121,7 @@
                 top: 0px;
                 right: 100%;
                 width: 100%;
-                height: 90vh;
+                height: 100vh;
                 background: #004a92;
                 flex-direction: column;
                 transition: 0.5s ease-in;
@@ -184,6 +184,24 @@
             text-align: center;
         }
 
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column; 
+                text-align: center; 
+            }
+
+            .footer-izq,
+            .footer-medio,
+            .footer-der {
+                width: 100%; 
+                margin: 5px 0;
+                text-align: center; 
+            }
+
+            .footer-medio {
+                font-size: 16px; 
+            }
+        }
         /*.footer-izq,
         .footer-medio,
         .footer-der {
@@ -266,17 +284,14 @@
             <div><a>UNIVERSITARIO</a></div>
         </div>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li></li><li></li>
+            <li></li><li></li>
+            <li></li><li></li>
+            <li></li><li></li>
 
             <li><a href="{{ url('/home') }}">Inicio</a></li>
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
+            <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
             <li><a href="#">Documentación</a></li>
             <li><a href="#">Ingreso</a></li>
             <!--<li class="show-on-mobile"><a href="#">Acerca de</a></li>
