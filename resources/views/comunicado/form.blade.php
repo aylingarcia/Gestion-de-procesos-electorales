@@ -116,7 +116,6 @@
                         name="titulo" placeholder="Escribe el titulo del comunicado..."
                         value="{{ isset($comunicado) ? $comunicado->titulo : '' }}" id="titulo" required 
                     >
-
                     <div class="file-upload-container">
                         <label for="pdf">Archivo(PDF):</label>
                         @if (isset($comunicado) && $comunicado->pdf)

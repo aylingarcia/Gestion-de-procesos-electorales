@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dos Columnas</title>
+    <title>Inicio</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
     <style>
@@ -64,10 +64,12 @@
             background: rgba(255, 255, 255, 0.2); 
             padding: 5px;
         }
+
         .pdf-overlay h2{
             margin-bottom: 20px;
             color:white;
         }
+
         .pdf-overlay p{
             color:white;
         }

@@ -106,6 +106,11 @@ class ComunicadoController extends Controller
     public function update(Request $request, $id)
     {
         $datos = $request->except(['_token','_method']);
+        if ($request->hasFile('pdf')) {
+            $titulo = Str::slug($request->input('titulo')) . '-' . $id;
+            $pdfPath = $request->file('pdf')->storeAs('uploads', $titulo . '.pdf', 'public');
+            $datos['pdf'] = $pdfPath;
+        }
         Comunicado::where('id',$id)->update($datos);
         return redirect('/comunicados');
     }
