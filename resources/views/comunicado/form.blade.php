@@ -9,17 +9,16 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
     </head>
     <style>
-        
         body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 100px;
-        padding-left: 10px;
-        padding-right: 10px;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
         label {
             font-weight: bold;
+            margin-bottom: 10px;
         }
 
         input[type="text"],
@@ -60,8 +59,8 @@
         }
 
         .container {                
-            max-width: 600px;
-            margin: 20px auto;
+            max-width: 700px;
+            margin: 100px auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
@@ -71,7 +70,7 @@
         .form-title {
             font-size: 28px;
             margin-bottom: 30px;
-            margin-top: 20px;
+            margin-top: 40px;
             text-align: center;
         }
 
@@ -134,12 +133,22 @@
                     <label for="fin">Fecha Fin:</label>
                     <input type="date" id="fin" name="fin"
                     value="{{ isset($comunicado) ? $comunicado->fin : '' }}"
-                    min="{{ now()->format('Y-m-d') }}">
+                    min="{{ now()->addDay(1)->format('Y-m-d') }}">
 
-                    <input type="submit" value="{{ isset($comunicado) ? 'Actualizar' : 'Registrar' }}">
-                    <input type="reset" value="Cancelar">
+                    <input type="submit" value="{{ isset($comunicado) ? 'Actualizar' : 'Registrar' }}" onclick="return confirm ('¿Está seguro que registrar este comunicado?')">
+                    <input type="reset" value="Cancelar" onclick="cancelacion()">
                 </div>
             </form>
         </div>
     </body>
+    <script>
+
+        function cancelacion() {
+        var confirmacion = confirm("¿Seguro que deseas cancelar? Los cambios no se guardarán.");
+            if (confirmacion) {
+        
+                window.location.href = "/comunicados";
+            }
+        }
+    </script>
 </html>
