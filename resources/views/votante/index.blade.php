@@ -146,43 +146,18 @@
                                      onclick="window.location.href='{{ url('/votante/' . $votante->id . '/edit') }}'">
                                     <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
                                 </button>
-                                    
-
-                                        {{-- inicio Funcion borrar --}}
-
-                                        {{-- <form action="{{ url('/votante/' .$votante->id ) }}" method="post">
-                                         @csrf 
-                                         {{method_field('DELETE')}}  
-                                         <button class="buttons" onclick="return confirm ('Quieres borrar este votante?')" 
-                                         style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" 
-                                         onclick="window.location.href='{{ url('/votante/' . $votante->id) }}'">Borrar</button>
-                                        </form> --}}
-
-                                        {{-- fin funcion borrar --}}
-
-
+                                               
                                  
-    {{-- Inicio Función borrar --}}
-<form id="delete-form-{{ $votante->id }}" action="{{ url('/votante/' . $votante->id) }}" method="post" style="display: inline;">
-    @csrf
-    {{ method_field('DELETE') }}
-    <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="confirmDelete('{{ $votante->id }}')">
-        <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
-    </button>
-</form>
-
-<script>
-    function confirmDelete(id) {
-        if (confirm('¿Quieres borrar esta elección?')) {
-            document.getElementById('delete-form-' + id).submit();
-        }
-        // No es necesario un 'else' ya que no se hará nada si el usuario cancela.
-    }
-</script>
-{{-- Fin función borrar --}}
+                                 {{-- Inicio Función borrar --}}
+                                    <form id="delete-form-{{ $votante->id }}" action="{{ url('/votante/' . $votante->id) }}" method="post" style="display: inline;">
+                                    @csrf
+                                 {{ method_field('DELETE') }}
+                                     <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="return confirm ('Quieres borrar este votante?')">
+                                      <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
+                                      </button>
+                                       </form>
+                                {{-- Fin función borrar --}}
   
-                                        
-
                                     
                                     </td>
 
@@ -190,8 +165,30 @@
                                     
                                     
                                     <div class="footer">
-                                        <span>Derechos Reservados © 2023</span>
-                                        <span class="second-line">Tribunal Electoral Universitario DevGenius S.R.L.</span>
+
+                                        <div class="footer-izq">
+                                            Av. Oquendo y calle Jordán asd
+                                            <br>
+                                            Mail: Tribunal_electoral@umss.edu
+                                            <br>
+                                            www.umss.edu.bo Cochabamba - Bolivia
+                                            <br>
+                                            Design: DevGenius
+
+                                        </div>
+                                        <div class="footer-medio">
+
+                                            Copyright © 2023 Tribunal Electoral Universitario Todos los derechos
+                                            Reservados
+
+                                        </div>
+                                        <div class="footer-der">
+                                            <a href="{{ url('/') }}">Acerca de</a>
+                                            <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
+                                            <a href="{{ url('/') }}">Contactos</a>
+
+                                        </div>
+
                                     </div>
 
 

@@ -148,9 +148,34 @@
             }
         }
 
+<<<<<<< HEAD
         .footer {
             background-color: #003770;
             color: white;
+=======
+
+        body {
+
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle at 50% 50%, #C20000, #003770), repeating-radial-gradient(circle, transparent 0, transparent 5px, #333 5px, #333 10px);
+
+            margin: 0;
+            padding: 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+
+
+
+        .footer {
+            background-color: #003770;
+            /*background-image: linear-gradient(to right, #003770, #C20000);*/
+            color: white;
+            text-align: right;
+>>>>>>> registro-frentes+correcciones-en-mensajes-de-error
             padding: 15px;
             position: fixed;
             bottom: 0;
@@ -158,6 +183,7 @@
             left: 0;
             font-size: 15px;
             display: flex;
+<<<<<<< HEAD
             justify-content: space-between;
             align-items: center;
         }
@@ -228,6 +254,14 @@
             /*background: radial-gradient(circle at 50% 50%, #C20000,#003770), repeating-radial-gradient(circle, transparent 0, transparent 5px, #333 5px, #333 10px);*/
 
             color: white;
+=======
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .footer .second-line {
+            font-size: 14px;
+>>>>>>> registro-frentes+correcciones-en-mensajes-de-error
         }
 
         .content-container {
@@ -252,6 +286,7 @@
         .title {
             padding-left: 20px;
         }
+<<<<<<< HEAD
 
         
 
@@ -299,19 +334,27 @@
         }
     </style>
 
+=======
+    </style>
+>>>>>>> registro-frentes+correcciones-en-mensajes-de-error
 </head>
 
 <body>
     <nav>
         <div class="logo">
             <a href="#" class="logo2">
+<<<<<<< HEAD
                 <img src="/images/Logo_TE.png" alt="Logo de Enrique" class="company-logo">
 
+=======
+                <img src="/images/LogoUMSS2.png" alt="Logo de la Empresa" class="company-logo">
+>>>>>>> registro-frentes+correcciones-en-mensajes-de-error
             </a>
             <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
             <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
         </div>
         <ul>
+<<<<<<< HEAD
             <li></li><li></li>
             <li></li><li></li>
             <li></li><li></li>
@@ -322,10 +365,18 @@
             <li><a href="#">Documentación</a></li>
             {{-- <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contacto</a></li> --}}
+=======
+            <li><a href="{{ url('/') }}">Inicio</a></li>
+            <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
+            <li><a href="#">Documentación</a></li>
+            <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Contacto</a></li>
+>>>>>>> registro-frentes+correcciones-en-mensajes-de-error
             <li><a href="#">Ingreso</a></li>
         </ul>
         <div class="menu-icon"></div>
     </nav>
+<<<<<<< HEAD
 
     <section class="fondoooo">
         <div class="content-container">
@@ -377,4 +428,45 @@
 
     </div>
 </body>
+=======
+    <!-- Header personalizado -->
+    <div class="content-container">
+        <div class="title">
+            <h1>Tribunal Electoral Universitario</h1>
+            <p>El TEU es responsable de las elecciones democráticas dentro de la Universidad Mayor de San Simón.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+    <span>
+            Av. Oquendo y calle Jordán 
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+            Copyright © 2023 Tribunal Electoral Universitario<br> 
+            
+            Mail: Tribunal_electoral@umss.edu 
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+            Todos los derechos Reservados<br>
+        
+            www.umss.edu.bo Cochabamba - Bolivia
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+            Design: DevGenius </span>
+    </div>
+</body>
+
+>>>>>>> registro-frentes+correcciones-en-mensajes-de-error
 </html>

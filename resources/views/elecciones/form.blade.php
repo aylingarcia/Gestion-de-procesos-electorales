@@ -94,7 +94,7 @@
             <div class="columns">
                 <div class="column">
                 <label for="nombre">Nombre de la Elección:</label>
-                   <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z]+/g, '')" name="nombre" maxlength="40"
+                   <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. 0-9]+/g, '')" name="nombre" maxlength="40"
                    placeholder="Escribe el nombre de la elección aquí..."
                    value="{{ isset($elecciones) ? $elecciones->nombre : old('nombre') }}" required>
                    @error('nombre')
@@ -102,7 +102,7 @@
                    @enderror
 
                    <label for="motivo">Motivo de la Elección:</label>
-                   <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')" name="motivo" maxlength="60"
+                   <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. 0-9]+/g, '')" name="motivo" maxlength="60"
                    placeholder="Escribe el motivo de la elección aquí..."
                    value="{{ isset($elecciones) ? $elecciones->motivo : old('motivo') }}" id="motivo" required>
                    @error('motivo')
@@ -118,10 +118,33 @@
                    <span class="error-message">{{ $message }}</span>
                    @enderror
 
-                    <label for="gestion">Gestión (Año):</label>
-                    <input type="text" name="gestion" placeholder="Ejemplo: 2023 - 2028"
-                        value="{{ isset($elecciones) ? $elecciones->gestion : '' }}" id="gestion" min="2023" max="2150"
-                        required>
+                   <label for="gestioninicio">Gestión (Inicio y Fin):</label>
+<select name="gestioninicio" id="gestionicio" required>
+    <option value="">Selecciona un año</option>
+    @for ($year = date('Y'); $year <= 2150; $year++)
+        <option value="{{ $year }}"
+            @if (isset($elecciones) && $elecciones->gestion && $year == explode(' - ', $elecciones->gestioninicio)[0])
+                selected
+            @endif>
+            {{ $year }}
+        </option>
+    @endfor
+</select>
+-
+<select name="gestionfin" id="gestionfin" required>
+    <option value="">Selecciona un año</option>
+    @for ($year = date('Y'); $year <= 2150; $year++)
+        <option value="{{ $year }}"
+            @if (isset($elecciones) && $elecciones->gestion && $year == explode(' - ', $elecciones->gestionfin)[1])
+                selected
+            @endif>
+            {{ $year }}
+        </option>
+    @endfor
+</select>
+
+<br><br>
+
 
                         <label for="tipodevotantes">Tipo de Votantes:</label>
                            <select name="tipodevotantes" id="tipodevotantes" required>
@@ -130,9 +153,11 @@
                              <option value="Docentes" {{ isset($elecciones) && $elecciones->tipodevotantes === 'Docentes' ? 'selected' : '' }}>Docentes</option>
                              <option value="Administrativos" {{ isset($elecciones) && $elecciones->tipodevotantes === 'Administrativos' ? 'selected' : '' }}>Administrativos</option>
                              <option value="General" {{ isset($elecciones) && $elecciones->tipodevotantes === 'General' ? 'selected' : '' }}>General</option>
-                            </select>
+                            </select><br><br>
 
-
+                    <label for="fechainscripcion">Fecha de inscripcion de frentes:</label>
+                    <input type="date" name="fechainscripcion" value="{{ isset($elecciones) ? $elecciones->fechainscripcion : '' }}"
+                        id="fechainscripcion" required min="<?php echo date('Y-m-d'); ?>">
 
                 </div>
                 <div class="column">
@@ -146,9 +171,10 @@
 <br>
 <br>
 <br>
-                    <label for="fecha">Fecha:</label>
+                    <label for="fecha">Fecha de eleccion:</label>
                     <input type="date" name="fecha" value="{{ isset($elecciones) ? $elecciones->fecha : '' }}"
                         id="fecha" required min="<?php echo date('Y-m-d'); ?>">
+
 
                         <label for="tipodeeleccion">Tipo de Elección:</label>
                          <select name="tipodeeleccion" id="tipodeeleccion" required>

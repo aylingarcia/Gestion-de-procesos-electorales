@@ -301,8 +301,8 @@
 
             <li><a href="{{ url('/') }}">Inicio</a></li>
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
-            <li><a href="#">Documentación</a></li>
             <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
+            <li><a href="#">Documentación</a></li>
             {{-- <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contactos</a></li> --}}
             <li><a href="#">Ingreso</a></li>
@@ -353,18 +353,18 @@
                 <label for="codSis">Codigo Sis:</label>
                 <input type="text" placeholder="Escribe el Codigo Sis aquí..." maxlength="9"
                 oninput="this.value = this.value.replace(/[^0-9]+/g, '')"
-                name="codSis" value="{{ isset($votante) ? $votante->codSis : old('codSis') }}" id="codSis" required><br><br>
+                name="codSis" value="{{ isset($votante) ? $votante->codSis : old('codSis') }}" id="codSis" required>
                 @error('codSis')
                 <span class="error-message">{{ $message }}</span>
-                @enderror
+                @enderror<br><br>
 
                 <label for="CI">CI:</label>
                 <input type="text" placeholder="Escribe el Carnet de Identidad aquí..." maxlength="10" 
                 oninput="this.value = this.value.replace(/[^A-Za-z,.0-9]+/g, '')"
-                name="CI" value="{{ isset($votante) ? $votante->CI : old('CI') }}" required><br><br>
+                name="CI" value="{{ isset($votante) ? $votante->CI : old('CI') }}" required>
                 @error('CI')
                 <span class="error-message">{{ $message }}</span>
-                @enderror
+                @enderror<br><br>
             
                 <label for="tipoVotante">Tipo de Votante:</label>
                 <select name="tipoVotante" value="{{ isset($votante) ? $votante->tipoVotante : '' }}" id="tipoVotante" required>

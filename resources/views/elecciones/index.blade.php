@@ -116,6 +116,10 @@
             </div>
 
             <div class="botones">
+                <a href="{{ url('/frente') }}" class="buttons">Lista de Frentes</a>
+            </div>
+
+            <div class="botones">
                 <input type="text" id="search" placeholder="Buscar...">
                 <button class="buttons" onclick="search()">Buscar</button>
             </div>
@@ -142,7 +146,8 @@
                                     <td>{{ $elecciones->id }}</td>
                                     <td>{{ $elecciones->nombre }}</td>
                                     <td>{{ $elecciones->cargodeautoridad }}</td>
-                                    <td>{{ $elecciones->gestion }}</td>
+                                    <td>{{ $elecciones->gestioninicio }} - {{ $elecciones->gestionfin }}</td>
+                                    
 
                                     <td class="celda-botones">
                                         <button class="buttons-dentro-tabla" title="Editar Elección"
@@ -166,28 +171,15 @@
                                             <img src="/images/anadircomite.png" alt="Archivar" class="formato-imagen" />
                                         </button>
 
-{{-- Inicio Función borrar --}}
-<form id="delete-form-{{ $elecciones->id }}" action="{{ url('/elecciones/' . $elecciones->id) }}" method="post" style="display: inline;">
-    @csrf
-    {{ method_field('DELETE') }}
-    <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="confirmDelete('{{ $elecciones->id }}')">
-        <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
-    </button>
-</form>
-
-<script>
-    function confirmDelete(id) {
-        if (confirm('¿Quieres borrar esta elección?')) {
-            document.getElementById('delete-form-' + id).submit();
-        }
-        // No es necesario un 'else' ya que no se hará nada si el usuario cancela.
-    }
-</script>
-{{-- Fin función borrar --}}
-
-
-
-
+                                        {{-- Inicio Función borrar --}}
+                                           <form id="delete-form-{{ $elecciones->id }}" action="{{ url('/elecciones/' . $elecciones->id) }}" method="post" style="display: inline;">
+                                            @csrf
+                                            {{ method_field('DELETE') }}
+                                           <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="return confirm ('Quieres borrar este votante?')">
+                                           <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
+                                           </button>
+                                            </form>
+                                        {{-- Fin función borrar --}}
 
                                     </td>
 

@@ -141,40 +141,16 @@
                                    <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
                                </button>
 
-                                    {{-- inicio Funcion borrar --}}
-
-                                        {{-- <form action="{{ url('/comite/' .$comite->id ) }}" method="post">
-                                         @csrf 
-                                         {{method_field('DELETE')}}  
-                                         <button class="buttons" onclick="return confirm ('Quieres borrar este miembro del comite?')" 
-                                         style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" 
-                                         onclick="window.location.href='{{ url('/comite/' . $comite->id ) }}'">Borrar</button>
-                                        </form> --}}
-
-                                        {{-- fin funcion borrar --}}
-   {{-- Inicio Función borrar --}}
-   <form id="delete-form-{{ $comite->id }}" action="{{ url('/comite/' . $comite->id) }}" method="post" style="display: inline;">
-    @csrf
-    {{ method_field('DELETE') }}
-    <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="confirmDelete('{{ $comite->id }}')">
-        <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
-    </button>
-</form>
-
-<script>
-    function confirmDelete(id) {
-        if (confirm('¿Quieres borrar esta elección?')) {
-            document.getElementById('delete-form-' + id).submit();
-        }
-        // No es necesario un 'else' ya que no se hará nada si el usuario cancela.
-    }
-</script>
-{{-- Fin función borrar --}}
-
-
-
-
-
+                                  
+                                {{-- Inicio Función borrar --}}
+                                      <form id="delete-form-{{ $comite->id }}" action="{{ url('/comite/' . $comite->id) }}" method="post" style="display: inline;">
+                                     @csrf
+                                {{ method_field('DELETE') }}
+                                      <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="return confirm ('Quieres borrar este miembro del comite?')">
+                                      <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
+                                       </button>
+                                         </form>
+                                {{-- Fin función borrar --}}
 
 
                                         {{-- <button class="buttons-dentro-tabla" title="Añadir Votante" --}}
