@@ -148,23 +148,6 @@
             }
         }
 
-
-        .fondoooo {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-image: linear-gradient(to right, #003770, #f80211);
-            /*background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 55, 112, 0.4) 10px, rgba(0, 55, 112, 0.4) 20px);*/
-            /*background: linear-gradient(to bottom, #003770, #C20000);*/
-            /*background: repeating-linear-gradient(60deg, #003770 0px, #003770 10px, #C20000 10px, #C20000 20px);*/
-            /*background: radial-gradient(circle at 50% 50%, #C20000,#003770), repeating-radial-gradient(circle, transparent 0, transparent 5px, #333 5px, #333 10px);*/
-
-            color: white;
-        }
-
-
-
-
         .footer {
             background-color: #003770;
             color: white;
@@ -185,8 +168,6 @@
             text-align: left;
             margin-left: 70px;
             /* Ajusta el valor de margen según cuánto espacio desees agregar */
-
-
         }
 
         .footer-medio {
@@ -236,11 +217,18 @@
 
         }
 
+        .fondoooo {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to right, #003770, #f80211);
+            /*background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 55, 112, 0.4) 10px, rgba(0, 55, 112, 0.4) 20px);*/
+            /*background: linear-gradient(to bottom, #003770, #C20000);*/
+            /*background: repeating-linear-gradient(60deg, #003770 0px, #003770 10px, #C20000 10px, #C20000 20px);*/
+            /*background: radial-gradient(circle at 50% 50%, #C20000,#003770), repeating-radial-gradient(circle, transparent 0, transparent 5px, #333 5px, #333 10px);*/
 
-
-
-
-
+            color: white;
+        }
 
         .content-container {
             display: flex;
@@ -266,40 +254,40 @@
         }
 
         .comunicado-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* Alinea los elementos a la derecha de la pantalla */
-}
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; /* Alinea los elementos a la derecha de la pantalla */
+        }
 
-.comunicado {
-    position: relative;
-    margin-bottom: 20px; /* Espacio entre comunicados */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra los elementos horizontalmente */
-}
+        .comunicado {
+            position: relative;
+            margin-bottom: 20px; /* Espacio entre comunicados */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra los elementos horizontalmente */
+        }
 
-.pdf-box {
-    width: 200px;
-    height: 200px;
-    overflow: hidden; /* Recorta cualquier contenido que se desborde del cuadro */
-    position: relative;
-    z-index: -1;
-}
+        .pdf-box {
+            width: 200px;
+            height: 200px;
+            overflow: hidden; /* Recorta cualquier contenido que se desborde del cuadro */
+            position: relative;
+            z-index: -1;
+        }
 
-.pdf-box embed {
-    width: 100%; /* Ancho del embed es igual al 100% del contenedor */
-    height: 100%; /* Altura del embed es igual al 100% del contenedor */
-    transform: scale(0.7); /* Escala el PDF para que quepa dentro del cuadro */
-    transform-origin: center; /* Define el punto de origen de la escala al centro */
-    overflow: hidden; /* Oculta barras de desplazamiento del PDF */
-}
+        .pdf-box embed {
+            width: 100%; /* Ancho del embed es igual al 100% del contenedor */
+            height: 100%; /* Altura del embed es igual al 100% del contenedor */
+            transform: scale(0.7); /* Escala el PDF para que quepa dentro del cuadro */
+            transform-origin: center; /* Define el punto de origen de la escala al centro */
+            overflow: hidden; /* Oculta barras de desplazamiento del PDF */
+        }
 
-.pdf-overlay {
-    width: 100%; /* Utiliza el 100% del ancho del contenedor principal */
-    text-align: center;
-    background: rgba(255, 255, 255, 0.7); /* Fondo semi-transparente para mejorar la legibilidad del texto */
-}
+        .pdf-overlay {
+            width: 100%; /* Utiliza el 100% del ancho del contenedor principal */
+            text-align: center;
+            background: rgba(255, 255, 255, 0.7); /* Fondo semi-transparente para mejorar la legibilidad del texto */
+        }
     </style>
 
 </head>
@@ -329,8 +317,6 @@
         </ul>
         <div class="menu-icon"></div>
     </nav>
-    <!-- Header personalizado -->
-
 
     <section class="fondoooo">
         <div class="content-container">
@@ -338,6 +324,8 @@
                 <h1>Tribunal Electoral Universitario</h1>
                 <p>El TEU es responsable de las elecciones democráticas dentro de la Universidad Mayor de San Simón.</p>
             </div>
+        </div>
+        <div class="carrusel">
             @foreach($comunicados as $comunicado)
                 <div class="comunicado">
                     <a href="{{ asset('storage/' . $comunicado->pdf) }}" target="_blank">
@@ -352,34 +340,32 @@
             @endforeach
         </div>
 
-        <div class="footer">
+    </section>
 
-            <div class="footer-izq">
-                Av. Oquendo y calle Jordán asd
-                <br>
-                Mail: Tribunal_electoral@umss.edu
-                <br>
-                www.umss.edu.bo Cochabamba - Bolivia
-                <br>
-                Design: DevGenius
+    <div class="footer">
 
-            </div>
-            <div class="footer-medio">
+        <div class="footer-izq">
+            Av. Oquendo y calle Jordán asd
+            <br>
+            Mail: Tribunal_electoral@umss.edu
+            <br>
+            www.umss.edu.bo Cochabamba - Bolivia
+            <br>
+            Design: DevGenius
 
-                Copyright © 2023 Tribunal Electoral Universitario Todos los derechos Reservados
+        </div>
+        <div class="footer-medio">
 
-            </div>
-            <div class="footer-der">
-                <a href="{{ url('/') }}">Acerca de</a>
-                <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
-                <a href="{{ url('/') }}">Contactos</a>
+            Copyright © 2023 Tribunal Electoral Universitario Todos los derechos Reservados
 
-            </div>
+        </div>
+        <div class="footer-der">
+            <a href="{{ url('/') }}">Acerca de</a>
+            <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
+            <a href="{{ url('/') }}">Contactos</a>
 
         </div>
 
-        
+    </div>
 </body>
-</section>
-
 </html>
