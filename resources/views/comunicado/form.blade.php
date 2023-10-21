@@ -110,11 +110,11 @@
                 <div class="column">
 
                     <label for="titulo">Título:</label>
-                        
-                    <input type="text" oninput="this.value = this.value.replace(/[^'A-Za-z, .0-9-]+/g, '')"
-                        name="titulo" placeholder="Escribe el titulo del comunicado..."
-                        value="{{ isset($comunicado) ? $comunicado->titulo : '' }}" id="titulo" required 
+                    @error('titulo')<span style="color:red">{{ $message }}</span> @enderror
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z0-9, .\-]+/g, '')"
+                    name="titulo" placeholder="Escribe el titulo del comunicado..." value="{{ isset($comunicado) ? $comunicado->titulo : '' }}" id="titulo" maxlength="180" required
                     >
+                    
                     <div class="file-upload-container">
                         <label for="pdf">Archivo(PDF):</label>
                         @if (isset($comunicado) && $comunicado->pdf)
@@ -123,6 +123,7 @@
                         <input type="file" accept="application/pdf" title="Subir archivo PDF" name="pdf"
                             {{ isset($comunicado) && $comunicado->pdf ? '' : 'required' }} 
                         >
+                        @error('pdf')<span style="color:red">{{ $message }}</span> @enderror
                     </div>
                     
                     <!--<label for="inicio">Fecha de Inicio:</label>

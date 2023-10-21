@@ -53,11 +53,14 @@ class ComunicadoController extends Controller
     {
         $request->validate([
             'titulo' => 'required',
-            'pdf' => 'required|file|mimes:pdf',
-        ]);
+            'pdf' => 'max:2048',
+        ], [
+            'pdf.max' => 'El archivo PDF no debe superar los 2 MB.',
+            'pdf.uploaded' => 'PDF máximo: 2048 KB.',
+        ]);        
 
         $datos = $request->except('_token');
-
+        
         if ($request->hasFile('pdf')) {
             $titulo = Str::slug($request->input('titulo')); 
             $pdfPath = $request->file('pdf')->storeAs('uploads', $titulo . '.pdf', 'public');
