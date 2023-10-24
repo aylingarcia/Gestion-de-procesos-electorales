@@ -356,7 +356,8 @@
                         <p>{{ $frente->fotofrente }}</p>
                     @endif
                     <input type="file" title="Subir Logotipo o foto del frente" name="fotofrente" required
-                        {{ isset($frente) && $frente->fotofrente ? '' : '' }}><br><br>
+                    accept=".png, .jpg, .jpeg"   
+                    {{ isset($frente) && $frente->fotofrente ? '' : '' }}><br><br>
 
                 <label for="nombrecandidato1">Nombre Candidato de Frente:</label>
                 <input type="text" placeholder="Escribe el Cnombre aquí..." maxlength="30"
