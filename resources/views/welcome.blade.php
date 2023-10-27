@@ -1,202 +1,14 @@
+@extends('layouts.header_footer')
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Inicio</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
     <style>
-        .company-logo {
-            border-radius: 8%;
-            max-width: 21%;
-            height: auto;
-            float: left;
-            margin-right: 40px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Uni Sans", sans-serif;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            height: 70px;
-            background-color: #003770;
-            border-bottom: 2px solid #fff;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 999;
-        }
-
-        nav .logo a {
-            font-size: 25px;
-            color: #fff;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        nav .logo a:hover {
-            color: #003770;
-            transition: 0.5s;
-        }
-
-        nav ul {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2.5rem;
-        }
-
-        nav ul li {
-            list-style: none;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        nav ul li a:hover {
-            color: #003770;
-            transition: 0.5s;
-        }
-
-        .menu-icon {
-            display: none;
-            width: 25px;
-            height: 3px;
-            background: #fff;
-            transform: translateY(-50%);
-            transition: 0.5s;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .menu-icon::before,
-        .menu-icon::after {
-            content: "";
-            position: absolute;
-            width: 25px;
-            height: 3px;
-            background: #fff;
-            transition: 0.5s;
-            border-radius: 5px;
-        }
-
-        .menu-icon::before {
-            top: -8px;
-        }
-
-        .menu-icon::after {
-            top: -8px;
-        }
-
-        .menu-icon.active {
-            background: rgba(0, 0, 0, 0);
-        }
-
-        .menu-icon.active::before {
-            top: 0;
-            transform: rotate(45deg);
-        }
-
-        .menu-icon.active::after {
-            top: 0;
-            transform: rotate(135deg);
-        }
-
-        @media screen and (max-width: 992px) {
-            nav ul {
-                position: fixed;
-                top: 0px;
-                right: 100%;
-                width: 100%;
-                height: 90vh;
-                background: #004a92;
-                flex-direction: column;
-                transition: 0.5s ease-in;
-            }
-
-            nav ul li a {
-                font-size: 24px;
-            }
-
-            ul.active {
-                right: 0;
-                transition: 0.5s ease-in;
-            }
-
-            .menu-icon {
-                display: block;
-            }
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-image: linear-gradient(to right, #003770, #C20000);
-            margin: 0;
-            padding: 0;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header {
-            background-image: linear-gradient(to right, #003770, #C20000);
-            color: white;
-            text-align: center;
-            padding: 40px 0;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        .header h1 {
-            font-size: 36px;
-            font-weight: bold;
-        }
-
-        .header p {
-            font-size: 18px;
-            font-weight: 300;
-        }
-
-        .votante-form-container {
-            padding: 20px;
-            margin-top: 100px;
-        }
-
-        .footer {
-            background-color: #003770;
-            color: white;
-            text-align: left;
-            padding: 15px;
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            left: 0;
-            font-size: 15px;
-            display: flex;
-            flex-direction: column; /* Cambia la dirección de flexión a columna (vertical) */
-            align-items: flex-start; /* Alinea elementos a la izquierda */
-        }
-
-        .content-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            height: 100vh;
-        }
-
         .title h1 {
             font-size: 28px;
             margin-bottom: 10px;
@@ -209,63 +21,181 @@
         .title {
             padding-left: 20px;
         }
+
+        .fondo {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to right, #003770, #f80211);
+            color: white;
+        }
+
+        .contenedor {
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            height: 100vh; 
+            flex-wrap: wrap; 
+        }
+
+        .columna {
+            width: 50%;
+            box-sizing: border-box;
+            padding: 5px;
+        }
+
+        .carrusel {
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+
+        .pdf-box {
+            background: rgba(255, 255, 255, 0.1); 
+        }
+
+        .pdf-box embed {
+            transform: scale(0.9); 
+            overflow: hidden;
+            transform-origin: center; 
+        }
+        .pdf-overlay {
+            position: center;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2); 
+            padding: 5px;
+        }
+
+        .pdf-overlay h2{
+            margin-bottom: 20px;
+            color:white;
+        }
+
+        .pdf-overlay p{
+            color:white;
+        }
+        .comunicado a {
+            text-decoration: none; 
+        }
+
+        @media (max-width: 768px) {
+            .contenedor {
+                flex-direction: column; 
+            }
+
+            .columna {
+                width: 100%; 
+                margin: 5%; 
+                padding: 0; 
+            }
+            
+        }
+
+        /*.content-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+        }
+        .carrusel {
+            /*display: flex;
+            justify-content: center; 
+            align-items: center;
+            overflow-x: auto; 
+            white-space: nowrap; 
+            width: 100%; 
+
+            margin-top: 30%;
+            margin-left: 20%;
+            margin-right: 20%;
+
+        }
+
+        /*.comunicado {
+            position: relative;
+            margin-bottom: 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+        .pdf-box {
+            /*width: relative;
+            height: relative;
+            overflow: hidden; 
+            position: relative;
+            z-index: -1;
+            background: rgba(255, 255, 255, 0.7); 
+        }
+
+        .pdf-box embed {
+            transform: scale(1); 
+            overflow: hidden;
+            transform-origin: center; 
+            /*width: 100%; 
+            height: 100%; 
+            
+            overflow: hidden; 
+        }
+        .pdf-overlay {
+            position: center;
+            /*bottom: 0;
+            left: 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9); 
+            padding: 5px;
+        }*/
     </style>
 </head>
-<body>
-    <nav>
-        <div class="logo">
-            <a href="#" class="logo2">
-            <img src="/images/LogoUMSS2.png" alt="Logo de Enrique" class="company-logo">
-            </a>
-            <div><a href="#">TRIBUNAL ELECTORAL</a></div>
-            <div><a href="#">UNIVERSITARIO</a></div>
-        </div>
-        <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Elecciones</a></li>
-            <li><a href="#">Documentación</a></li>
-            <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Contactos</a></li>
-            <li><a href="#">Ingreso</a></li>
-        </ul>
-        <div class="menu-icon"></div>
-    </nav>
-    <!-- Header personalizado -->
-    <div class="content-container">
-        <div class="title">
-            <h1>Tribunal Electoral Universitario</h1>
-            <p>El TEU es responsable de las elecciones democráticas dentro de la Universidad Mayor de San Simón.</p>
-        </div>
-    </div>
-    <div class="footer" style="display: flex; justify-content: space-between;">
-    <div style="flex: 1;">
-        <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            Av. Oquendo y calle Jordán 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            Copyright © 2023 Tribunal Electoral Universitario<br> 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            Mail: Tribunal_electoral@umss.edu 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            Todos los derechos Reservados<br>
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            www.umss.edu.bo Cochabamba - Bolivia
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            Design: DevGenius </p>
 
+<body class="fondo">
+    <div class="contenedor">
+        <div class="columna">
+            <div class="content-container">
+                <div class="title">
+                    <h1>Tribunal Electoral Universitario</h1>
+                    <p>El TEU es responsable de las elecciones democráticas dentro de la Universidad Mayor de San Simón.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="columna">
+            <div class="carrusel">
+                @foreach($comunicados as $comunicado)
+                    <div class="comunicado">
+                        <a href="{{ asset('storage/' . $comunicado->pdf) }}" target="_blank">
+                            <div class="pdf-box">
+                                <embed src="{{ asset('storage/' . $comunicado->pdf) }}" type="application/pdf" width="100%" height="100%">
+                            </div>
+                            <div class="pdf-overlay">
+                                <h2>{{ $comunicado->titulo }}</h2>
+                                <p>Publicado el:{{ $comunicado->created_at->format('d/m/Y') }}</p>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        
     </div>
-    
-</div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <!-- Inicializa el carrusel -->
+    <script>
+        $(document).ready(function(){
+            // Selecciona la clase .carrusel dentro de la segunda columna y aplica Slick Carousel
+            $('.carrusel').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                dots: true,
+                infinite: true,
+                autoplay: true,
+                autoplaySpeed: 2000,
+        });
+        })
+
+    </script>
 </body>
+
 </html>

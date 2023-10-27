@@ -34,19 +34,24 @@
     <nav>
         <div class="logo">
             <a href="#" class="logo2">
-                <img src="/images/LogoUMSS2.png" alt="Logo de Enrique" class="company-logo">
+                <img src="/images/Logo_TE.png" alt="Logo de Enrique" class="company-logo">
                 
             </a>
-            <div><a href="#">TRIBUNAL ELECTORAL</a></div>
+            <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
             
-            <div><a href="#">UNIVERSITARIO</a></div>
+            <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
         </div>
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Elecciones</a></li>
+            <li></li><li></li>
+            <li></li><li></li>
+            <li></li><li></li>
+            <li></li><li></li>
+
+        <li><a href="{{ url('/') }}">Inicio</a></li>
+            <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="#">Documentación</a></li>
-            <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Contactos</a></li>
+            {{-- <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Contacto</a></li> --}}
             <li><a href="#">Ingreso</a></li>
         </ul>
         <div class="menu-icon"></div>
@@ -63,18 +68,21 @@
                 {{ method_field('PATCH') }}
             @endif
             <h2 class="form-title">Registrar Comite</h2>
-            
+            <br>
             <div class="columns">
                 <div class="column">
 
-                <select name="id_eleccion" required>
-                 <option value="">Selecciona una elección</option>
-                   @if (isset($elecciones))
-                      @foreach ($elecciones as $eleccion)
-                 <option value="{{ $eleccion->id }}" @if(isset($comite) && $comite->id_eleccion == $eleccion->id) selected @endif>{{ $eleccion->nombre }}</option>
-                   @endforeach
-                   @endif
-                </select>
+                
+
+                    <label for="id_eleccion">Eleccion:</label>
+                    <select name="id_eleccion" required>
+                        <option value="">Selecciona una elección</option>
+                          @if (isset($elecciones))
+                             @foreach ($elecciones as $eleccion)
+                        <option value="{{ $eleccion->id }}" @if(isset($comite) && $comite->id_eleccion == $eleccion->id) selected @endif>{{ $eleccion->nombre }}</option>
+                          @endforeach
+                          @endif
+                       </select><br><br>
 
                     <label for="nombreMiembro">Nombre Miembro Comite:</label>
                     <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')" name="nombreMiembro"
@@ -95,7 +103,7 @@
 
                         <label for="CI">CI:</label>
                     <input type="text" 
-                        name="CI" placeholder="Escribe el aCArnet de identidad aquí..."
+                        name="CI" placeholder="Escribe el carnet de identidad"
                         value="{{ isset($comite) ? $comite->CI : '' }}" id="CI"
                         required>
 
@@ -104,18 +112,18 @@
                 </div>
                 <div class="column">
                 <label for="cargoComite">Cargo en Comite:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
                         name="cargoComite" placeholder="Escribe el cargo aquí..."
                         value="{{ isset($comite) ? $comite->cargoComite : '' }}" id="cargoComite"
                         required><br><br>
                     <label for="profesion">Profesion:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
                         name="profesion" placeholder="Escribe la profesion aquí..."
                         value="{{ isset($comite) ? $comite->profesion : '' }}" id="profesion"
                         required>
 
                         <label for="cargoUMSS">Cargo en UMSS:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
                         name="cargoUMSS" placeholder="Escribe el cargo que ejerce en la universidad"
                         value="{{ isset($comite) ? $comite->cargoUMSS : '' }}" id="cargoUMSS">
 
@@ -128,35 +136,29 @@
             <label for=""></label><br><br>
         </form>
         <div class="footer">
-        <span>
-            Av. Oquendo y calle Jordán 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            Copyright © 2023 Tribunal Electoral Universitario<br> 
-            
-            Mail: Tribunal_electoral@umss.edu 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-            Todos los derechos Reservados<br>
-        
-            www.umss.edu.bo Cochabamba - Bolivia
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            Design: DevGenius </span>
-    </div>
-    
+
+            <div class="footer-izq">
+                Av. Oquendo y calle Jordán asd
+                <br>
+                Mail: Tribunal_electoral@umss.edu
+                <br>
+                www.umss.edu.bo Cochabamba - Bolivia
+                <br>
+                Design: DevGenius
+
+            </div>
+            <div class="footer-medio">
+
+                Copyright © 2023 Tribunal Electoral Universitario Todos los derechos Reservados
+
+            </div>
+            <div class="footer-der">
+                <a href="{{ url('/') }}">Acerca de</a>
+                <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
+                <a href="{{ url('/') }}">Contactos</a>
+
+            </div>
+
         </div>
     </div>
 </body>

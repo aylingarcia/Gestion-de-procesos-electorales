@@ -15,6 +15,8 @@ class VotanteController extends Controller
     public function index()
     {
         //
+        $votantescreados = Votante::orderBy('ideleccion', 'asc')->paginate(20);
+        return view('votante.index', compact('votantescreados'));
     }
 
     /**
@@ -38,13 +40,29 @@ class VotanteController extends Controller
      */
     public function store(Request $request)
 {
-    // Obtiene todos los datos del formulario
+    //
+    $request->validate([
+        'ideleccion' => 'required',
+        'codSis' => 'required|unique:votantes,codSis,NULL,id,ideleccion,'.$request->ideleccion,
+        'CI' => 'required|unique:votantes,CI,NULL,id,ideleccion,'.$request->ideleccion,
+    ]);
+
+    // Verifica si ya existe un votante con el mismo CI y codSis en la misma elección
+    $existingVotante = Votante::where('ideleccion', $request->ideleccion)
+        ->where('codSis', $request->codSis)
+        ->where('CI', $request->CI)
+        ->first();
+
+    if ($existingVotante) {
+        return redirect('/votante')->with('error', 'Este votante ya está registrado en la misma elección.');
+    }
+
+    // Si no existe un votante con los mismos datos en la misma elección, procede a registrar al votante
     $datosVotante = request()->except('_token');
-    
-    // Inserta los datos en la tabla votantes
+
     Votante::insert($datosVotante);
 
-    return response()->json($datosVotante);
+    return redirect('/votante')->with('success', 'El votante se ha guardado con éxito.');
 }
 
     /**
@@ -64,9 +82,12 @@ class VotanteController extends Controller
      * @param  \App\Models\Votante  $votante
      * @return \Illuminate\Http\Response
      */
-    public function edit(Votante $votante)
+    public function edit($id)
     {
         //
+        $votante = Votante::findOrFail($id);
+        $elecciones = Eleccion::where('estado', 1)->get();
+        return view('votante.edit', compact('votante', 'elecciones'));
     }
 
     /**
@@ -76,10 +97,30 @@ class VotanteController extends Controller
      * @param  \App\Models\Votante  $votante
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Votante $votante)
-    {
-        //
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'ideleccion' => 'required',
+        'codSis' => 'required|unique:votantes,codSis,NULL,id,ideleccion,'.$request->ideleccion,
+        'CI' => 'required|unique:votantes,CI,NULL,id,ideleccion,'.$request->ideleccion,
+    ]);
+
+    $existingVotante = Votante::where('ideleccion', $request->ideleccion)
+        ->where('codSis', $request->codSis)
+        ->where('CI', $request->CI)
+        ->where('id', '!=', $id) // Excluye el registro actual
+        ->first();
+
+    if ($existingVotante) {
+        return redirect('/votante')->with('error', 'Este votante ya está registrado en la misma elección.');
     }
+
+    $datosVotante = request()->except(['_token', '_method']);
+
+    Votante::where('id', $id)->update($datosVotante);
+
+    return redirect('/votante');
+}
 
     /**
      * Remove the specified resource from storage.
@@ -87,8 +128,10 @@ class VotanteController extends Controller
      * @param  \App\Models\Votante  $votante
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Votante $votante)
+    public function destroy($id)
     {
         //
+        Votante::destroy($id);
+        return redirect('votante');
     }
 }

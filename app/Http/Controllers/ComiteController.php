@@ -16,8 +16,9 @@ class ComiteController extends Controller
     public function index()
     {
         //
-        $datos['comitecreado']=Comite::paginate(20);
-        return view('comite.index', $datos);
+        $comitecreado = Comite::orderBy('id_eleccion', 'asc')->paginate(20);
+
+        return view('comite.index', compact('comitecreado'));
     }
 
     /**
@@ -46,7 +47,7 @@ class ComiteController extends Controller
         // Inserta los datos en la tabla votantes
         Comite::insert($datosComite);
     
-        return response()->json($datosComite);
+        return redirect('/comite')->with('success', 'El miembro del comite se ha guardado con éxito.');
     }
 
     /**
@@ -93,7 +94,7 @@ class ComiteController extends Controller
 
     $comite = Comite::findOrFail($id);
 
-    return view('comite.edit', compact('comite', 'elecciones'));
+    return redirect('/comite');
     
     }
 
@@ -103,8 +104,10 @@ class ComiteController extends Controller
      * @param  \App\Models\Comite  $comite
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comite $comite)
+    public function destroy($id)
     {
         //
+        Comite::destroy($id);
+        return redirect('comite');
     }
 }

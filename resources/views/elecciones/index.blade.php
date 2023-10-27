@@ -16,23 +16,34 @@
 </head>
 
 
+
 <body>
     <nav>
 
 
         <div class="logo">
             <a href="#" class="logo2">
-                <img src="/images/LogoUMSS2.png" alt="Logo de la Empresa" class="company-logo">
+                <img src="/images/Logo_TE.png" alt="Logo de la Empresa" class="company-logo">
             </a>
-            <div><a href="#">TRIBUNAL ELECTORAL</a></div>
-            <div><a href="#">UNIVERSITARIO</a></div>
+            <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
+            <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
         </div>
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Elecciones</a></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+
+            <li><a href="{{ url('/') }}">Inicio</a></li>
+            <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
+            <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
             <li><a href="#">Documentación</a></li>
-            <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Contactos</a></li>
+            {{-- <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Contacto</a></li> --}}
             <li><a href="#">Ingreso</a></li>
         </ul>
         <div class="menu-icon"></div>
@@ -47,7 +58,7 @@
 
 
                 <a href="#" class="logo">
-                    <img src="images/LogoUMSS2.png" alt="Logo de la Empresa" class="company-logo">
+                    <img src="images/Logo_TE.png" alt="Logo de la Empresa" class="company-logo">
                     Administrador de Elecciones
                     <br>
                     Universidad Mayor de San Simon
@@ -92,33 +103,28 @@
         <br>
 
         <div class="container botonesss">
-
-
             <div class="botones">
                 <a href="{{ route('elecciones.create') }}" class="buttons">Crear nueva elección</a>
-
-            </div>
-
-            {{-- Votones Momentaneos de Anadir votante y comite electoral --}}
-            <div class="botones">
-                <a href="{{ route('elecciones.create') }}" class="buttons">Añadir Votante</a>
-
             </div>
 
             <div class="botones">
-                <a href="{{ route('elecciones.create') }}" class="buttons">Añadir Comite Electoral</a>
-
+                <a href="{{ url('/votante') }}" class="buttons">Lista de votantes</a>
             </div>
-            {{-- Fin botones momentaneos --}}
 
+            <div class="botones">
+                <a href="{{ url('/comite') }}" class="buttons">Lista Comité Electoral</a>
+            </div>
+
+            <div class="botones">
+                <a href="{{ url('/frente') }}" class="buttons">Lista de Frentes</a>
+            </div>
 
             <div class="botones">
                 <input type="text" id="search" placeholder="Buscar...">
                 <button class="buttons" onclick="search()">Buscar</button>
             </div>
-
-
         </div>
+
 
         <br>
         <div class="container">
@@ -128,7 +134,7 @@
                         <thead>
                             <tr>
                                 <th>Numero</th>
-                                <th>Nombre de eleccion</th>
+                                <th>Nombre de elección</th>
                                 <th>Cargo de Autoridad</th>
                                 <th>Gestion</th>
                                 <th>Acciones</th>
@@ -140,7 +146,8 @@
                                     <td>{{ $elecciones->id }}</td>
                                     <td>{{ $elecciones->nombre }}</td>
                                     <td>{{ $elecciones->cargodeautoridad }}</td>
-                                    <td>{{ $elecciones->gestion }}</td>
+                                    <td>{{ $elecciones->gestioninicio }} - {{ $elecciones->gestionfin }}</td>
+                                    
 
                                     <td class="celda-botones">
                                         <button class="buttons-dentro-tabla" title="Editar Elección"
@@ -153,19 +160,26 @@
                                             <img src="/images/archivar.png" alt="Archivar" class="formato-imagen" />
                                         </button>
 
-                                        {{-- <button class="buttons-dentro-tabla" title="Añadir Votante" --}}
-                                            {{-- añadir la funcion que redireccione --}}
-                                            {{-- > --}}
-                                            {{-- <img src="/images/anadirvotante.png" alt="Archivar" class="formato-imagen" /> --}}
-                                        {{-- </button> --}}
+                                        <button class="buttons-dentro-tabla" title="Añadir Votante"
+                                            onclick="window.location.href='{{ url('/votante' . '/create') }}'">
+                                            <img src="/images/anadirvotante.png" alt="Archivar"
+                                                class="formato-imagen" />
+                                        </button>
 
-                                        {{-- <button class="buttons-dentro-tabla" title="Añadir Comite" --}}
-                                            {{-- añadir la funcion que redireccione --}}
-                                            {{-- > --}}
-                                            {{-- <img src="/images/anadircomite.png" alt="Archivar" class="formato-imagen" /> --}}
-                                        {{-- </button> --}}
+                                        <button class="buttons-dentro-tabla" title="Añadir Comite"
+                                            onclick="window.location.href='{{ url('/comite' . '/create') }}'">
+                                            <img src="/images/anadircomite.png" alt="Archivar" class="formato-imagen" />
+                                        </button>
 
-
+                                        {{-- Inicio Función borrar --}}
+                                           <form id="delete-form-{{ $elecciones->id }}" action="{{ url('/elecciones/' . $elecciones->id) }}" method="post" style="display: inline;">
+                                            @csrf
+                                            {{ method_field('DELETE') }}
+                                           <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="return confirm ('Quieres borrar este votante?')">
+                                           <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
+                                           </button>
+                                            </form>
+                                        {{-- Fin función borrar --}}
 
                                     </td>
 
@@ -183,34 +197,32 @@
                                             }
                                         }
                                     </script>
+
                                     <div class="footer">
-                                    <span>
-            Av. Oquendo y calle Jordán 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            Copyright © 2023 Tribunal Electoral Universitario<br> 
-            
-            Mail: Tribunal_electoral@umss.edu 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-            Todos los derechos Reservados<br>
-        
-            www.umss.edu.bo Cochabamba - Bolivia
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            Design: DevGenius </span>
+
+                                        <div class="footer-izq">
+                                            Av. Oquendo y calle Jordán asd
+                                            <br>
+                                            Mail: Tribunal_electoral@umss.edu
+                                            <br>
+                                            www.umss.edu.bo Cochabamba - Bolivia
+                                            <br>
+                                            Design: DevGenius
+
+                                        </div>
+                                        <div class="footer-medio">
+
+                                            Copyright © 2023 Tribunal Electoral Universitario Todos los derechos
+                                            Reservados
+
+                                        </div>
+                                        <div class="footer-der">
+                                            <a href="{{ url('/') }}">Acerca de</a>
+                                            <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
+                                            <a href="{{ url('/') }}">Contactos</a>
+
+                                        </div>
+
                                     </div>
 
 

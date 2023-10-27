@@ -11,6 +11,17 @@
             box-sizing:border-box;
             font-family: "Uni Sans" , sans-serif;
         }
+        .company-logo {
+    border-radius: 8%;
+
+    max-width: 15%;
+    /* Ajusta el ancho máximo de la imagen al 100% del contenedor */
+    height: auto;
+    /* Permite que la altura se ajuste automáticamente para mantener la proporción */
+    /* Alinea verticalmente la imagen en el medio del texto */
+    float: left;
+    margin-right: 40px;
+}
         nav {
             display:flex;
             align-items: center;
@@ -194,7 +205,6 @@
         .footer {
             background-color: #003770;
             color: white;
-            text-align: right;
             padding: 15px;
             position: fixed;
             bottom: 0;
@@ -202,18 +212,73 @@
             left: 0;
             font-size: 15px;
             display: flex;
-            flex-direction: column; 
-            align-items: flex-end;
-            
+            justify-content: space-between;
+            align-items: center;
         }
 
+        .footer-izq {
+            flex: 1;
 
-        .content {
-            padding-bottom: 70px;
+            text-align: left;
+            margin-left: 70px;
+            /* Ajusta el valor de margen según cuánto espacio desees agregar */
+
+
         }
-        .footer .second-line {
-            font-size: 14px; 
+
+        .footer-medio {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            /* Evita el retorno de línea */
+            overflow: hidden;
+            /* Oculta el desbordamiento si el contenido es demasiado largo */
+            text-overflow: ellipsis;
+            /* Agrega puntos suspensivos (...) si el contenido es demasiado largo */
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            /* Evita el retorno de línea */
+            overflow: hidden;
+            /* Oculta el desbordamiento si el contenido es demasiado largo */
+            text-overflow: ellipsis;
+            /* Agrega puntos suspensivos (...) si el contenido es demasiado largo */
+            font-size: 18px;
+
         }
+
+        .footer-der {
+            flex: 1;
+            text-align: center;
+        }
+
+        .footer-der a {
+            color: white;
+            /* Establece el color del texto en blanco por defecto */
+            text-decoration: none;
+            /* Elimina el subrayado predeterminado de los enlaces */
+            transition: color 0.3s;
+            /* Agrega una transición suave para el cambio de color */
+            font-size: 18px;
+            /* Ajusta el tamaño de fuente según tus preferencias */
+
+        }
+
+        .footer-der a:hover {
+            color: red;
+            /* Cambia el color del texto a rojo al pasar el ratón sobre el enlace */
+            font-size: 20px;
+            /* Tamaño de fuente al pasar el ratón sobre el enlace, puedes ajustarlo según tus preferencias */
+
+        }
+
+    .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px; 
+    display: block;
+}
     </style>
 
 
@@ -221,15 +286,25 @@
 <body>
     <nav>
         <div class="logo">
-            <div><a href="#">TRIBUNAL ELECTORAL</a></div>
-            <div><a href="#">UNIVERSITARIO</a></div>
+        <a href="#" class="logo2">
+            <img src="/images/Logo_TE.png" alt="Logo de Enrique" class="company-logo">
+                
+            </a>
+            <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
+            <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
         </div>
         <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Elecciones</a></li>
+            <li></li><li></li>
+            <li></li><li></li>
+            <li></li><li></li>
+            <li></li><li></li>
+
+            <li><a href="{{ url('/') }}">Inicio</a></li>
+            <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
+            <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
             <li><a href="#">Documentación</a></li>
-            <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Contactos</a></li>
+            {{-- <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Contactos</a></li> --}}
             <li><a href="#">Ingreso</a></li>
         </ul>
         <div class="menu-icon"></div>
@@ -237,39 +312,62 @@
     <div class="header">
             <label for=""></label><br><br>
            
-    </div>
+            </div>
     <div class="votante-form-container">
     <form action="{{ url('/votante') }}" method="post" enctype="multipart/form-data">
         @csrf
+        @if (isset($votante))
+                {{ method_field('PATCH') }}
+            @endif
 
         <h2 class="form-title">Registrar Votante</h2>
         <div class="column">
 
         <label for="ideleccion">Elegir Elección:</label>
-         <select name="ideleccion" id="ideleccion" required>
-                <option value="">Selecciona una elección</option>
-                      @foreach ($elecciones as $eleccion)
-                          <option value="{{ $eleccion->id }}">{{ $eleccion->nombre }}</option>
-                      @endforeach
-         </select>
+<select name="ideleccion" id="ideleccion" required>
+    <option value="">Selecciona una elección</option>
+    @if (isset($elecciones))
+        @foreach ($elecciones as $eleccion)
+            <option value="{{ $eleccion->id }}" @if(isset($votante) && $votante->ideleccion == $eleccion->id) selected @endif>{{ $eleccion->nombre }}</option>
+        @endforeach
+    @endif
+</select>
+@error('ideleccion')
+<span class="error-message">{{ $message }}</span>
+@enderror
 
                 <label for="nombres">Nombre:</label>
-                <input type="text" name="nombres" required><br><br>
+                <input type="text" placeholder="Escribe el nombre aqui..." maxlength="40" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
+                name="nombres" value="{{ isset($votante) ? $votante->nombres : '' }}" required><br><br>
 
                 <label for="apellidoPaterno">Apellido Paterno:</label>
-                <input type="text" name="apellidoPaterno" id="apellidoPaterno" required><br><br>
+                <input type="text" placeholder="Escribe el Apellido Paterno aquí..." maxlength="40"
+                oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                 name="apellidoPaterno" value="{{ isset($votante) ? $votante->apellidoPaterno : '' }}" id="apellidoPaterno" required><br><br>
 
                 <label for="apellidoMaterno">Apellido Materno:</label>
-                <input type="text" name="apellidoMaterno" id="apellidoMaterno" required><br><br>
+                <input type="text" placeholder="Escribe el Apellido Materno aquí..." maxlength="40"
+                oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
+                name="apellidoMaterno" value="{{ isset($votante) ? $votante->apellidoMaterno : '' }}" id="apellidoMaterno" required><br><br>
 
                 <label for="codSis">Codigo Sis:</label>
-                <input type="codSis" name="codSis" id="codSis" required><br><br>
+                <input type="text" placeholder="Escribe el Codigo Sis aquí..." maxlength="9"
+                oninput="this.value = this.value.replace(/[^0-9]+/g, '')"
+                name="codSis" value="{{ isset($votante) ? $votante->codSis : old('codSis') }}" id="codSis" required>
+                @error('codSis')
+                <span class="error-message">{{ $message }}</span>
+                @enderror<br><br>
 
-                <label for="CI"> CI:</label>
-                <input type="text" name="CI" required><br><br>
+                <label for="CI">CI:</label>
+                <input type="text" placeholder="Escribe el Carnet de Identidad aquí..." maxlength="10" 
+                oninput="this.value = this.value.replace(/[^A-Za-z,.0-9]+/g, '')"
+                name="CI" value="{{ isset($votante) ? $votante->CI : old('CI') }}" required>
+                @error('CI')
+                <span class="error-message">{{ $message }}</span>
+                @enderror<br><br>
             
                 <label for="tipoVotante">Tipo de Votante:</label>
-                <select name="tipoVotante" id="tipoVotante" required>
+                <select name="tipoVotante" value="{{ isset($votante) ? $votante->tipoVotante : '' }}" id="tipoVotante" required>
                     <option value="Estudiante">Estudiante</option>
                     <option value="Docente">Docente</option>
                     <option value="Administrativo">Administrativo</option>
@@ -277,33 +375,44 @@
 
                 <div class="campo-adicional" id="campoCarrera">
                 <label for="carrera">Carrera:</label>
-                <input type="text" name="carrera" id="carrera" ><br><br>
+                <input type="text" placeholder="Escribe la Carrera aquí..." maxlength="40" 
+                oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
+                name="carrera" value="{{ isset($votante) ? $votante->carrera : '' }}" id="carrera" ><br><br>
                 </div>
 
                 <div class="campo-adicional" id="campoProfesion">
-                <label for="profesion">Profesion:</label>
-                <input type="text" name="profesion" id="profesion" ><br><br>
+                <label for="profesion">Profesión:</label>
+                <input type="text" placeholder="Escribe la Profesión aquí..." maxlength="40" 
+                oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
+                name="profesion" value="{{ isset($votante) ? $votante->profesion : '' }}" id="profesion" ><br><br>
                 </div>
 
                 <div class="campo-adicional" id="campoFacultad">
                 <label for="facultad">Facultad:</label>
-                <input type="text" name="facultad" id="facultad" ><br><br>
+                <input type="text" placeholder="Escribe la Facultad aquí..." maxlength="40" 
+                oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
+                name="facultad" value="{{ isset($votante) ? $votante->facultad : '' }}" id="facultad" ><br><br>
                 </div>
 
                 <div class="campo-adicional" id="campoCargo">
                 <label for="cargoAdministrativo">Cargo Administrativo:</label>
-                <input type="text" name="cargoAdministrativo" id="cargoAdministrativo" ><br><br>
+                <input type="text" placeholder="Escribe el Cargo Administrativo aquí..." maxlength="40"
+                oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
+                name="cargoAdministrativo" value="{{ isset($votante) ? $votante->cargoAdministrativo : '' }}" id="cargoAdministrativo" ><br><br>
                 </div>
                 
                 <label for="celular">Celular:</label>
-                <input type="number" name="celular" id="celular" required><br><br>
+                <input type="number" placeholder="Escribe el Número de Celular aquí..." min="60000000" max=""79999999 
+                name="celular" value="{{ isset($votante) ? $votante->celular : '' }}" id="celular" required><br><br>
 
-                <label for="e-mail">e-mail:</label>
-                <input type="email" name="e-mail" id="e-mail" required><br><br>
+                <label for="email">e-mail:</label>
+                <input type="email" placeholder="Escribe el e-Mail aquí..." maxlength="40" 
+                name="email" value="{{ isset($votante) ? $votante->email : '' }}" id="email" required><br><br>
+
 
                 <label for="cargarLista">Cargar lista de votantes:</label>
-                <input type="file" name="cargarLista" id="cargarLista">
-            
+                <input type="file" title="Subir Archivo CSV o Excel" name="cargarLista" id="cargarLista" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                
         </div>
         <input type="submit" value="Registrar"
                 onclick="confirmacion()">
@@ -314,36 +423,29 @@
         
     </form>
     <div class="footer">
-    <span>
-            Av. Oquendo y calle Jordán 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            Copyright © 2023 Tribunal Electoral Universitario<br> 
-            
-            Mail: Tribunal_electoral@umss.edu 
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-            Todos los derechos Reservados<br>
-        
-            www.umss.edu.bo Cochabamba - Bolivia
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-            &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
-            Design: DevGenius </span>
 
-    </div>
-    
+        <div class="footer-izq">
+            Av. Oquendo y calle Jordán asd
+            <br>
+            Mail: Tribunal_electoral@umss.edu
+            <br>
+            www.umss.edu.bo Cochabamba - Bolivia
+            <br>
+            Design: DevGenius
+
+        </div>
+        <div class="footer-medio">
+
+            Copyright © 2023 Tribunal Electoral Universitario Todos los derechos Reservados
+
+        </div>
+        <div class="footer-der">
+            <a href="{{ url('/') }}">Acerca de</a>
+            <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
+            <a href="{{ url('/') }}">Contactos</a>
+
+        </div>
+
     </div>
     
     <script>
@@ -356,7 +458,7 @@
         }
 
         function confirmacion() {
-            var confirmacion = confirm("Los datos han sido registrados con exito");
+            var confirmacion = confirm("Estas seguro de registrar este votante?");
             if (confirmacion) {
 
                 window.location.href = "/votante";

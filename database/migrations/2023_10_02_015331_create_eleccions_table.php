@@ -18,10 +18,12 @@ class CreateEleccionsTable extends Migration
             $table->string('nombre');
             $table->string('motivo');
             $table->string('cargodeautoridad');
-            $table->string('gestion');
+            $table->string('gestioninicio');
+            $table->string('gestionfin');
             $table->string('tipodevotantes');
             $table->binary('convocatoria')->nullable();
             $table->date('fecha');
+            $table->date('fechainscripcion');
             $table->string('tipodeeleccion');
             $table->text('descripcion');
             $table->boolean('estado');
