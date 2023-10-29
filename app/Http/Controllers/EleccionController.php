@@ -15,8 +15,11 @@ class EleccionController extends Controller
     public function index()
     {
         //
-        $datos['eleccionescreadas']=Eleccion::where('estado', 1)->paginate(20);
-        return view('elecciones.index', $datos);
+        $eleccionescreadas = Eleccion::where('estado', 1)
+        ->orderBy('id', 'asc')
+        ->paginate(20);
+
+         return view('elecciones.index', compact('eleccionescreadas'));
     }
 
     /**
@@ -39,7 +42,12 @@ class EleccionController extends Controller
     public function store(Request $request)
     {
         //
-        //$datosEleccion = request()->all();
+        $request->validate([
+            'nombre' => 'required|unique:eleccions,nombre',
+            'motivo' => 'required|unique:eleccions,motivo',
+            'cargodeautoridad' => 'required|unique:eleccions,cargodeautoridad',
+        ]);
+
         $datosEleccion = request()->except('_token');
         $datosEleccion['estado'] = $request->input('estado', 1);
         Eleccion::insert($datosEleccion);
@@ -47,7 +55,7 @@ class EleccionController extends Controller
         if($request->hasFile('convocatoria')){
             $datosEleccion['convocatoria']=$request->file('convocatoria')->store('uploads','public');
         }
-        return response()->json($datosEleccion);
+        return redirect('/elecciones')->with('success', 'La elección se ha guardado con éxito.');
 
     }
 
@@ -89,7 +97,7 @@ class EleccionController extends Controller
         Eleccion::where('id','=',$id)->update($datosEleccion);
 
         $elecciones=Eleccion::FindOrFail($id);
-        return view('elecciones.edit', compact('elecciones'));
+        return redirect('/elecciones');
     }
 
     /**
@@ -98,9 +106,12 @@ class EleccionController extends Controller
      * @param  \App\Models\Eleccion  $eleccion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Eleccion $eleccion)
+    public function destroy($id)
     {
         //
+        Eleccion::destroy($id);
+        return redirect('elecciones');
+
     }
 
     public function archivar($id)

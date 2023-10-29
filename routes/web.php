@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\EleccionController;
+use App\Http\Controllers\VotanteController;
+use App\Http\Controllers\ComiteController;
+use App\Http\Controllers\FrenteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,13 +18,13 @@ use App\Http\Controllers\EleccionController;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('/', 'WelcomeController');
 
 //Route::get('/elecciones', 'EleccionController@index');
 Route::get('/elecciones/{id}/archivar', 'EleccionController@archivar');
@@ -32,6 +35,26 @@ Route::resource('elecciones', 'EleccionController');
 
 Route::get('/home', 'ConfirmacionController@index')->name('confirmacion');
 
-Route::get('/registro-votante', function () {
-    return view('votante.form');
+Route::resource('votante', 'VotanteController');
+
+Route::get('/header', function () {
+    return view('votante.header');
 });
+
+Route::resource('comite', 'ComiteController');
+
+Route::resource('frente', 'FrenteController');
+
+Route::resource('comunicados', 'ComunicadoController');
+Route::get('/mesas-create', function () {
+    return view('mesas.form');
+});
+Route::get('/mesas', function () {
+    return view('mesas.index');
+});
+Route::get('/jurados', function () {
+    return view('jurados.jurados');
+});
+//Route::get('/registro-votante', function () {
+    //return view('votante.form');
+//});

@@ -1,100 +1,201 @@
+@extends('layouts.header_footer')
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="es">
 
-        <title>Laravel</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <style>
+        .title h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        .title p {
+            font-size: 16px;
+        }
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
+        .title {
+            padding-left: 20px;
+        }
+
+        .fondo {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to right, #003770, #f80211);
+            color: white;
+        }
+
+        .contenedor {
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            height: 100vh; 
+            flex-wrap: wrap; 
+        }
+
+        .columna {
+            width: 50%;
+            box-sizing: border-box;
+            padding: 5px;
+        }
+
+        .carrusel {
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+
+        .pdf-box {
+            background: rgba(255, 255, 255, 0.1); 
+        }
+
+        .pdf-box embed {
+            transform: scale(0.9); 
+            overflow: hidden;
+            transform-origin: center; 
+        }
+        .pdf-overlay {
+            position: center;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2); 
+            padding: 5px;
+        }
+
+        .pdf-overlay h2{
+            margin-bottom: 20px;
+            color:white;
+        }
+
+        .pdf-overlay p{
+            color:white;
+        }
+        .comunicado a {
+            text-decoration: none; 
+        }
+
+        @media (max-width: 768px) {
+            .contenedor {
+                flex-direction: column; 
             }
 
-            .full-height {
-                height: 100vh;
+            .columna {
+                width: 100%; 
+                margin: 5%; 
+                padding: 0; 
             }
+            
+        }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+        /*.content-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+        }
+        .carrusel {
+            /*display: flex;
+            justify-content: center; 
+            align-items: center;
+            overflow-x: auto; 
+            white-space: nowrap; 
+            width: 100%; 
 
-            .position-ref {
-                position: relative;
-            }
+            margin-top: 30%;
+            margin-left: 20%;
+            margin-right: 20%;
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        }
 
-            .content {
-                text-align: center;
-            }
+        /*.comunicado {
+            position: relative;
+            margin-bottom: 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
 
-            .title {
-                font-size: 84px;
-            }
+        .pdf-box {
+            /*width: relative;
+            height: relative;
+            overflow: hidden; 
+            position: relative;
+            z-index: -1;
+            background: rgba(255, 255, 255, 0.7); 
+        }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+        .pdf-box embed {
+            transform: scale(1); 
+            overflow: hidden;
+            transform-origin: center; 
+            /*width: 100%; 
+            height: 100%; 
+            
+            overflow: hidden; 
+        }
+        .pdf-overlay {
+            position: center;
+            /*bottom: 0;
+            left: 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9); 
+            padding: 5px;
+        }*/
+    </style>
+</head>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+<body class="fondo">
+    <div class="contenedor">
+        <div class="columna">
+            <div class="content-container">
+                <div class="title">
+                    <h1>Tribunal Electoral Universitario</h1>
+                    <p>El TEU es responsable de las elecciones democráticas dentro de la Universidad Mayor de San Simón.</p>
                 </div>
             </div>
         </div>
-    </body>
+
+        <div class="columna">
+            <div class="carrusel">
+                @foreach($comunicados as $comunicado)
+                    <div class="comunicado">
+                        <a href="{{ asset('storage/' . $comunicado->pdf) }}" target="_blank">
+                            <div class="pdf-box">
+                                <embed src="{{ asset('storage/' . $comunicado->pdf) }}" type="application/pdf" width="100%" height="100%">
+                            </div>
+                            <div class="pdf-overlay">
+                                <h2>{{ $comunicado->titulo }}</h2>
+                                <p>Publicado el:{{ $comunicado->created_at->format('d/m/Y') }}</p>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <!-- Inicializa el carrusel -->
+    <script>
+        $(document).ready(function(){
+            // Selecciona la clase .carrusel dentro de la segunda columna y aplica Slick Carousel
+            $('.carrusel').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                dots: true,
+                infinite: true,
+                autoplay: true,
+                autoplaySpeed: 2000,
+        });
+        })
+
+    </script>
+</body>
+
 </html>
