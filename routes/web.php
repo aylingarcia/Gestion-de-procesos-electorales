@@ -52,6 +52,9 @@ Route::get('/mesas-create', function () {
 Route::get('/mesas', function () {
     return view('mesas.index');
 });
+Route::get('/jurados', function () {
+    return view('jurados.jurados');
+});
 //Route::get('/registro-votante', function () {
     //return view('votante.form');
 //});

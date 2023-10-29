@@ -12,6 +12,21 @@
     <link rel="stylesheet" href="{{ asset('css/Elecciones_Creadas.css') }}">
     
 </head>
+<style>
+    .centered-container {
+    text-align: center;
+    }
+    .styled-button {
+            width: 10%;
+            height: 100%;
+            background: rgba(4, 36, 60, 0.99);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 5px;
+            border: 1px solid rgba(198, 69, 196, 0.30);
+            color: #fff; 
+            padding: 1% 2%;
+            }
+</style>
 
 
 <body>
@@ -38,6 +53,7 @@
             {{-- <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contacto</a></li> --}}
             <li><a href="#">Ingreso</a></li>
+            <img src="/images/img.png"  class="company-logo">
         </ul>
         <div class="menu-icon"></div>
     </nav>
@@ -94,6 +110,13 @@
         </center>
         <br>
         <br>
+        <div class="centered-container">
+        <div>
+            <button id="crearmesas" class="styled-button" onclick="crearM()" >Crear</button>
+        </div>
+        </div>
+
+
 
         <br>
         <div class="container">
@@ -105,7 +128,7 @@
                                 <th>N°.</th>
                                 <th>Eleccion</th>
                                 <th>Tipo Votante</th>
-                                <th>Carrera</th>
+                                <th>Area</th>
                                 <th>Ubicacion</th>
                                 <th>Cantidad</th>
                                 <th>Acciones</th>
@@ -113,7 +136,15 @@
                         </thead>
                         <tbody>
                             
-                                    
+                             <script>    
+                                function crearM() {
+                                    window.location.href="/mesas-create";
+                                }
+                            </script>    
+
+
+
+
           
         <div class="footer">
 
