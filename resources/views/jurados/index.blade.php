@@ -22,7 +22,7 @@
             <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
             
             <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
-        </div>s
+        </div>
         <ul>
             <li></li><li></li>
             <li></li><li></li>
