@@ -161,7 +161,7 @@
                                     style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;">Lista de Jurados</a> --}}
 
                                     <button class="buttons-dentro-tabla" title="Generar Jurados"
-                                    onclick="window.location.href='{{ url('/mesas/' . $mesas->id . '/generate-jurados') }}" class="buttons'" >
+                                    onclick="window.location.href='{{ url('/mesas/' . $mesas->id . '/generate-jurados') }}'" class="buttons'" >
                                    <img src="/images/generarjurados.png" alt="Editar" class="formato-imagen" />
                                 </button>
 
