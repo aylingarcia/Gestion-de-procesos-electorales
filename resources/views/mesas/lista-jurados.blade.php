@@ -148,7 +148,8 @@
         <td>{{ $jurado->tipojurado }}</td>
         
         <td class="celda-botones">
-    <a href="{{ route('jurados.edit', ['id' => $jurado->id]) }}" class="buttons" style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;">Editar</a>
+    <a href="{{ route('jurados.edit', ['id' => $jurado->id]) }}" class="buttons" 
+        style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;">Editar</a>
 </td>
 
     </tr>
