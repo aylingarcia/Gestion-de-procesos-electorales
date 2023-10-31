@@ -131,15 +131,42 @@
                     <table id="juradosTable" class="vistatabla">
                         <thead>
                             <tr>
-                                <th>N°</th>
-                                <th>Nombre</th>
+
+                              <th>Id de eleccion</th>
+                              <th>N° Mesa</th>
+                              <th>Nombre</th>
                               <th>Apellido Paterno</th>
-                          <th>Apellido Materno</th>
-                          <th>Tipo Jurado</th>
-                          <th>Cambiar Jurado</th>
+                              <th>Apellido Materno</th>
+                              <th>Tipo Jurado</th>
+                              <th>Cambiar Jurado</th>
 
                                 
                             </tr>
+                                  
+
+                            <td class="celda-botones">
+                                    
+                                    <button> </button>
+
+                                    <button class="buttons-dentro-tabla" title="Editar Elección"
+                                     onclick="window.location.href='{{ url('/jurados/' . $jurados->id . '/edit') }}'">
+                                    <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
+                                 </button>
+
+                                 </td>
+
+
+
+
+
+
+
+
+
+
+
+
+
                         </thead>
                         <tbody>
 

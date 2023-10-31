@@ -1,3 +1,4 @@
+{{-- mostrar lista de mesas --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,8 +14,10 @@
     
 </head>
 <style>
-
-.styled-button {
+    .centered-container {
+    text-align: center;
+    }
+    .styled-button {
             width: 10%;
             height: 100%;
             background: rgba(4, 36, 60, 0.99);
@@ -23,7 +26,7 @@
             border: 1px solid rgba(198, 69, 196, 0.30);
             color: #fff; 
             padding: 1% 2%;
-        }
+            }
 </style>
 
 
@@ -108,9 +111,16 @@
         </center>
         <br>
         <br>
-        <div>
-  <button id="crearmesas" class="styled-button" onclick="crearM()" >Crear</button>
-</div>
+        <div class="container botonesss">
+
+
+            <div class="botones">
+                <a href="{{ url('mesas/create') }}" class="buttons">Crear Mesa</a>
+
+            </div>
+
+
+        </div>
 
 
 
@@ -121,25 +131,54 @@
                     <table id="mesasTable" class="vistatabla">
                         <thead>
                             <tr>
-                                <th>N°.</th>
-                                <th>Eleccion</th>
+                                <th>Id de Eleccion</th>
+                                <th>N° de Mesa.</th>
                                 <th>Tipo Votante</th>
-                                <th>Carrera</th>
+                                <th>Facultad</th>
                                 <th>Ubicacion</th>
-                                <th>Cantidad</th>
+                                <th>Nº de votantes</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach ($mesascreadas as $mesas)
+                                <tr>
+                                    <td>{{ $mesas->id_de_eleccion }}</td>
+                                    <td>{{ $mesas->numeromesa}}</td>
+                                    <td>{{ $mesas->votantemesa }}</td>
+                                    <td>{{ $mesas->facultadmesa }}</td>
+                                    <td>{{ $mesas->ubicacionmesa }}</td>
+                                    <td>{{ $mesas->numerodevotantes }}</td>
+                                    
+
+                                    <td class="celda-botones">
+                                    
+                                    <a href="{{ url('/mesas/' . $mesas->id . '/generate-jurados') }}" class="buttons" 
+                                    style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;">Generar Jurados</a>
+
+
+                                    <a href="{{ url('/mesas/' . $mesas->id . '/lista-jurados') }}" class="buttons"
+                                    style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;">Lista de Jurados</a>
+
+                                    <button class="buttons-dentro-tabla" title="Editar Elección"
+                                     onclick="window.location.href='{{ url('/mesas/' . $mesas->id . '/edit') }}'">
+                                    <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
+                                 </button>
+                                               
+                                 
+                                 {{-- Inicio Función borrar --}}
+                                    <form id="delete-form-{{ $mesas->id }}" action="{{ url('/mesas/' . $mesas->id) }}" method="post" style="display: inline;">
+                                    @csrf
+                                 {{ method_field('DELETE') }}
+                                     <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="return confirm ('Quieres borrar esta mesa?')">
+                                      <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
+                                      </button>
+                                       </form>
+                                 {{-- Fin función borrar --}}
+                                 
+                                 </td>
                             
-                             <script>    
-
-
-function crearM() {
-    window.location.href="/mesas-create";
-}
-                        
-        </script>    
+                                      
 
 
 
@@ -177,7 +216,8 @@ function crearM() {
 
 
                                 
-                            
+                          </tr>
+                          @endforeach
                         </tbody>
                     </table>
                 </div>

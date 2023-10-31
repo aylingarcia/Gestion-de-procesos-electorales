@@ -1,3 +1,4 @@
+{{-- crear/editar mesas --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -329,66 +330,74 @@
            
             </div>
     <div class="mesa-form-container">
-    <form action="{{ url('/votante') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ url('/mesas') }}" method="post" enctype="multipart/form-data">
         @csrf
-        @if (isset($votante))
+        @if (isset($mesas))
                 {{ method_field('PATCH') }}
             @endif
         <label for=""></label><br><br>
         <h2 class="form-title">Registrar Mesa de Votacion</h2>
         <div class="column">
 
-        <label for="ideleccion">Elección asociada:</label>
-<select name="ideleccion" id="ideleccion" required>
+        <label for="id_de_eleccion">Elección asociada:</label>
+<select name="id_de_eleccion" id="id_de_eleccion" required>
     <option value="">Selecciona una elección</option>
     @if (isset($elecciones))
         @foreach ($elecciones as $eleccion)
-            <option value="{{ $eleccion->id }}" @if(isset($votante) && $votante->ideleccion == $eleccion->id) selected @endif>{{ $eleccion->nombre }}</option>
+            <option value="{{ $eleccion->id }}" @if(isset($mesas) && $mesas->ideleccion == $eleccion->id) selected @endif>{{ $eleccion->nombre }}</option>
         @endforeach
     @endif
-</select>
-@error('ideleccion')
-<span class="error-message">{{ $message }}</span>
-@enderror
+</select><br><br>
 
                      
-                <label for="tipoVotante">Tipo de Votante:</label>
-                <select name="tipoVotante" value="{{ isset($votante) ? $votante->tipoVotante : '' }}" id="tipoVotante" required>
+                <label for="votantemesa">Tipo de Votante:</label>
+                <select name="votantemesa" value="{{ isset($mesas) ? $mesas->votantemesa : '' }}" id="votantemesa" required>
                     <option value="Estudiante">Estudiante</option>
                     <option value="Docente">Docente</option>
                     <option value="Administrativo">Administrativo</option>
-                </select>
-                <div class="campo-adicional" id="campoCarrera">
-                <label for="carrera">Carrera:</label>
+                </select><br><br>
+
+                <div class="campo-adicional" id="facultadmesa">
+                <label for="facultadmesa">Facultad de la mesa:</label>
+                <input type="text" placeholder="Escribe la fac aquí..." maxlength="40" 
+                oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
+                name="facultadmesa" value="{{ isset($mesas) ? $mesas->facultadmesa : '' }}" id="facultadmesa" ><br><br>
+                </div>
+
+                <div class="campo-adicional" id="carreramesa">
+                <label for="carreramesa">Carrera:</label>
                 <input type="text" placeholder="Escribe la Carrera aquí..." maxlength="40" 
                 oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                name="carrera" value="{{ isset($votante) ? $votante->carrera : '' }}" id="carrera" ><br><br>
+                name="carreramesa" value="{{ isset($mesas) ? $mesas->carreramesa : '' }}" id="carreramesa" ><br><br>
                 </div>
-                <div class="campo-adicional" id="campoProfesion">
-                <label for="profesion">Profesión:</label>
-                <input type="text" placeholder="Escribe la Profesión aquí..." maxlength="40" 
-                oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                name="profesion" value="{{ isset($votante) ? $votante->profesion : '' }}" id="profesion" ><br><br>
+
+                <div class="campo-adicional" id="ubicacionmesa">
+                <label for="ubicacionmesa">Ubicacion de mesa:</label>
+                <input type="text" placeholder="Escribe la ubicacion aquí..." maxlength="40" 
+                oninput="this.value = this.value.replace(/[^A-Za-z,. 0-9]+/g, '')"
+                name="ubicacionmesa" value="{{ isset($mesas) ? $mesas->ubicacionmesa : '' }}" id="mesas" ><br><br>
                 </div>
-                <div class="campo-adicional" id="campoCargo">
-                <label for="cargoAdministrativo">Cargo Administrativo:</label>
-                <input type="text" placeholder="Escribe el Cargo Administrativo aquí..." maxlength="40"
-                oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                name="cargoAdministrativo" value="{{ isset($votante) ? $votante->cargoAdministrativo : '' }}" id="cargoAdministrativo" ><br><br>
+
+                <div class="campo-adicional" id="numerodevotantes">
+                <label for="numerodevotantes">Numero de votantes:</label>
+                <input type="number" placeholder="Escribe el numero de votantes aquí..." maxlength="1000000"
+                name="numerodevotantes" value="{{ isset($mesas) ? $mesas->numerodevotantes : '' }}" id="numerodevotantes" ><br><br>
                 </div>
-                <span id="cantidad">Cantidad: </span>
-                <label for=""></label><br><br>
+                {{--
+                <label for=""></label>
                 <div class="campo-adicional">
                 <label for="numeroMesas">Número de Mesas:</label>
                 <div class="input-group">
                     <input type="number" name="numeroMesas" id="numeroMesas" value="1" min="1">
                     
                 </div>
-                <label for=""></label><br><br>      
+                <label for=""></label>--}}
+                
+                <br><br>      
                 
         </div>
         <div class="botones centered">
-            <input type="submit" value="Crear" onclick="confirmacion()">
+            <input type="submit" value="{{ isset($mesas) ? 'Actualizar' : 'Crear' }}" onclick="confirmacion()">
             <input type="reset" value="Cancelar" onclick="cancelacion()">
             <label for=""></label><br><br>
             <label for=""></label><br><br>
@@ -427,12 +436,12 @@
             var confirmacion = confirm("¿Seguro que deseas cancelar? Los cambios no se guardarán.");
             if (confirmacion) {
 
-                window.location.href = "/elecciones";
+                window.location.href = "/mesas";
             }
         }
 
         function confirmacion() {
-            var confirmacion = confirm("Estas seguro de registrar estas mesas?");
+            var confirmacion = confirm("Estas seguro de registrar esta mesa?");
             if (confirmacion) {
 
                 window.location.href = "/mesas";    
