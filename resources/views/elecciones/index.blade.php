@@ -156,7 +156,12 @@
 
                                     <td class="celda-botones">
 
-                                    <a href="{{ route('elecciones.boleta', ['id' => $elecciones->id]) }}" class="buttons" style="background-color: #04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;">Imprimir Boleta</a>
+                          
+
+                                        <button class="buttons-dentro-tabla" title="Imprimir Boleta"
+                                        onclick="window.location.href='{{ route('elecciones.boleta', ['id' => $elecciones->id]) }}'">
+                                        <img src="/images/imprimir.png" alt="Editar" class="formato-imagen" />
+                                    </button>
 
 
                                         <button class="buttons-dentro-tabla" title="Editar Elección"
