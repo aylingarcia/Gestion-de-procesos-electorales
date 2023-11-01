@@ -45,6 +45,8 @@
             {{-- <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contacto</a></li> --}}
             <li><a href="#">Ingreso</a></li>
+            <img src="/images/img.png"  class="company-logo">
+
         </ul>
         <div class="menu-icon"></div>
     </nav>

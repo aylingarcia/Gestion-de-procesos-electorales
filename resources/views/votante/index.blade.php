@@ -40,6 +40,9 @@
             {{-- <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contacto</a></li> --}}
             <li><a href="#">Ingreso</a></li>
+            <img src="/images/img.png"  class="company-logo">
+
+
         </ul>
         <div class="menu-icon"></div>
     </nav>
@@ -152,7 +155,7 @@
                                     <form id="delete-form-{{ $votante->id }}" action="{{ url('/votante/' . $votante->id) }}" method="post" style="display: inline;">
                                     @csrf
                                  {{ method_field('DELETE') }}
-                                     <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="return confirm ('Quieres borrar este votante?')">
+                                     <button class="buttons-dentro-tabla" title="Borrar Votante" onclick="return confirm ('Quieres borrar este votante?')">
                                       <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
                                       </button>
                                        </form>

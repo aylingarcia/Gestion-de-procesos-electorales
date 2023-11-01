@@ -8,6 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="{{ asset('css/Form.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Elecciones_Creadas.css') }}">
+    
 
 
 </head>
@@ -22,7 +24,7 @@
             <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
             
             <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
-        </div>
+        </div>s
         <ul>
             <li></li><li></li>
             <li></li><li></li>
@@ -46,6 +48,7 @@
         <label for=""></label><br><br>
     </div>
 
+    <div class=" menu container">
         <form action="{{ isset($elecciones) ? url('/elecciones/' . $elecciones->id) : url('/elecciones') }}"
             method="post" enctype="multipart/form-data">
             @csrf
@@ -55,7 +58,26 @@
             <h2 class="form-title1">{{ $eleccion->nombre }}</h2>
             <br><br>
             <h2 class="form-title">Lista de Jurados</h2>
+
+
+            
+           
             <style>
+              .elecciones-section {
+            background-color: white; 
+            padding: 20px;
+        }
+            .styled-button {
+            width: 10%;
+            height: 100%;
+            background: rgba(4, 36, 60, 0.99);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 5px;
+            border: 1px solid rgba(198, 69, 196, 0.30);
+            color: #fff; 
+            padding: 1% 2%;
+        }
+        <style>
             .elecciones-section {
                 background-color: white;
                 padding: 20px;
@@ -91,7 +113,7 @@
             }
 
             th {
-                background-color: #A70606;
+                background-color: #EE0F0F;
                 color: #FFFFFF;
             }
 
@@ -106,74 +128,102 @@
                 border: none;
                 cursor: pointer;
             }
-        </style>
-    </form>
-    <body>
-        <div class="centered-container">
-            <button id="crearJurados" class="styled-button" onclick="mesajurado()">Crear</button>
-        </div>
-        <script>
-            function mesajurado() {
-                alert("Script de redirección activado");
-                window.location.href = "/mesas/create";
+            .botones {
+
+            display: inline-block;
+            margin-right: 10px;
             }
-        </script>
-        <br>
-        <br>
-        <table id="juradosTable" class="vistatabla">
-            <thead>
-                <tr>
-                    <th>Id de elección</th>
-                    <th>N° Mesa</th>
-                    <th>Nombre</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
-                    <th>Tipo Jurado</th>
-                    <th>Cambiar Jurado</th>
-                </tr>
-            </thead>
-            <tbody>
+            .botones {
+             margin: 10px;
+        /* Espacio entre los botones (ajusta según tus preferencias) */
+            }
+        </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+<div class="centered-container">
+<div class="botones">
+                <a href="{{ url('mesas/create') }}" class="buttons">Crear Mesa</a>
+
+            </div>
+
+        
+
+<section class="elecciones-section">
+        <div class="container">
+
+            <table id="juradosTable" class="vistatabla">
+                <thead>
+                    <tr>
+                        <th>Id de elección</th>
+                        <th>N° Mesa</th>
+                        <th>Nombre</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Tipo Jurado</th>
+                        <th>Cambiar Jurado</th>
+                    </tr>
+                </thead>
+                <tbody>
                 @foreach ($jurados as $jurado)
-                <tr>
-                    <td>{{ $jurado->iddeeleccion }}</td>
-                    <td>{{ $jurado->idmesa }}</td>
-                    <td>{{ $jurado->nombres }}</td>
-                    <td>{{ $jurado->apellidoPaterno }}</td>
-                    <td>{{ $jurado->apellidoMaterno }}</td>
-                    <td>{{ $jurado->tipojurado }}</td>
-                    <td class="celda-botones">
-                        <a href="{{ route('jurados.edit', ['id' => $jurado->id]) }}" class="buttons" style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;">Editar</a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
+    <tr>
+        <td>{{ $jurado->iddeeleccion }}</td>
+        <td>{{ $jurado->idmesa }}</td>
+        <td>{{ $jurado->nombres }}</td>
+        <td>{{ $jurado->apellidoPaterno }}</td>
+        <td>{{ $jurado->apellidoMaterno }}</td>
+        <td>{{ $jurado->tipojurado }}</td>
+        
+        <td class="celda-botones">
+    <a href="{{ route('jurados.edit', ['id' => $jurado->id]) }}" class="buttons-dentro-tabla">
+        <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
+    </a>
+</td>
+
+
+    </tr>
+@endforeach
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+        <div class="footer">
+
+            <div class="footer-izq">
+                Av. Oquendo y calle Jordán asd
+                <br>
+                Mail: Tribunal_electoral@umss.edu
+                <br>
+                www.umss.edu.bo Cochabamba - Bolivia
+                <br>
+                Design: DevGenius
+
+            </div>
+            <div class="footer-medio">
+
+                Copyright © 2023 Tribunal Electoral Universitario Todos los derechos Reservados
+
+            </div>
+            <div class="footer-der">
+                <a href="{{ url('/') }}">Acerca de</a>
+                <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
+                <a href="{{ url('/') }}">Contactos</a>
+
+            </div>
+
+        </div>
+        </tr>
+        </tbody>
+                    
         </table>
     </div>
     </section>
-
-    <div class="footer">
-        <div class="footer-izq">
-            Av. Oquendo y calle Jordán asd
-            <br>
-            Mail: Tribunal_electoral@umss.edu
-            <br>
-            www.umss.edu.bo Cochabamba - Bolivia
-            <br>
-            Design: DevGenius
-        </div>
-        <div class="footer-medio">
-            Copyright © 2023 Tribunal Electoral Universitario Todos los derechos Reservados
-        </div>
-        <div class="footer-der">
-            <a href="{{ url('/') }}">Acerca de</a>
-            <span>&nbsp;|&nbsp;</span>
-            <a href="{{ url('/') }}">Contactos</a>
-        </div>
-    </div>
-</section>
 </body>
 
 </html>
-
-            
-           

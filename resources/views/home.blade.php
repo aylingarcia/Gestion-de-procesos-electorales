@@ -152,6 +152,7 @@
         .footer {
             background-color: #003770;
             color: white;
+        }
 =======
 
         body {
@@ -172,7 +173,7 @@
 
         .footer {
             background-color: #003770;
-            /*background-image: linear-gradient(to right, #003770, #C20000);*/
+            /background-image: linear-gradient(to right, #003770, #C20000);/
             color: white;
             text-align: right;
 >>>>>>> registro-frentes+correcciones-en-mensajes-de-error
@@ -248,10 +249,10 @@
             padding: 0;
             font-family: Arial, sans-serif;
             background-image: linear-gradient(to right, #003770, #f80211);
-            /*background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 55, 112, 0.4) 10px, rgba(0, 55, 112, 0.4) 20px);*/
-            /*background: linear-gradient(to bottom, #003770, #C20000);*/
-            /*background: repeating-linear-gradient(60deg, #003770 0px, #003770 10px, #C20000 10px, #C20000 20px);*/
-            /*background: radial-gradient(circle at 50% 50%, #C20000,#003770), repeating-radial-gradient(circle, transparent 0, transparent 5px, #333 5px, #333 10px);*/
+            /background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 55, 112, 0.4) 10px, rgba(0, 55, 112, 0.4) 20px);/
+            /background: linear-gradient(to bottom, #003770, #C20000);/
+            /background: repeating-linear-gradient(60deg, #003770 0px, #003770 10px, #C20000 10px, #C20000 20px);/
+            /background: radial-gradient(circle at 50% 50%, #C20000,#003770), repeating-radial-gradient(circle, transparent 0, transparent 5px, #333 5px, #333 10px);/
 
             color: white;
 =======
