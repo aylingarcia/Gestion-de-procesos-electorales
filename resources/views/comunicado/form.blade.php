@@ -111,7 +111,7 @@
 
                     <label for="titulo">Título:</label>
                     @error('titulo')<span style="color:red">{{ $message }}</span> @enderror
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')" maxlength="40"
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. 0-9]+/g, '')" maxlength="40"
                     name="titulo" placeholder="Escribe el título del comunicado..." value="{{ isset($comunicado) ? $comunicado->titulo : '' }}" id="titulo" maxlength="180" required
                     >
                     
