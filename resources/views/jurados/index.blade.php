@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear jurado</title>
+    <title>Crear Jurado</title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="{{ asset('css/Form.css') }}">
@@ -132,7 +132,7 @@
                         <thead>
                             <tr>
 
-                              <th>Id de eleccion</th>
+                              <th>Id de Eleccion</th>
                               <th>N° Mesa</th>
                               <th>Nombre</th>
                               <th>Apellido Paterno</th>

@@ -59,11 +59,25 @@ Route::get('/mesas/{id}/lista-jurados', 'MesaController@listaJurados');
 
 Route::get('/jurados/{id}/edit', 'JuradoController@edit')->name('jurados.edit');
 
+Route::get('/elecciones/{id}/boleta', 'EleccionController@showBoleta')->name('elecciones.boleta');
+
+Route::get('/votantes/carga', 'VotanteController@showCarga')->name('votante.carga');
+
+Route::post('/votantes/importCsv', 'VotanteController@importCsv')->name('votantes.importCsv');
 
 
-//Route::get('/mesas-create', function () {
-  //  return view('mesas.form');
-//});
+
+
+
+
+
+
+
+
+
+Route::get('/previsualizacion', function () {
+    return view('elecciones.previsualizacion');
+});
 //Route::get('/mesas', function () {
   //  return view('mesas.index');
 //});

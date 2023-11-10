@@ -40,6 +40,7 @@
             {{-- <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contacto</a></li> --}}
             <li><a href="#">Ingreso</a></li>
+            <img src="/images/img.png"  class="company-logo">
         </ul>
         <div class="menu-icon"></div>
     </nav>
@@ -115,13 +116,13 @@
                     <table id="eleccionesTable" class="vistatabla">
                         <thead>
                             <tr>
-                                <th>IdEleccion</th>
-                                <th>Nombre de frente</th>
-                                <th>Nombre candidato</th>
-                                <th>Nombre 2do candidato</th>
-                                <th>Nombre 3er candidato</th>
-                                <th>Nombre 4to candidato </th>
-                                <th>Cargo de postulacion</th>
+                                <th>IdElección</th>
+                                <th>Nombre de Frente</th>
+                                <th>Nombre Candidato</th>
+                                <th>Nombre 2do Candidato</th>
+                                <th>Nombre 3er Candidato</th>
+                                <th>Nombre 4to Candidato </th>
+                                <th>Cargo de Postulación</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -168,7 +169,25 @@
 
                                     
                                     
-                                    <div class="footer">
+                                    
+
+
+
+
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <div class="footer">
 
                                         <div class="footer-izq">
                                             Av. Oquendo y calle Jordán asd
@@ -195,18 +214,6 @@
 
                                     </div>
 
-
-
-
-
-
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
     </section>
 </body>
 

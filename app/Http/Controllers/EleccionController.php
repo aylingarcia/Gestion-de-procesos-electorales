@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Eleccion;
+use App\Models\Frente;
 use Illuminate\Http\Request;
 
 class EleccionController extends Controller
@@ -49,6 +50,11 @@ class EleccionController extends Controller
         ]);
 
         $datosEleccion = request()->except('_token');
+
+        if($request->hasFile('convocatoria')){
+            $datosEleccion['convocatoria']=$request->file('convocatoria')->store('uploads','public');
+        }
+
         $datosEleccion['estado'] = $request->input('estado', 1);
         Eleccion::insert($datosEleccion);
 
@@ -121,5 +127,12 @@ class EleccionController extends Controller
         $eleccion->save();
 
         return redirect('/elecciones');
+    }
+
+    public function showBoleta($id) {
+        $eleccion = Eleccion::find($id);
+        $frentes = Frente::where('ideleccionfrente', $id)->get();
+    
+        return view('elecciones.boleta', compact('eleccion', 'frentes'));
     }
 }

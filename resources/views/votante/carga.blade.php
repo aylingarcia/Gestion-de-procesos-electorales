@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RegistrarFrente</title>
+    <title>RegistrarVottantesporcsv</title>
     <style>
         * {
             margin: 0;
@@ -315,102 +315,41 @@
            
             </div>
     <div class="votante-form-container">
-    <form action="{{ url('/frente') }}" method="post" enctype="multipart/form-data">
-        @csrf
-        @if (isset($frente))
-                {{ method_field('PATCH') }}
+    <form action="{{ route('votantes.importCsv') }}" method="post" enctype="multipart/form-data">
+    @csrf
+    <div class="csv-upload-section">
+        <h2>Cargar Votantes Masivamente desde CSV</h2>
+        <br><br>
+        <label for="ideleccion">Elegir Elección:</label>
+        <select name="ideleccion" id="ideleccion" required>
+            <option value="">Selecciona una elección</option>
+            @if (isset($elecciones))
+                @foreach ($elecciones as $eleccion)
+                    <option value="{{ $eleccion->id }}">{{ $eleccion->nombre }}</option>
+                @endforeach
             @endif
+        </select>
 
-        <h2 class="form-title">Registrar Frente</h2>
-        <div class="column">
-
-        <label for="ideleccionfrente">Elegir Elección:</label>
-              <select name="ideleccionfrente" id="ideleccionfrente" required>
-              <option value="">Selecciona una elección</option>
-              @if (isset($elecciones))
-              @foreach ($elecciones as $eleccion)
-                   <option value="{{ $eleccion->id }}" @if(isset($frente) && $frente->ideleccion == $eleccion->id) selected @endif>{{ $eleccion->nombre }}</option>
-              @endforeach
-              @endif
-             </select>
-                @error('ideleccionfrente')
-                   <span class="error-message">{{ $message }}</span>
-                @enderror
-
-                <label for="nombrefrente">Nombre del frente:</label>
-<input type="text" placeholder="Escribe el nombre del frente aquí..." maxlength="40" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-       name="nombrefrente" value="{{ isset($frente) ? $frente->nombrefrente : old('nombrefrente') }}" required>
-@error('nombrefrente')
-<span class="error-message">{{ $message }}</span>
-@enderror<br><br>
-
-                <label for="cargopostulacion">Cargo de postulación:</label>
-                <input type="text" placeholder="Escribe el cargo de postulación aqui..." maxlength="40"
-                oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                 name="cargopostulacion" value="{{ isset($frente) ? $frente->cargopostulacion : '' }}" id="cargopostulacion" required><br><br>
+       
+        <label for="cargarListaCSV">Archivo CSV:</label> <p>Selecciona un archivo CSV para cargar múltiples votantes a la vez.</p>
+        <input type="file" name="cargarListaCSV" id="cargarListaCSV" accept=".csv">
         
+        <input type="submit" value="Cargar Votantes CSV" onclick="confirmarCargaCSV()">
+    </div>
         
-        
-        
-                <label for="fotofrente">Logo del Frente:</label>
-                    @if (isset($frente) && $frente->fotofrente)
-                        <p>{{ $frente->fotofrente }}</p>
-                    @endif
-                    <input type="file" title="Subir Logotipo o foto del frente" name="fotofrente" required
-                    accept=".png, .jpg, .jpeg"   
-                    {{ isset($frente) && $frente->fotofrente ? '' : '' }}><br><br>
-                
-                <label for="">Cantidad de Candidatos:</label>
-                <select name="" id="cantCandidatos" required>
-                    <option value="candidato1">1</option>
-                    <option value="candidato2">2</option>
-                    <option value="candidato3">3</option>
-                    <option value="candidato4">4</option>
-                </select>    
-                <div class="campo-adicional" id="candidato1">
-                <label for="profesion">Nombre Candidato de Frente 1:</label>
-                <input type="text" placeholder="Escribe el Nombre aquí..." maxlength="30"
-                oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                name="nombrecandidato1" value="{{ isset($frente) ? $frente->nombrecandidato1 : old('nombrecandidato1') }}" id="codSis" required>
-                </div>
-                <div class="campo-adicional" id="candidato2">
-                <label for="profesion">Nombre Candidato de Frente 2:</label>
-                <input type="text" placeholder="Escribe el Nombre aquí..." maxlength="30"
-                oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                name="nombrecandidato2" value="{{ isset($frente) ? $frente->nombrecandidato1 : old('nombrecandidato2') }}" id="codSis" >
-                </div>
-                <div class="campo-adicional" id="candidato3">
-                <label for="profesion">Nombre Candidato de Frente 3:</label>
-                <input type="text" placeholder="Escribe el Nombre aquí..." maxlength="30"
-                oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                name="nombrecandidato3" value="{{ isset($frente) ? $frente->nombrecandidato3 : old('nombrecandidato1') }}" id="codSis" >
-                </div>
-                <div class="campo-adicional" id="candidato4">
-                <label for="profesion">Nombre Candidato de Frente 4:</label>
-                <input type="text" placeholder="Escribe el Nombre aquí..." maxlength="30"
-                oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                name="nombrecandidato4" value="{{ isset($frente) ? $frente->nombrecandidato4 : old('nombrecandidato1') }}" id="codSis" >
-                </div>
-
-
 
                 
-                @error('nombrecandidato1')
-                <span class="error-message">{{ $message }}</span>
-                @enderror<br><br>
-
-                
-        
         </div>
-
-        <input type="submit" value="Registrar"
-                onclick="confirmacion()">
-          
-        <input type="reset" value="Cancelar" onclick="cancelacion()">
-        <label for=""></label><br><br>
-        <label for=""></label><br><br>
+        
+       <br><br>
+        <br><br>
         
     </form>
+
+    
+</div>
+<br><br>
+<br><br>
     <div class="footer">
 
         <div class="footer-izq">
@@ -447,53 +386,13 @@
         }
 
         function confirmacion() {
-            var confirmacion = confirm("Estas seguro de registrar este frente?");
+            var confirmacion = confirm("Estas seguro de registrar este votante?");
             if (confirmacion) {
 
-                window.location.href = "/frente";
+                window.location.href = "/votante";
             }
         }
 
-    </script>
-    <script>
-        function mostrarCampoAdicional() {
-            var cantCandidatos = document.getElementById("cantCandidatos").value;
-            var candidato1 = document.getElementById("candidato1");
-            var candidato2 = document.getElementById("candidato2");
-            var candidato3 = document.getElementById("candidato3");
-            var candidato4 = document.getElementById("candidato4")
-            
-            candidato1.style.display = "none";
-            candidato2.style.display = "none";
-            candidato3.style.display = "none";
-            candidato4.style.display = "none";
-            
-            if (cantCandidatos === "candidato1") {
-                candidato1.style.display = "block";
-            } else if (cantCandidatos === "candidato2") {
-                candidato1.style.display = "block";
-                candidato2.style.display = "block";
-            } else if (cantCandidatos === "candidato3") {
-                candidato1.style.display = "block";
-                candidato2.style.display = "block";
-                candidato3.style.display = "block";
-            } else if(cantCandidatos === "candidato4") {
-                candidato1.style.display = "block";
-                candidato2.style.display = "block";
-                candidato3.style.display = "block";
-                candidato4.style.display = "block";
-            } else{
-                candidato1.style.display = "block";
-                candidato2.style.display = "block";
-                candidato3.style.display = "block";
-                candidato4.style.display = "block";
-            }
-
-        }
-
-        document.getElementById("cantCandidatos").addEventListener("change", mostrarCampoAdicional);
-
-        mostrarCampoAdicional();
     </script>
 
 

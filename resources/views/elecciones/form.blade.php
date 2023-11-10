@@ -23,7 +23,7 @@
             var confirmacion = confirm("Estas seguro de registrar esta eleccion?");
             if (confirmacion) {
 
-                window.location.href = "/";
+                window.location.href = "/elecciones";
             }
         }
     </script>
@@ -76,7 +76,6 @@
             <li><a href="#">Contactos</a></li> --}}
             <li><a href="#">Ingreso</a></li>
             <img src="/images/img.png"  class="company-logo">
-
         </ul>
         <div class="menu-icon"></div>
     </nav>
@@ -194,7 +193,7 @@
             </div>
             <input type="submit" value="{{ isset($elecciones) ? 'Actualizar' : 'Registrar' }}"
                 onclick="confirmarConfirmacion()">
-            <input type="reset" value="Cancelar" onclick="confirmarCancelacion()">
+            <input type="reset" value="Cancelar" onclick="confirmarCancelación()">
             <label for=""></label><br><br>
             <label for=""></label><br><br>
         </form>
