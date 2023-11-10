@@ -36,10 +36,11 @@
             <li><a href="{{ url('/') }}">Inicio</a></li>
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
-            <li><a href="#">Documentación</a></li>
+            <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
             {{-- <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contacto</a></li> --}}
             <li><a href="#">Ingreso</a></li>
+            <img src="/images/img.png"  class="company-logo">
         </ul>
         <div class="menu-icon"></div>
     </nav>
@@ -168,9 +169,32 @@
 
 
                                     </td>
+                                
 
+                                
+                                
+                                
+                                    
           
+        
+
+
+
+
+
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <br><br>
+        <br><br>
         <div class="footer">
+            <br>
 
             <div class="footer-izq">
                 Av. Oquendo y calle Jordán asd
@@ -194,19 +218,6 @@
 
             </div>
 
-        </div>
-
-
-
-
-
-
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     </section>
 </body>

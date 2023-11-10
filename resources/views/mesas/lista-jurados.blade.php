@@ -34,7 +34,7 @@
         <li><a href="{{ url('/') }}">Inicio</a></li>
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
-            <li><a href="#">Documentación</a></li>
+            <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
             {{-- <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contactos</a></li> --}}
             <li><a href="#">Ingreso</a></li>
@@ -113,7 +113,7 @@
             }
 
             th {
-                background-color: #A70606;
+                background-color: #EE0F0F;
                 color: #FFFFFF;
             }
 
@@ -151,9 +151,7 @@
                 <a href="{{ url('mesas/create') }}" class="buttons">Crear Mesa</a>
 
             </div>
-
-        
-
+            
 <section class="elecciones-section">
         <div class="container">
 
@@ -191,8 +189,10 @@
                 </tbody>
             </table>
         </div>
+        <br><br>
+        <br><br>
+        <br><br>
     </section>
-
         <div class="footer">
 
             <div class="footer-izq">

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Jurado</title>
+    <title>Crear jurado</title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="{{ asset('css/Form.css') }}">
@@ -22,7 +22,7 @@
             <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
             
             <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
-        </div>
+        </div>s
         <ul>
             <li></li><li></li>
             <li></li><li></li>
@@ -131,42 +131,15 @@
                     <table id="juradosTable" class="vistatabla">
                         <thead>
                             <tr>
-
-                              <th>Id de Eleccion</th>
-                              <th>N° Mesa</th>
-                              <th>Nombre</th>
+                                <th>N°</th>
+                                <th>Nombre</th>
                               <th>Apellido Paterno</th>
-                              <th>Apellido Materno</th>
-                              <th>Tipo Jurado</th>
-                              <th>Cambiar Jurado</th>
+                          <th>Apellido Materno</th>
+                          <th>Tipo Jurado</th>
+                          <th>Cambiar Jurado</th>
 
                                 
                             </tr>
-                                  
-
-                            <td class="celda-botones">
-                                    
-                                    <button> </button>
-
-                                    <button class="buttons-dentro-tabla" title="Editar Elección"
-                                     onclick="window.location.href='{{ url('/jurados/' . $jurados->id . '/edit') }}'">
-                                    <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
-                                 </button>
-
-                                 </td>
-
-
-
-
-
-
-
-
-
-
-
-
-
                         </thead>
                         <tbody>
 

@@ -49,6 +49,8 @@ Route::resource('frente', 'FrenteController');
 
 Route::resource('comunicados', 'ComunicadoController');
 
+Route::resource('documentaciones', 'DocumentacionController');
+
 Route::resource('mesas', 'MesaController');
 
 Route::resource('jurados', 'JuradoController');
@@ -60,6 +62,17 @@ Route::get('/mesas/{id}/lista-jurados', 'MesaController@listaJurados');
 Route::get('/jurados/{id}/edit', 'JuradoController@edit')->name('jurados.edit');
 
 Route::get('/elecciones/{id}/boleta', 'EleccionController@showBoleta')->name('elecciones.boleta');
+
+Route::get('/votantes/carga', 'VotanteController@showCarga')->name('votante.carga');
+
+Route::post('/votantes/importCsv', 'VotanteController@importCsv')->name('votantes.importCsv');
+
+
+
+
+
+
+
 
 
 

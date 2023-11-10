@@ -10,7 +10,7 @@
     <br>
     <br>
     <br>
-    <title>Comunicados</title>
+    <title>Documentación</title>
     <link rel="stylesheet" href="{{ asset('css/Elecciones_Creadas.css') }}">
 
     </head>
@@ -34,7 +34,6 @@
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
             <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
-            <!--<li><a href="#">Documentación</a></li>-->
             <li><a href="#">Ingreso</a></li>
             <img src="/images/img.png"  class="company-logo">
         </ul>
@@ -47,14 +46,14 @@
         <br>
         <br>
         <center>
-            <h1>Comunicados</h1>
+            <h1>Documentación</h1>
         </center>
         <br>
         <br>
 
         <div class="container botonesss">
             <div class="botones">
-                <a href="{{ url('comunicados/create') }}" class="buttons">Añadir</a>
+                <a href="{{ url('documentaciones/create') }}" class="buttons">Añadir</a>
 
             </div>
         </div>
@@ -68,39 +67,32 @@
                                 <th>Nro</th>
                                 <th>Título</th>
                                 <th>Añadido el:</th>
-                                <th>Finaliza el:</th>
+                                
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($comunicados as $comunicado)
+                            @foreach ($documentaciones as $documentacion)
                                 <tr>
-                                    <td>{{ $comunicado->id}}</td>
-                                    <td>{{ $comunicado->titulo}}
+                                    <td>{{ $documentacion->id}}</td>
+                                    <td>{{ $documentacion->titulo}}
                                     <td>
-                                        @if ($comunicado->inicio)
-                                            {{ \Carbon\Carbon::parse($comunicado->inicio)->format('d/m/y') }}
+                                        @if ($documentacion->inicio)
+                                            {{ \Carbon\Carbon::parse($documentacion->inicio)->format('d/m/y') }}
                                         @else
                                             Sin fecha
                                         @endif
                                     </td>
-                                    <td>
-                                        @if ($comunicado->fin)
-                                            {{ \Carbon\Carbon::parse($comunicado->fin)->format('d/m/y') }}
-                                        @else
-                                            Sin fecha de fin
-                                        @endif
-                                    </td>
 
                                     <td class="celda-botones">
-                                    <button class="buttons-dentro-tabla" title="Editar Comite" onclick="window.location.href='{{ url('/comunicados/' . $comunicado->id . '/edit') }}'">
+                                    <button class="buttons-dentro-tabla" title="Editar documento" onclick="window.location.href='{{ url('/documentaciones/' . $documentacion->id . '/edit') }}'">
                                         <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
                                     </button>
 
-                                    <form id="delete-form-{{ $comunicado->id }}" action="{{ url('/comunicados/' . $comunicado->id) }}" method="post" style="display: inline;">
+                                    <form id="delete-form-{{ $documentacion->id }}" action="{{ url('/documentaciones/' . $documentacion->id) }}" method="post" style="display: inline;">
                                         @csrf
                                         {{ method_field('DELETE') }}
-                                        <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="return confirm ('¿Seguro que quieres borrar este comunicado?')">
+                                        <button class="buttons-dentro-tabla" title="Borrar documento" onclick="return confirm ('¿Seguro que quieres borrar este documento?')">
                                             <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
                                         </button>
                                     </form>
@@ -108,14 +100,10 @@
                             @endforeach
                         </tbody>
                     </table> 
-                    <!--{{ $comunicados->links() }}-->
                 </div>
             </div>
-           
         </div>
-
         <div class="footer">
-
             <div class="footer-izq">
                 Av. Oquendo y calle Jordán asd
                 <br>
