@@ -49,6 +49,8 @@ Route::resource('frente', 'FrenteController');
 
 Route::resource('comunicados', 'ComunicadoController');
 
+Route::resource('documentaciones', 'DocumentacionController');
+
 Route::resource('mesas', 'MesaController');
 
 Route::resource('jurados', 'JuradoController');
@@ -65,19 +67,32 @@ Route::get('/votantes/carga', 'VotanteController@showCarga')->name('votante.carg
 
 Route::post('/votantes/importCsv', 'VotanteController@importCsv')->name('votantes.importCsv');
 
-
-
-
-
-
-
-
-
-
-
 Route::get('/previsualizacion', function () {
-    return view('elecciones.previsualizacion');
+  return view('elecciones.previsualizacion');
 });
+
+Route::get('/reporte', function () {
+  return view('elecciones.reporte');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Route::get('/mesas-create', function () {
+  //  return view('mesas.form');
+//});
 //Route::get('/mesas', function () {
   //  return view('mesas.index');
 //});
