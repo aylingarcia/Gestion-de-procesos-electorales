@@ -75,6 +75,9 @@ Route::get('/registroResultados', function () {
   return view('elecciones.registroResultados');
 });
 
+Route::get('/reporte', function () {
+  return view('elecciones.reporte');
+});
 
 
 
