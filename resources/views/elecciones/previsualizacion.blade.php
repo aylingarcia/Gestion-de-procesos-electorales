@@ -119,6 +119,27 @@
         transform: rotate(135deg);
     }
 
+    .alineadosssss {
+                    text-align: center; /* Alinea todos los elementos hijos horizontalmente al centro */
+                }
+
+    .boton_descargar {
+        display: inline-block;
+        width: 50px; /* Ajusta el ancho según tus necesidades */
+        height: 50px; /* Ajusta la altura según tus necesidades */
+        background-color: #ffffff; /* Cambia el color de fondo según tus preferencias */
+        color: #ffffff; /* Cambia el color del texto según tus preferencias */
+        text-decoration: none;
+        border-radius: 3px; /* Ajusta el radio del borde para que tenga esquinas redondeadas */
+        font-size: 12px; /* Ajusta el tamaño del texto según tus preferencias */
+        cursor: pointer;
+    }
+
+    .boton_descargar:hover {
+        background-color: #a8a8aa;
+    }
+    
+
     @media screen and (max-width: 992px) {
         nav ul {
             position: fixed;
@@ -347,6 +368,8 @@
     font-size: 20px; /* Ajusta el tamaño del texto según sea necesario */
     color: #888; /* Cambia el color del texto si lo deseas */
     }
+
+    
 </style>
 
 <body>
@@ -428,12 +451,27 @@
                 </div>
 
                 <div class="column">
+
+
                 <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px; font-weight: 400; word-wrap: break-word;">Convocatoria (PDF):</h2>
+               
+               <div class="alineadosssss">
                 @if (isset($eleccion) && $eleccion->convocatoria)
-                 <p>
+                 {{-- <p>
                      {{ $eleccion->convocatoria }}
-                   <a href="{{ asset('storage/' . $eleccion->convocatoria) }}" download="Convocatoria.pdf" class="boton-descarga-pdf">Descargar PDF</a>
-                 </p>
+                   <a href="{{ asset('storage/' . $eleccion->convocatoria) }}" download="Convocatoria.pdf" class="boton-descarga-pdf"></a>
+                
+                 </p> --}}
+              
+
+                 
+                    <img src="{{ asset('/images/imprimir.png') }}" alt="Botón Descargar PDF" class="boton_descargar" title="Descargar Convocatoria"  style="cursor: pointer;">
+
+                    <a href="{{ asset('storage/' . $eleccion->convocatoria) }}" download="Convocatoria.pdf"> </a>
+                    
+                
+                </div>
+
                       <embed src="{{ asset('storage/' . $eleccion->convocatoria) }}" type="">
                 @endif
 
