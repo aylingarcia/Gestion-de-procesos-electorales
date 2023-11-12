@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear/Editar una elección</title>
+    <title>Previsualizar Registro </title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 </head>
@@ -146,13 +146,13 @@
     }
 
     /* Estilos del contenido */
+   
     body {
         font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
         margin: 0;
         padding: 0;
+        background-color: white;
     }
-
     .header {
         background-color: white;
         color: white;
@@ -162,10 +162,11 @@
 
     .container {
         max-width: 1300px;
-     
-        margin: 2px auto;
+        margin-top:auto;
+        margin-left: 30px ;
+        margin-right: 30px ;
         background-color: #fff;
-        padding: 8px;
+        padding: 100px;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
@@ -282,8 +283,8 @@
         border-radius: 5px;
         border: 1px solid rgba(198, 69, 196, 0.3);
         padding: 10px 20px;
-        background-color: #75D731;
-        color: rgba(4, 36, 60, 0.99);
+        background-color: #003770;
+        color: #fff;
         font-size: 16px;
         cursor: pointer;
     }
@@ -294,7 +295,7 @@
         font-size: 25px;
         text-align: left;
         font-weight: 400;
-        margin-left: 30px;
+        margin-left: 0 px;
     }
 
     .acomodar {
@@ -302,9 +303,18 @@
         justify-content: space-between;
     }
 
-    .column1,
-    .column2 {
+    .column1{
         text-align: left;
+   
+
+        padding: 0px;
+
+}
+
+    .column2 {
+        text-align: right;
+        padding: 10px 20px;
+        margin-right:700px;
     }
 
     .column2 {
@@ -358,18 +368,7 @@
         <label for=""></label><br><br>
     </div>
 
-    <div class="acomodar">
-        <div class="column1">
-            <h2 class="form-title1"> Eleccion Rector 2023</h2>
-            <h2 class="form-title"> Nº de Votantes:</h2>
-        </div>
-        <div class="column2">
-            <input type="submit" class="boton1" value="{{ isset($elecciones) ? 'Actualizar' : 'Registrar resultados' }}"
-                onclick="confirmarConfirmacion()">
-            <input type="submit" class="boton" value="{{ isset($elecciones) ? 'Actualizar' : 'Editar resultados' }}"
-                onclick="confirmarConfirmacion()">
-        </div>
-    </div>
+    
 
     <div class="container">
         <form action="{{ isset($elecciones) ? url('/elecciones/' . $elecciones->id) : url('/elecciones') }}"
@@ -381,6 +380,11 @@
 
             <div class="columns">
                 <div class="column">
+    
+     <div class="column1">
+            <h2 class="form-title1"> Eleccion Rector 2023</h2>
+            <h2 class="form-title"> Nº de Votantes:</h2>
+        </div>
                 <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;">Motivo de eleccion:</h2>
 
                 <label for="nom" > Motivo de eleccion:</label>
@@ -402,6 +406,19 @@
                 </div>
 
                 <div class="column">
+                <div class="column2">
+
+                <div class="acomodar">
+               <!-- Cambia type="submit" a type="button" -->
+                <input type="button" class="boton1" value="Registrar resultados" onclick="registroRes()">
+                <input type="button" class="boton1" value="Editar resultados" onclick=" ()">
+              
+                </div>
+
+             </div>
+                <br>
+                <br>
+
                 <h2 class="forms"style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;">Convocatoria (PDF):</h2>
 
                     <br><br>
@@ -414,6 +431,15 @@
                 </div>
             </div>
         </form>
+
+        <script>
+                       function registroRes() {
+                                          
+                      window.location.href = '/registroResultados';
+                                           
+                                        }
+                                        
+                                    </script>
 
         <div class="footer">
             <div class="footer-izq">
