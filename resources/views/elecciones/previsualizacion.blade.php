@@ -119,9 +119,9 @@
         transform: rotate(135deg);
     }
 
-    .alineadosssss {
-                    text-align: center; /* Alinea todos los elementos hijos horizontalmente al centro */
-                }
+   .alineadosssss {
+                    text-align: center; 
+                } 
 
     .boton_descargar {
         display: inline-block;
@@ -455,22 +455,19 @@
 
                 <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px; font-weight: 400; word-wrap: break-word;">Convocatoria (PDF):</h2>
                
-               <div class="alineadosssss">
+            <div class="alineadosssss">
                 @if (isset($eleccion) && $eleccion->convocatoria)
                  {{-- <p>
                      {{ $eleccion->convocatoria }}
                    <a href="{{ asset('storage/' . $eleccion->convocatoria) }}" download="Convocatoria.pdf" class="boton-descarga-pdf"></a>
                 
                  </p> --}}
-              
-
-                 
-                    <img src="{{ asset('/images/imprimir.png') }}" alt="Botón Descargar PDF" class="boton_descargar" title="Descargar Convocatoria"  style="cursor: pointer;">
-
-                    <a href="{{ asset('storage/' . $eleccion->convocatoria) }}" download="Convocatoria.pdf"> </a>
+                    <a href="{{ asset('storage/' . $eleccion->convocatoria) }}" download="Convocatoria.pdf"> 
+                        <img src="{{ asset('/images/imprimir.png') }}" alt="Botón Descargar PDF" class="boton_descargar" title="Descargar Convocatoria"  style="cursor: pointer;">
+                    </a>
                     
-                
                 </div>
+               
 
                       <embed src="{{ asset('storage/' . $eleccion->convocatoria) }}" type="">
                 @endif
