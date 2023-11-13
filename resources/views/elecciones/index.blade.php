@@ -547,8 +547,12 @@ td:first-child {
 
 
             <div class="botones">
-                <input type="text" id="search" placeholder="Buscar...">
-                <button class="buttons" onclick="search()">Buscar</button>
+                {{-- <input type="text" id="search" placeholder="Buscar...">
+                <button class="buttons" onclick="search()">Buscar</button> --}}
+                
+                {{-- Boton backup --}}
+                <a href="{{ route('backup.create') }}" class="buttons">Crear Backup</a>
+
             </div>
         </div>
 

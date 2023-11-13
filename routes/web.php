@@ -79,6 +79,13 @@ Route::get('/reporte', function () {
 
 
 
+use App\Http\Controllers\BackupController;
+
+Route::get('/backup', [BackupController::class, 'createBackup'])->name('backup.create');
+Route::get('/backup/{filename}', [BackupController::class, 'downloadBackup'])->name('backup.download');
+// routes/web.php
+
+
 
 
 
