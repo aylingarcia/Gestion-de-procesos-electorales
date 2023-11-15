@@ -545,6 +545,10 @@ td:first-child {
                 <a href="{{ url('/mesas') }}" class="buttons">Lista de Mesas</a>
             </div>
 
+            <div class="botones">
+                <a href="{{ url('/reporte') }}" class="buttons">Reportes</a>
+            </div>
+
 
             <div class="botones">
                 <input type="text" id="search" placeholder="Buscar...">
@@ -578,9 +582,9 @@ td:first-child {
 
                                     <td class="celda-botones">
 
-                                    <button class="buttons-dentro-tabla" title="Previsualizar registro"
-                                    onclick="previsuali()">
-                                        <img src="/images/previ.png" alt="Editar" class="formato-imagen" />
+                                    <button class="buttons-dentro-tabla" title="Previsualizar registro" 
+                                    onclick="window.location.href='{{ route('elecciones.previsualizacion', ['id' => $elecciones->id]) }}'">
+                                        <img src="/images/previ.png" alt="Previsualizar" class="formato-imagen" />
                                     </button>
 
                                     <button class="buttons-dentro-tabla" title="Imprimir Boleta"
@@ -614,7 +618,7 @@ td:first-child {
                                            <form id="delete-form-{{ $elecciones->id }}" action="{{ url('/elecciones/' . $elecciones->id) }}" method="post" style="display: inline;">
                                             @csrf
                                             {{ method_field('DELETE') }}
-                                           <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="return confirm ('Quieres borrar este votante?')">
+                                           <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="return confirm ('Quieres borrar esta eleccion? se borraran todos los registros asociados a esta.')">
                                            <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
                                            </button>
                                             </form>
@@ -637,14 +641,7 @@ td:first-child {
                                         }
                                     </script>
 
-                                    <script>
-                                        function previsuali() {
-                                          
-                                                window.location.href = '/previsualizacion';
-                                           
-                                        }
-                                        
-                                    </script>
+                                
 
                                     <div class="footer">
 

@@ -67,17 +67,26 @@ Route::get('/votantes/carga', 'VotanteController@showCarga')->name('votante.carg
 
 Route::post('/votantes/importCsv', 'VotanteController@importCsv')->name('votantes.importCsv');
 
-Route::get('/previsualizacion', function () {
-  return view('elecciones.previsualizacion');
-});
+Route::get('/elecciones/{id}/previsualizacion', 'EleccionController@mostrarPrevisualizacion')->name('elecciones.previsualizacion');
 
-Route::get('/registroResultados', function () {
-  return view('elecciones.registroResultados');
-});
+Route::get('/elecciones/{id}/registrar-resultados', 'EleccionController@registroResultados')
+    ->name('elecciones.registrarResultados');
 
-Route::get('/reporte', function () {
-  return view('elecciones.reporte');
-});
+Route::patch('/elecciones/{id}/guardarResultados', 'EleccionController@guardarResultados')->name('elecciones.guardarResultados');
+
+Route::get('/elecciones/{id}/editar-resultados', [EleccionController::class, 'editarRegistroResultados'])->name('elecciones.editarResultados');
+Route::patch('/elecciones/{id}/guardar-edicion-resultados', [EleccionController::class, 'guardarEdicionResultados'])->name('elecciones.guardarEdicionResultados');
+
+
+//Route::get('/registroResultados', function () {
+  //return view('elecciones.registroResultados');
+//});
+
+Route::get('/reporte', 'ReporteController@index');
+Route::get('/reporteGrafico/{id}', 'ReporteController@reporteGrafico');
+
+
+
 
 
 

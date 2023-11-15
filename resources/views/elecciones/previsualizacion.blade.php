@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Previsualizar Registro </title>
+    <title>Crear editar resultados </title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 </head>
@@ -146,13 +146,13 @@
     }
 
     /* Estilos del contenido */
-   
     body {
         font-family: Arial, sans-serif;
+        background-color: white;
         margin: 0;
         padding: 0;
-        background-color: white;
     }
+
     .header {
         background-color: white;
         color: white;
@@ -162,20 +162,12 @@
 
     .container {
         max-width: 1300px;
-        margin-top:auto;
-        margin-left: 30px ;
-        margin-right: 30px ;
+     
+        margin: 2px auto;
         background-color: #fff;
-        padding: 100px;
+        padding: 8px;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-
-     
-
-
-
-
-
 
     }
 
@@ -236,46 +228,75 @@
     }
 
     .footer {
-        background-color: #003770;
-        color: white;
-        padding: 15px;
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        font-size: 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+    background-color: #003770;
+    color: white;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    .footer-izq {
-        flex: 1;
-        text-align: left;
-        margin-left: 70px;
-    }
+.footer-izq {
+    flex: 1;
 
-    .footer-medio {
-        text-align: center;
-        flex: 1;
-    }
+    text-align: left;
+    margin-left: 70px;
+    /* Ajusta el valor de margen según cuánto espacio desees agregar */
 
-    .footer-der {
-        flex: 1;
-        text-align: center;
-    }
 
-    .footer-der a {
-        color: white;
-        text-decoration: none;
-        transition: color 0.3s;
-        font-size: 18px;
-    }
+}
 
-    .footer-der a:hover {
-        color: red;
-        font-size: 20px;
-    }
+.footer-medio {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    /* Evita el retorno de línea */
+    overflow: hidden;
+    /* Oculta el desbordamiento si el contenido es demasiado largo */
+    text-overflow: ellipsis;
+    /* Agrega puntos suspensivos (...) si el contenido es demasiado largo */
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    /* Evita el retorno de línea */
+    overflow: hidden;
+    /* Oculta el desbordamiento si el contenido es demasiado largo */
+    text-overflow: ellipsis;
+    /* Agrega puntos suspensivos (...) si el contenido es demasiado largo */
+    font-size: 18px;
+
+}
+
+.footer-der {
+    flex: 1;
+    text-align: center;
+}
+
+.footer-der a {
+    color: white;
+    /* Establece el color del texto en blanco por defecto */
+    text-decoration: none;
+    /* Elimina el subrayado predeterminado de los enlaces */
+    transition: color 0.3s;
+    /* Agrega una transición suave para el cambio de color */
+    font-size: 18px;
+    /* Ajusta el tamaño de fuente según tus preferencias */
+
+}
+
+.footer-der a:hover {
+    color: red;
+    /* Cambia el color del texto a rojo al pasar el ratón sobre el enlace */
+    font-size: 20px;
+    /* Tamaño de fuente al pasar el ratón sobre el enlace, puedes ajustarlo según tus preferencias */
+
+}
 
     .boton1,
     .boton {
@@ -283,8 +304,8 @@
         border-radius: 5px;
         border: 1px solid rgba(198, 69, 196, 0.3);
         padding: 10px 20px;
-        background-color: #003770;
-        color: #fff;
+        background-color: #75D731;
+        color: rgba(4, 36, 60, 0.99);
         font-size: 16px;
         cursor: pointer;
     }
@@ -295,7 +316,7 @@
         font-size: 25px;
         text-align: left;
         font-weight: 400;
-        margin-left: 0 px;
+        margin-left: 30px;
     }
 
     .acomodar {
@@ -303,18 +324,9 @@
         justify-content: space-between;
     }
 
-    .column1{
-        text-align: left;
-   
-
-        padding: 0px;
-
-}
-
+    .column1,
     .column2 {
-        text-align: right;
-        padding: 10px 20px;
-        margin-right:700px;
+        text-align: left;
     }
 
     .column2 {
@@ -337,6 +349,44 @@
         transform: scale(0.7);
         transform-origin: center;
         overflow: hidden;
+    }
+
+    .boton-descarga-pdf {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #04243C;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .boton-descarga-pdf:hover {
+        background-color: #0056b3;
+    }
+
+    .no-votantes {
+    font-size: 20px; /* Ajusta el tamaño del texto según sea necesario */
+    color: #888; /* Cambia el color del texto si lo deseas */
+    }
+    .alineadosssss {
+                    text-align: center; 
+                } 
+
+                .boton_descargar {
+        display: inline-block;
+        width: 50px; /* Ajusta el ancho según tus necesidades */
+        height: 50px; /* Ajusta la altura según tus necesidades */
+        background-color: #ffffff; /* Cambia el color de fondo según tus preferencias */
+        color: #ffffff; /* Cambia el color del texto según tus preferencias */
+        text-decoration: none;
+        border-radius: 3px; /* Ajusta el radio del borde para que tenga esquinas redondeadas */
+        font-size: 12px; /* Ajusta el tamaño del texto según tus preferencias */
+        cursor: pointer;
+    }
+
+    .boton_descargar:hover {
+        background-color: #a8a8aa;
     }
 </style>
 
@@ -368,7 +418,27 @@
         <label for=""></label><br><br>
     </div>
 
-    
+    <div class="acomodar">
+        <div class="column1">
+            <h2 class="form-title1"> {{ $eleccion->nombre }}</h2>
+            @if ($numVotantes > 0)
+    <h2 class="form-title"> Nº de Votantes: {{ $numVotantes }}</h2>
+@else
+    <h2 class="form-title">
+        Nº de Votantes:
+        <span class="no-votantes">No hay votantes registrados en esta elección</span>
+    </h2>
+@endif
+        </div>
+        <div class="column2">
+            
+        <a href="{{ route('elecciones.registrarResultados', ['id' => $eleccion->id]) }}" class="boton-descarga-pdf">
+        Registrar resultados</a>
+
+        <a href="{{ route('elecciones.editarResultados', ['id' => $eleccion->id]) }}" class="boton-descarga-pdf">
+    Editar resultados</a>
+        </div>
+    </div>
 
     <div class="container">
         <form action="{{ isset($elecciones) ? url('/elecciones/' . $elecciones->id) : url('/elecciones') }}"
@@ -380,66 +450,54 @@
 
             <div class="columns">
                 <div class="column">
-    
-     <div class="column1">
-            <h2 class="form-title1"> Eleccion Rector 2023</h2>
-            <h2 class="form-title"> Nº de Votantes:</h2>
-        </div>
                 <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;">Motivo de eleccion:</h2>
 
-                <label for="nom" > Motivo de eleccion:</label>
+                <label for="nom" > {{ $eleccion->motivo }}</label>
                     <br><br>
                     <h2 class="forms"style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;"> Cargo de Autoridad:</h2>
-                    <label for="nombre"> Cargo de Autoridad:</label>
+                    <label for="nombre"> {{ $eleccion->cargodeautoridad }} </label>
                     <br><br>
                     <h2 class="forms"style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;"> Gestion:</h2>
-                    <label for="nom"> Gestion:</label>
+                    <label for="nom">{{ $eleccion->gestioninicio }} - {{ $eleccion->gestionfin }} </label>
                     <br><br>
                     <h2 class="forms"style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;"> Tipo de Votantes:</h2>
-                    <label for="nom"> Tipo de Votantes:</label>
+                    <label for="nom"> {{ $eleccion->tipodevotantes }}</label>
                     <br><br>
                     <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;"> Fecha de inscripcion de frentes:</h2>
-                    <label for="nom"> Fecha de inscripcion de frentes:</label>
-                    <br><br>
+                    <label for="nom"> {{ $eleccion->fechainscripcion }}
+                    <br><br>  
                     <h2 class="forms"style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;">Fecha de eleccion:</h2>
-                    <label for="nom"> Fecha de eleccion:</label>
+                    <label for="nom"> {{ $eleccion->fecha }}</label>
                 </div>
 
                 <div class="column">
-                <div class="column2">
-
-                <div class="acomodar">
-               <!-- Cambia type="submit" a type="button" -->
-                <input type="button" class="boton1" value="Registrar resultados" onclick="registroRes()">
-                <input type="button" class="boton1" value="Editar resultados" onclick=" ()">
-              
-                </div>
-
-             </div>
-                <br>
-                <br>
-
-                <h2 class="forms"style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;">Convocatoria (PDF):</h2>
-
-                    <br><br>
-                    <br><br>
-                    <br><br>
-                    <br><br>
+                <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px; font-weight: 400; word-wrap: break-word;">Convocatoria (PDF):</h2>
+                <div class="alineadosssss">
+                @if (isset($eleccion) && $eleccion->convocatoria)
+                 {{-- <p>
+                     {{ $eleccion->convocatoria }}
+                   <a href="{{ asset('storage/' . $eleccion->convocatoria) }}" download="Convocatoria.pdf" class="boton-descarga-pdf"></a>
+                
+                 </p> --}}
+                    <a href="{{ asset('storage/' . $eleccion->convocatoria) }}" download="Convocatoria.pdf"> 
+                        <img src="{{ asset('/images/descargar.png') }}" alt="Botón Descargar PDF" class="boton_descargar" title="Descargar Convocatoria"  style="cursor: pointer;">
+                    </a>
                     
+                </div>
+                      <embed src="{{ asset('storage/' . $eleccion->convocatoria) }}" type="">
+                @endif
+
+            
+                    <br><br>        
                     <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;" >Tipo de Eleccion:</h2>
-                    <label for="nom"> Tipo de Eleccion:</label>
+                    <label for="nom"> {{ $eleccion->tipodeeleccion }}</label>
+                    <br><br>        
+                    <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;" >Descripcion:</h2>
+                    <label for="nom"> {{ $eleccion->descripcion }}</label>
                 </div>
             </div>
         </form>
 
-        <script>
-                       function registroRes() {
-                                          
-                      window.location.href = '/registroResultados';
-                                           
-                                        }
-                                        
-                                    </script>
 
         <div class="footer">
             <div class="footer-izq">
