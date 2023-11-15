@@ -37,7 +37,7 @@
             /*max-width: 1300px;*/
             margin: 20px;
             margin-top: 70px ;
-            margin-bottom: 80px;
+            margin-bottom: 120px;
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
@@ -104,7 +104,7 @@
         }
         
         .container {
-            display: flex;
+            
             max-width: 1300px;
             overflow-x: auto;
             text-align: left;
@@ -151,8 +151,10 @@
             background-color: #c4babada;
         }
 
-        #mychart{
-            margin-left: 100px;
+        #mychart {
+            margin-left: auto;
+            margin-right: auto;
+            display: block; 
         }
         .grafico {
             padding: 5px;
@@ -287,12 +289,44 @@
                         </tbody>
                     </table> 
                 </div>
+               
+                <canvas id="myChart"></canvas>
+
             </div>
         @else
             <h3 style="color: #185a9f;; text-align: center; padding: 10px;">Resultados Actuales: 0</h3>
         @endif
     </div>  
 
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var data = @json($data);
+
+        var myChart = new Chart(ctx, {
+            //type: 'doughnut', 
+            type: 'pie',
+            data: {
+                labels: data.labels,
+                datasets: [{
+                    data: data.values,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(255, 255, 0, 0.8)',  
+                        'rgba(169, 169, 169, 0.8)',
+                    ],
+                }]
+            },
+            options: {
+                responsive: false, // Desactiva la respuesta automática al tamaño del contenedor
+                maintainAspectRatio: false, // No mantenga la relación de aspecto fija
+                width: 400, // Ancho del gráfico
+                height: 300, // Alto del gráfico
+            }
+        });
+
+    </script>
 </body>
 </html>
 

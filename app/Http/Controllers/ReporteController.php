@@ -18,110 +18,6 @@ class ReporteController extends Controller
     public function index(Request $request)
     {
         //dd($request->tipo);
-        if($request->tipo == 'Reporte por frentes'){
-
-            $registros = Eleccion::whereBetween('fecha', [$request->fecha_inicio, $request->fecha_fin])->get();
-        
-            $nroVotantesPorRegistro = [];
-            $frentesG= [];
-
-            foreach ($registros as $registro) {
-                $nroVotantes = Votante::where('ideleccion', $registro->id)->count();
-                $nroVotantesPorRegistro[$registro->id] = $nroVotantes;
-            
-                $frentes = Frente::where('ideleccionfrente', $registro->id)->get();
-            
-                if ($frentes->isNotEmpty() && $nroVotantes > 0 ) {
-                    $maxVotos = max(
-                        $frentes->max('votosFrente1'),
-                        $frentes->max('votosFrente2'),
-                        $frentes->max('votosFrente3'),
-                        $frentes->max('votosFrente4')
-                    );
-                    
-                    $frenteGanador = $frentes->first(function ($frente) use ($maxVotos) {
-                        return $frente->votosFrente1 == $maxVotos
-                            || $frente->votosFrente2 == $maxVotos
-                            || $frente->votosFrente3 == $maxVotos
-                            || $frente->votosFrente4 == $maxVotos;
-                    });
-
-                    $frentesG[$registro->id] = $frenteGanador;
-                } else {
-                    $frentesG[$registro->id] = null;
-                }
-            }
-
-            $request->session()->put('registros', $registros);
-            
-            $tipo = $request->input('tipo');
-            $fecha_inicio = $request->input('fecha_inicio');
-            $fecha_fin = $request->input('fecha_fin');
-            
-            $fechas = compact('tipo', 'fecha_inicio', 'fecha_fin');
-            $request->session()->put('fechas', $fechas);
-
-            return view('elecciones.reporte', [
-                'fechas' => $fechas,
-                'registros' => $registros,
-                'nroVotantesPorRegistro'=> $nroVotantesPorRegistro,
-                'frentesG' => $frentesG,
-                'fechas' => $fechas
-            ]);
-
-
-        }else if($request->tipo == 'Numero de votos'){
-
-            $registros = Eleccion::whereBetween('fecha', [$request->fecha_inicio, $request->fecha_fin])->get();
-        
-            $nroVotantesPorRegistro = [];
-            $frentesG= [];
-
-            foreach ($registros as $registro) {
-                $nroVotantes = Votante::where('ideleccion', $registro->id)->count();
-                $nroVotantesPorRegistro[$registro->id] = $nroVotantes;
-            
-                $frentes = Frente::where('ideleccionfrente', $registro->id)->get();
-            
-                if ($frentes->isNotEmpty() && $nroVotantes > 0 ) {
-                    $maxVotos = max(
-                        $frentes->max('votosFrente1'),
-                        $frentes->max('votosFrente2'),
-                        $frentes->max('votosFrente3'),
-                        $frentes->max('votosFrente4')
-                    );
-                    
-                    $frenteGanador = $frentes->first(function ($frente) use ($maxVotos) {
-                        return $frente->votosFrente1 == $maxVotos
-                            || $frente->votosFrente2 == $maxVotos
-                            || $frente->votosFrente3 == $maxVotos
-                            || $frente->votosFrente4 == $maxVotos;
-                    });
-
-                    $frentesG[$registro->id] = $frenteGanador;
-                } else {
-                    $frentesG[$registro->id] = null;
-                }
-            }
-
-            $tipo = $request->input('tipo');
-            $fecha_inicio = $request->input('fecha_inicio');
-            $fecha_fin = $request->input('fecha_fin');
-            
-            $fechas = compact('tipo', 'fecha_inicio', 'fecha_fin');
-
-            $request->session()->put('registros', $registros);
-            $request->session()->put('fechas', $fechas);
-
-            return view('elecciones.reporteVotos', [
-                'fechas' => $fechas,
-                'registros' => $registros,
-                'nroVotantesPorRegistro'=> $nroVotantesPorRegistro,
-                'frentesG' => $frentesG,
-            ]);
-        }else{
-            $registros = null;
-        }
 
         $tipo = $request->input('tipo');
         $fecha_inicio = $request->input('fecha_inicio');
@@ -129,6 +25,64 @@ class ReporteController extends Controller
         
         $fechas = compact('tipo', 'fecha_inicio', 'fecha_fin');
         $request->session()->put('fechas', $fechas);
+
+        if($request->tipo != null){
+            $registros = Eleccion::whereBetween('fecha', [$request->fecha_inicio, $request->fecha_fin])->get();
+        
+            $nroVotantesPorRegistro = [];
+            $frentesG= [];
+
+            foreach ($registros as $registro) {
+                $nroVotantes = Votante::where('ideleccion', $registro->id)->count();
+                $nroVotantesPorRegistro[$registro->id] = $nroVotantes;
+            
+                $frentes = Frente::where('ideleccionfrente', $registro->id)->get();
+            
+                if ($frentes->isNotEmpty() && $nroVotantes > 0 ) {
+                    $maxVotos = max(
+                        $frentes->max('votosFrente1'),
+                        $frentes->max('votosFrente2'),
+                        $frentes->max('votosFrente3'),
+                        $frentes->max('votosFrente4')
+                    );
+                    
+                    $frenteGanador = $frentes->first(function ($frente) use ($maxVotos) {
+                        return $frente->votosFrente1 == $maxVotos
+                            || $frente->votosFrente2 == $maxVotos
+                            || $frente->votosFrente3 == $maxVotos
+                            || $frente->votosFrente4 == $maxVotos;
+                    });
+
+                    $frentesG[$registro->id] = $frenteGanador;
+                } else {
+                    $frentesG[$registro->id] = null;
+                }
+            }
+
+            $request->session()->put('registros', $registros);
+
+            if($request->tipo == 'Reporte por frentes'){
+            
+                $vista = 'reporte';
+    
+            }else if($request->tipo  == 'Numero de votos'){
+    
+                $vista = 'reporteVotos';
+    
+            }
+
+            return view('elecciones.'.$vista, [
+                'fechas' => $fechas,
+                'registros' => $registros,
+                'nroVotantesPorRegistro'=> $nroVotantesPorRegistro,
+                'frentesG' => $frentesG,
+                'fechas' => $fechas
+            ]);
+
+        }else{
+            $registros = null;
+        }
+
         return view('elecciones.reporte', [
             'fechas' => $fechas,
             'registros' => $registros,
@@ -137,9 +91,9 @@ class ReporteController extends Controller
 
     public function reporteGrafico(Request $request, $registroId)
     {
-
         $registros = $request->session()->get('registros');
         $fechas = $request->session()->get('fechas');
+        
         $nroVotantesPorRegistro = [];
         $frentesG= [];
         $grafico = Eleccion::find($registroId);
@@ -204,8 +158,19 @@ class ReporteController extends Controller
             ];
         }
         
-        return view('elecciones.reporteGrafico', compact('data','registros', 'nroVotantesPorRegistro', 'frentesG', 'fechas'));
-    }
+        if($fechas['tipo'] == 'Reporte por frentes'){
+            
+            $vista = 'reporteGrafico';
+
+        }else if($fechas['tipo']  == 'Numero de votos'){
+
+            $vista = 'reporteVotosGrafico';
+
+        }
+
+        return view('elecciones.' . $vista, compact('data', 'registros', 'nroVotantesPorRegistro', 'frentesG', 'fechas'));
+    }        
+
     /**
      * Show the form for creating a new resource.
      *
