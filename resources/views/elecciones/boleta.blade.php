@@ -144,12 +144,18 @@
     margin-right: 10px; /* Espacio entre el recuadro y el nombre del frente */
     display: inline-block; /* Para que los elementos se muestren en línea */
 }
+    .botonImprimir{
+        text-align: center;
+    }
+    .datosEleccion{
+        text-align: center;
+    }
 
     </style>
 
 <script>
         function confirmarCancelacion() {
-            var confirmacion = confirm("¿Seguro que deseas cancelar? La impresion se cancelara.");
+            var confirmacion = confirm("¿Seguro que deseas cancelar? La impresion se cancelará.");
             if (confirmacion) {
 
                 window.location.href = "/elecciones";
@@ -159,14 +165,17 @@
 
 <body>
     <div class="container">
-        <h1>Imprimir Boleta de Sufragio</h1>
-        <br><br>
-        <label for="">Nombre de Eleccion</label>
-        <p>{{ $eleccion->nombre }}</p>
-        <p>{{ $eleccion->motivo }}</p>
-        <p>{{ $eleccion->cargoautoridad }}</p>
 
-        <br><br>
+        <div class="datosEleccion">
+            <h1>Boleta de Sufragio</h1>
+            <br><br>
+            <label for="">Nombre de Eleccion</label>
+            <p>{{ $eleccion->nombre }}</p>
+            <p>{{ $eleccion->motivo }}</p>
+            <p>{{ $eleccion->cargoautoridad }}</p>
+        </div>
+        
+        <br>
 
         <h3>Frentes:</h3>
         <div class="frentes-container">
@@ -186,9 +195,11 @@
 
         <br><br>
         
-
-        <input type="submit" value="{{ 'Imprimir' }}" onclick="imprimirBoleta()">
+        <div class="botonImprimir">
+            <input type="submit" value="{{ 'Imprimir' }}" onclick="imprimirBoleta()">
             <input type="reset" value="Cancelar" onclick="confirmarCancelación()">
+        </div>
+            
     </div>
 
     <script>

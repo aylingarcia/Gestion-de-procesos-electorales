@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear/Editar comite</title>
+    <title>Registro Resultados</title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    
 
 
     <script>
@@ -13,22 +15,21 @@
             var confirmacion = confirm("¿Seguro que deseas cancelar? Los cambios no se guardarán.");
             if (confirmacion) {
 
-                window.location.href = "/comite";
+                window.location.href = "/elecciones";
             }
         }
 
         function confirmarConfirmacion() {
-            var confirmacion = confirm("Los datos han sido registrados con éxito");
+            var confirmacion = confirm("Estas seguro de registrar estos resultados?");
             if (confirmacion) {
 
-                window.location.href = "/comite";
+                window.location.href = "/elecciones";
             }
         }
     </script>
+  
+    <style>
 
-</head>
-
-<Style>
     /* Estilos del encabezado */
 * {
     margin: 0;
@@ -170,11 +171,11 @@ nav ul li a:hover {
 
 /* Estilos del contenido */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-}
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+    }
 
 .header {
     background-color: white;
@@ -185,8 +186,11 @@ body {
 
 .container {
     max-width: 1300px;
-    margin: 20px auto;
-    background-color: #fff;
+    margin-right: 20px ;
+    margin-left: 20px ;
+    background-color: white;
+        background-color: white;
+
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -203,7 +207,7 @@ label {
     font-weight: bold;
 }
 
-.form-title {
+.form-title1{
     font-size: 28px;
     margin-bottom: 20px;
     text-align: center;
@@ -225,32 +229,42 @@ input[type="file"] {
 }
 
 input[type="submit"] {
-    background-color: #04243C;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        border: 1px solid rgba(198, 69, 196, 0.3);
+        padding: 10px 20px;
+        background-color: #003770;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+
+
+
+
 }
 
 input[type="reset"] {
-    background-color: #A70606;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        border: 1px solid rgba(198, 69, 196, 0.3);
+        padding: 10px 20px;
+        background-color: #f80211;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+
 }
 
 input[type="submit"]:hover,
 input[type="reset"]:hover {
-    background-color: #0056b3;
+    background-color:  #04243C;
 }
 
 /* Estilos para las columnas */
 .columns {
     display: flex;
     justify-content: space-between;
+    margin-left :100px;
 }
 
 .column {
@@ -328,8 +342,35 @@ input[type="reset"]:hover {
     /* Tamaño de fuente al pasar el ratón sobre el enlace, puedes ajustarlo según tus preferencias */
 
 }
+        
+    .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px; 
+    display: block;
+}
+    .botones{
+        text-align:right;
+        margin-right:30px;
 
-</Style>
+    }
+    .form-title {
+        color: rgba(4, 36, 60, 0.99);
+        font-size: 30px;
+        text-align: left;
+        font-weight: 400;
+        margin-left: 30px;
+    }
+    .form-title1{
+        color: rgba(4, 36, 60, 0.99);    
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+  
+    </style>
+
+</head>
 
 <body>
     <nav>
@@ -350,93 +391,61 @@ input[type="reset"]:hover {
 
         <li><a href="{{ url('/') }}">Inicio</a></li>
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
+            <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
             <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
             {{-- <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Contacto</a></li> --}}
+            <li><a href="#">Contactos</a></li> --}}
             <li><a href="#">Ingreso</a></li>
             <img src="/images/img.png"  class="company-logo">
         </ul>
         <div class="menu-icon"></div>
     </nav>
-    
+
+
     <div class="header">
-    <label for=""></label><br><br>
+        <label for=""></label><br><br>
     </div>
+  
+    <br>
+   
     <div class="container">
-        <form action="{{ isset($comite) ? url('/comite/' . $comite->id) : url('/comite') }}"
-            method="post" enctype="multipart/form-data">
+        <form action="{{ url('/elecciones/' . $eleccion->id . '/guardarResultados') }}" method="post" enctype="multipart/form-data">
             @csrf
-            @if (isset($comite))
-                {{ method_field('PATCH') }}
-            @endif
-            <h2 class="form-title">Registrar Comite</h2>
-            <br>
-            <div class="columns">
-                <div class="column">
+            {{ method_field('PATCH') }}
 
-                
-
-                    <label for="id_eleccion">Eleccion:</label>
-                    <select name="id_eleccion" required>
-                        <option value="">Selecciona una elección</option>
-                          @if (isset($elecciones))
-                             @foreach ($elecciones as $eleccion)
-                        <option value="{{ $eleccion->id }}" @if(isset($comite) && $comite->id_eleccion == $eleccion->id) selected @endif>{{ $eleccion->nombre }}</option>
-                          @endforeach
-                          @endif
-                       </select><br><br>
-
-                    <label for="nombreMiembro">Nombre Miembro Comite:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')" name="nombreMiembro"
-                        placeholder="Escribe el nombre del miembro aquí..."
-                        value="{{ isset($comite) ? $comite->nombreMiembro : '' }}" id="nombreMiembro" required>
-
-                    <label for="apellidoPaterno">Apellido Paterno:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
-                        name="apellidoPaterno" placeholder="Escribe el apellido paterno aquí..."
-                        value="{{ isset($comite) ? $comite->apellidoPaterno : '' }}" id="apellidoPaterno"
-                        required>
-
-                        <label for="apellidoMaterno">Apellido Materno:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,.]+/g, '')"
-                        name="apellidoMaterno" placeholder="Escribe el apellido materno aquí..."
-                        value="{{ isset($comite) ? $comite->apellidoMaterno : '' }}" id="apellidoMaterno"
-                        required>
-
-                        <label for="CI">CI:</label>
-                    <input type="text" 
-                        name="CI" placeholder="Escribe el carnet de identidad"
-                        value="{{ isset($comite) ? $comite->CI : '' }}" id="CI"
-                        required>
-
-                   
-
-                </div>
-                <div class="column">
-                <label for="cargoComite">Cargo en Comite:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                        name="cargoComite" placeholder="Escribe el cargo aquí..."
-                        value="{{ isset($comite) ? $comite->cargoComite : '' }}" id="cargoComite"
-                        required><br><br>
-                    <label for="profesion">Profesion:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                        name="profesion" placeholder="Escribe la profesion aquí..."
-                        value="{{ isset($comite) ? $comite->profesion : '' }}" id="profesion"
-                        required>
-
-                        <label for="cargoUMSS">Cargo en UMSS:</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-z,. ]+/g, '')"
-                        name="cargoUMSS" placeholder="Escribe el cargo que ejerce en la universidad"
-                        value="{{ isset($comite) ? $comite->cargoUMSS : '' }}" id="cargoUMSS">
-
-                </div>
+            <div class="column1">
+                <h2 class="form-title"> {{ $eleccion->nombre }} </h2>
             </div>
-            <input type="submit" value="{{ isset($comite) ? 'Actualizar' : 'Registrar' }}"
-                onclick="confirmarConfirmacion()">
-            <input type="reset" value="Cancelar" onclick="confirmarCancelación()">
-            
+            <h2 class="form-title1">Editar resultados</h2>
+            <br><br>
+
+            <div class="columns">
+                @php
+                $numFrentes = 4; // Puedes cambiar esto según tu límite de frentes
+                @endphp
+
+                @for ($index = 1; $index <= $numFrentes; $index++)
+                    <div class="column">
+                        <label for="nombrefrente{{ $index }}">Nombre frente {{ $index }}:</label><br>
+                        <input type="text" name="nombrefrente{{ $index }}" value="{{ $eleccion->{'nombrefrente' . $index} }}" maxlength="100" style="width: 200px;"><br><br>
+
+                        <label for="votosfrente{{ $index }}">Nº de votos frente {{ $index }}:</label><br>
+                        <input type="number" name="votosfrente{{ $index }}" value="{{ $eleccion->{'votosfrente' . $index} }}" style="width: 200px;"><br><br>
+                    </div>
+                @endfor
+            </div>
+
+            <div class="botones">
+                <input type="submit" value="{{ isset($elecciones) ? 'Actualizar' : 'Registrar' }}" onclick="confirmarConfirmacion()">
+                <input type="reset" value="Cancelar" onclick="confirmarCancelacion()">
+            </div>
             <label for=""></label><br><br>
+            <label for=""></label><br><br>
+            <br><br>
+            <br><br>
+
         </form>
+
         <div class="footer">
 
             <div class="footer-izq">
