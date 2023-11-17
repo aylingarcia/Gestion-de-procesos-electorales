@@ -545,7 +545,9 @@ td:first-child {
                 <a href="{{ url('/mesas') }}" class="buttons">Lista de Mesas</a>
             </div>
 
-            
+            <div class="botones">
+                <a href="{{ url('/reporte') }}" class="buttons">Reportes</a>
+            </div>
 
             <div class="botones">
     <a href="{{ url('/generar-backup') }}" class="buttons" download="backup.sql">Generar Backup</a>
