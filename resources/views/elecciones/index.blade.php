@@ -550,14 +550,14 @@ td:first-child {
             </div>
 
             <div class="botones">
-    <a href="{{ url('/generar-backup') }}" class="buttons" download="backup.sql">Generar Backup</a>
-</div>
+                <a href="{{ url('/generar-backup') }}" class="buttons" download="backup.sql">Generar Backup</a>
+            </div>
 
 
-            <div class="botones">
+            {{--<div class="botones">
                 <input type="text" id="search" placeholder="Buscar...">
                 <button class="buttons" onclick="search()">Buscar</button>
-            </div>
+            </div>--}}
         </div>
 
 

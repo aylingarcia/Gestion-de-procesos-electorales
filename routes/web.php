@@ -91,6 +91,9 @@ Route::get('/generar-backup', [EleccionController::class, 'generarBackup']);
 
 Route::get('/mesas/{id}/actapdf', 'MesaController@pdf')->name('mesas.actapdf');
 
+Route::get('/generar-pdf/{id}','EleccionController@generarPDF')->name('elecciones.pdf');
+
+
 
 
 

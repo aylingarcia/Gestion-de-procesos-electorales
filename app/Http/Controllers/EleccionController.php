@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Eleccion;
 use App\Models\Votante;
 use App\Models\Frente;
+use App\Models\Mesa;
+use App\Models\Comite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -180,7 +182,7 @@ class EleccionController extends Controller
        $eleccion->save();
 
     // Redirigir a la vista de elecciones u otra vista según sea necesario
-       return redirect('/elecciones');
+    return redirect()->route('elecciones.pdf', ['id' => $id]);
 }
 
 public function editarRegistroResultados($id)
@@ -213,7 +215,7 @@ public function guardarEdicionResultados(Request $request, $id)
     $eleccion->save();
 
     // Redirigir a la vista de elecciones u otra vista según sea necesario
-    return redirect('/elecciones');
+    return redirect()->route('elecciones.pdf', ['id' => $id]);
 }
 
 public function generarBackup()
@@ -249,6 +251,76 @@ public function generarBackup()
     } catch (\Exception $e) {
         return response()->json(['success' => false, 'message' => 'Error al generar el backup: ' . $e->getMessage()]);
     }
+}
+
+public function generarPDF($id){
+
+    $registro = Eleccion::findOrFail($id);
+    $grafico = Eleccion::find($id);
+    
+    $nroVotantes = Votante::where('ideleccion', $registro->id)->count();
+    
+    $frentes = Frente::where('ideleccionfrente', $registro->id)->get();
+
+    $comites = Comite::where('id_eleccion', $registro->id)->get();
+
+    $mesas = Mesa::where('id_de_eleccion', $registro->id)->count();
+
+
+
+    if ($frentes->isNotEmpty() && $nroVotantes > 0) {
+        $maxVotos = max(
+            $frentes->max('votosFrente1'),
+            $frentes->max('votosFrente2'),
+            $frentes->max('votosFrente3'),
+            $frentes->max('votosFrente4')
+        );
+        
+        $frenteGanador = $frentes->first(function ($frente) use ($maxVotos) {
+            return $frente->votosFrente1 == $maxVotos
+                || $frente->votosFrente2 == $maxVotos
+                || $frente->votosFrente3 == $maxVotos
+                || $frente->votosFrente4 == $maxVotos;
+        });
+    }
+
+    //dd($frenteGanador->nombrefrente);
+
+    $frente1 = $grafico->votosfrente1;
+    $frente2 = $grafico->votosfrente2;
+    $frente3 = $grafico->votosfrente3;
+    $frente4 = $grafico->votosfrente4;
+
+    if($frente1 != null && $frente2 != null && $frente3 != null && $frente4 != null){
+        $data = [
+            'labels' => [$grafico->nombrefrente1, $grafico->nombrefrente2, $grafico->nombrefrente3, $grafico->nombrefrente4],
+            'values' => [$frente1, $frente2, $frente3,$frente4],
+        ];
+    }else if($frente1 != null && $frente2 != null && $frente3 != null){
+        $data = [
+            'labels' => [$grafico->nombrefrente1, $grafico->nombrefrente2, $grafico->nombrefrente3],
+            'values' => [$frente1, $frente2, $frente3],
+        ];
+    }else if($frente1 != null && $frente2 != null){
+        $data = [
+            'labels' => [$grafico->nombrefrente1, $grafico->nombrefrente2],
+            'values' => [$frente1, $frente2],
+        ];
+    }else if($frente1 != null){
+        $data = [
+            'labels' => [$grafico->nombrefrente1],
+            'values' => [$frente1],
+        ];
+    }else{
+        $data = [
+            'labels' => ['Sin registro de resultados'],
+            'values' => [$frente1],
+        ];
+    }
+    $suma=$frente1+$frente2+$frente3+$frente4;
+    
+    return view('elecciones.reporteEleccion',compact('data', 'registro', 'nroVotantes', 'frenteGanador','suma','comites','mesas'));
+
 }
 
 }

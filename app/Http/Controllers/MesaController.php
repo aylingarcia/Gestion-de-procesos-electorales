@@ -243,8 +243,8 @@ class MesaController extends Controller
 
     // Obtén la cantidad de jurados que deseas generar
     $cantidadSuplentes = 1;
-    $cantidadTitulares = 1;
-    $cantidadPresidente = 1;
+    $cantidadTitulares = 2;
+    $cantidadPresidente = 2;
 
     // Obtén la elección asociada a la mesa
     $eleccion = Eleccion::find($mesa->id_de_eleccion);
@@ -253,129 +253,76 @@ class MesaController extends Controller
         return redirect('/mesas')->with('error', 'No se encontró la elección asociada a esta mesa.');
     }
 
-    // Verificar si la elección no es de tipo "General"
-    if ($eleccion->tipodevotantes !== 'General') {
-        // Si no es de tipo "General", asigna aleatoriamente los 5 jurados
-        $this->generateJuradosRandomly($mesa->numeromesa, $eleccion->id, $cantidadSuplentes + $cantidadTitulares + $cantidadPresidente);
+    // Verificar si el tipo de votantes es "General"
+    if (strtolower($eleccion->tipodevotantes) === 'general') {
+        // Generar jurados de tipo 'Docente'
+        $this->generateJuradosByType($mesa->numeromesa, $eleccion->id, 'docente', $cantidadSuplentes, $cantidadTitulares, $cantidadPresidente);
 
-        return redirect('/mesas/' . $id . '/lista-jurados')->with('success', 'Se han generado los jurados con éxito.');
+        // Generar jurados de tipo 'Estudiante'
+        $this->generateJuradosByType($mesa->numeromesa, $eleccion->id, 'estudiante', 1, 1, 0);
+    } else {
+        // Generar jurados sin tener en cuenta el tipo de votante
+        $this->generateJuradosByType($mesa->numeromesa, $eleccion->id, null, $cantidadSuplentes, $cantidadTitulares, $cantidadPresidente);
     }
-
-    // Generar jurados de tipo 'Docente'
-    $this->generateJuradosByType($mesa->numeromesa, $eleccion->id, 'docente', $cantidadSuplentes, $cantidadTitulares, $cantidadPresidente);
-
-    // Generar jurados de tipo 'Estudiante'
-    $this->generateJuradosByType($mesa->numeromesa, $eleccion->id, 'estudiante', 1, 1, 0);
-
-    // Asignar los jurados que faltan en caso de elección no general
-    $this->assignAdditionalJurados($mesa->numeromesa, $eleccion->id, $cantidadSuplentes, $cantidadTitulares, $cantidadPresidente);
 
     return redirect('/mesas/' . $id . '/lista-jurados')->with('success', 'Se han generado los jurados con éxito.');
-}
-
-// Nueva función para asignar jurados adicionales en caso de elección no general
-private function assignAdditionalJurados($idMesa, $idEleccion, $cantidadSuplentes, $cantidadTitulares, $cantidadPresidente)
-{
-    $totalJurados = $cantidadSuplentes + $cantidadTitulares + $cantidadPresidente;
-    $juradosActuales = Jurado::where('idmesa', $idMesa)->count();
-
-    // Calcular cuántos jurados faltan asignar
-    $faltanAsignar = $totalJurados - $juradosActuales;
-
-    if ($faltanAsignar > 0) {
-        $this->generateJuradosRandomly($idMesa, $idEleccion, $faltanAsignar);
-    }
-}
-
-// Función para generar jurados aleatoriamente
-private function generateJuradosRandomly($idMesa, $idEleccion, $cantidadJurados)
-{
-    $votantes = Votante::where('ideleccion', $idEleccion)
-        ->inRandomOrder()
-        ->limit($cantidadJurados)
-        ->get();
-
-    // Contadores para cada tipo de jurado
-    $contadorSuplentes = 0;
-    $contadorTitulares = 0;
-    $contadorPresidente = 0;
-
-    $i = 0; // Contador general
-
-    foreach ($votantes as $votante) {
-        // Ajuste para el nombre del presidente
-        $tipoJurado = '';
-        $nombreJurado = '';
-
-        // Asignar tipo de jurado según disponibilidad
-        if ($contadorSuplentes < 2) {
-            $tipoJurado = 'Suplente';
-            $nombreJurado = 'Suplente ' . ucfirst(strtolower($votante->tipoVotante));
-            $contadorSuplentes++;
-        } elseif ($contadorTitulares < 2) {
-            $tipoJurado = 'Titular';
-            $nombreJurado = 'Titular ' . ucfirst(strtolower($votante->tipoVotante));
-            $contadorTitulares++;
-        } elseif ($contadorPresidente < 1) {
-            $tipoJurado = 'Presidente';
-            $nombreJurado = 'Presidente';
-            $contadorPresidente++;
-        }
-
-        // Crear el jurado
-        Jurado::create([
-            'iddeeleccion' => $votante->ideleccion,
-            'idmesa' => $idMesa,
-            'nombres' => $votante->nombres,
-            'apellidoPaterno' => $votante->apellidoPaterno,
-            'apellidoMaterno' => $votante->apellidoMaterno,
-            'codSis' => $votante->codSis,
-            'CI' => $votante->CI,
-            'tipoJurado' => $nombreJurado,
-        ]);
-
-        // Incrementar el contador general
-        $i++;
-
-        // Detener la asignación si se alcanza la cantidad necesaria para cada tipo de jurado
-        if ($contadorSuplentes >= 2 && $contadorTitulares >= 2 && $contadorPresidente >= 1) {
-            break;
-        }
-    }
-
-    // Mensaje de depuración
-    dd("Se asignaron $i jurados: $contadorSuplentes suplentes, $contadorTitulares titulares, $contadorPresidente presidente");
 }
 
 // Función para generar jurados por tipo
 private function generateJuradosByType($idMesa, $idEleccion, $tipoVotante, $cantidadSuplentes, $cantidadTitulares, $cantidadPresidente)
 {
-    $query = Votante::where('ideleccion', $idEleccion);
+    // Verificar la cantidad actual de jurados asignados a la mesa y elección
+    $juradosAsignados = Jurado::where('idmesa', $idMesa)
+        ->where('iddeeleccion', $idEleccion)
+        ->count();
 
-    if ($tipoVotante) {
-        $query->whereRaw('LOWER(tipoVotante) = ?', [$tipoVotante]);
+    // Calcular la cantidad máxima de jurados que se pueden asignar
+    $cantidadMaxima = 5 - $juradosAsignados;
+
+    // Si no hay espacio para más jurados, no hacer más asignaciones
+    if ($cantidadMaxima <= 0) {
+        return;
     }
 
-    $votantes = $query->inRandomOrder()
-        ->limit($cantidadSuplentes + $cantidadTitulares + $cantidadPresidente)
+    $votantesQuery = Votante::where('ideleccion', $idEleccion);
+
+    // Si se especifica un tipoVotante, agregar la condición
+    if ($tipoVotante !== null) {
+        $votantesQuery->whereRaw('LOWER(tipoVotante) = ?', [$tipoVotante]);
+    }
+
+    $votantes = $votantesQuery
+        ->whereNotIn('codSis', function ($query) use ($idEleccion) {
+            $query->select('codSis')
+                ->from('jurados')
+                ->where('iddeeleccion', $idEleccion);
+        })
+        ->whereNotIn('CI', function ($query) use ($idEleccion) {
+            $query->select('CI')
+                ->from('jurados')
+                ->where('iddeeleccion', $idEleccion);
+        })
+        ->inRandomOrder()
+        ->limit(min($cantidadMaxima, $cantidadSuplentes + $cantidadTitulares + $cantidadPresidente))
         ->get();
 
     $votantes = $votantes->shuffle();
-
+    
     $tiposJurado = ['Suplente', 'Titular', 'Presidente'];
 
     $i = 0;
 
     foreach ($votantes as $votante) {
-        $tipoJurado = $tiposJurado[$i];
-
+        // Obtener el tipo de jurado de manera segura
+        $tipoJurado = isset($tiposJurado[$i]) ? $tiposJurado[$i] : null;
+    
         // Ajuste para el nombre del presidente
         if ($tipoJurado === 'Presidente') {
             $nombreJurado = $tipoJurado;
         } else {
-            $nombreJurado = $tipoJurado . ' ' . ucfirst($tipoVotante);
+            $nombreJurado = $tipoJurado === null ? 'Jurado' : $tipoJurado . ' ' . ucfirst($tipoVotante);
         }
-
+    
         Jurado::create([
             'iddeeleccion' => $votante->ideleccion,
             'idmesa' => $idMesa,
@@ -386,10 +333,10 @@ private function generateJuradosByType($idMesa, $idEleccion, $tipoVotante, $cant
             'CI' => $votante->CI,
             'tipoJurado' => $nombreJurado,
         ]);
-
+    
         $i++;
-
-        if ($i >= ($cantidadSuplentes + $cantidadTitulares + $cantidadPresidente)) {
+    
+        if ($i >= count($tiposJurado) || $i >= ($cantidadSuplentes + $cantidadTitulares + $cantidadPresidente)) {
             break;
         }
     }
