@@ -634,8 +634,10 @@ td:first-child {
                                 </button>
 
 
-                                    
-
+                                <button class="buttons-dentro-tabla" title="Previsualizar acta" 
+                                    onclick="window.location.href='{{ url('/mesas/' . $mesas->id . '/acta')}}'" class="buttons'">
+                                        <img src="/images/previ.png" alt="Previsualizar" class="formato-imagen" />
+                                    </button>
 
 
                                     <button class="buttons-dentro-tabla" title="Editar Elección"

@@ -6,6 +6,9 @@ use App\Models\Eleccion;
 use App\Models\Votante;
 use App\Models\Frente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class EleccionController extends Controller
 {
@@ -213,5 +216,39 @@ public function guardarEdicionResultados(Request $request, $id)
     return redirect('/elecciones');
 }
 
+public function generarBackup()
+{
+    try {
+        
+        $backupFileName = 'backup-' . Carbon::now()->format('Y-m-d_His') . '.sql';
+
+        $backupPath = storage_path('app/backups/' . $backupFileName);
+        
+        $tables = DB::select('SHOW TABLES');
+
+        foreach ($tables as $table) {
+            $tableName = reset($table);
+            
+            $structure = DB::select('SHOW CREATE TABLE ' . $tableName)[0]->{'Create Table'};
+            
+            $data = DB::table($tableName)->get()->toArray();
+            
+            $sql = "";
+            foreach ($data as $row) {
+                $values = implode("', '", (array)$row);
+                $sql .= "INSERT INTO $tableName VALUES ('$values');\n";
+            }
+
+            file_put_contents($backupPath, "-- Table: $tableName\n", FILE_APPEND);
+            file_put_contents($backupPath, "$structure;\n", FILE_APPEND);
+            file_put_contents($backupPath, "-- Data for $tableName\n", FILE_APPEND);
+            file_put_contents($backupPath, "$sql\n", FILE_APPEND);
+        }
+
+        return response()->download($backupPath, $backupFileName, ['Content-Type' => 'application/sql']);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => 'Error al generar el backup: ' . $e->getMessage()]);
+    }
+}
 
 }

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Optional;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\DB;
 
 use App\Models\Eleccion;
+use App\Models\Frente;
 use App\Models\Votante;
 use App\Models\Jurado;
 use App\Models\Mesa;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MesaController extends Controller
 {
@@ -415,5 +417,49 @@ public function listaJurados($id)
     return view('mesas.lista-jurados', compact('jurados', 'eleccion'));
 }
 
+public function visualizaracta($id)
+    {
+        
+        $mesa = Mesa::find($id);
+
+        if (!$mesa) {
+            return response()->json(['error' => 'Mesa no encontrada'], 404);
+        }
+
+        // Obtener elección relacionada
+        $eleccion = Eleccion::find($mesa->id_de_eleccion);
+
+        // Obtener los frentes relacionados con la elección
+        
+        
+        $frentes = Frente::where('ideleccionfrente', $mesa->id_de_eleccion)->get();
+        $jurados = Jurado::where('iddeeleccion', $mesa->id_de_eleccion)
+        ->where('idmesa', $mesa->numeromesa)
+        ->orderBy('tipojurado', 'asc')
+        ->get();
+
+        return view('mesas.acta', compact('mesa', 'eleccion', 'frentes', 'jurados'));
+    }
+    public function pdf($id)
+    {
+        
+        $mesa = Mesa::find($id);
+
+        if (!$mesa) {
+            return response()->json(['error' => 'Mesa no encontrada'], 404);
+        }
+
+        // Obtener elección relacionada
+        $eleccion = Eleccion::find($mesa->id_de_eleccion);
+
+        // Obtener los frentes relacionados con la elección
+        $frentes = Frente::where('ideleccionfrente', $mesa->id_de_eleccion)->get();
+        $jurados = Jurado::where('iddeeleccion', $mesa->id_de_eleccion)
+        ->where('idmesa', $mesa->numeromesa)
+        ->orderBy('tipojurado', 'asc')
+        ->get();
+        $pdf = PDF::loadView('mesas.actapdf', compact('mesa', 'eleccion', 'frentes', 'jurados'));
+        return $pdf->stream();
+    }
 
 }

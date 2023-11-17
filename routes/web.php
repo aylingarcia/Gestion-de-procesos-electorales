@@ -59,6 +59,8 @@ Route::get('/mesas/{id}/generate-jurados', 'MesaController@generateJurados')->na
 
 Route::get('/mesas/{id}/lista-jurados', 'MesaController@listaJurados');
 
+Route::get('/mesas/{id}/acta', 'MesaController@visualizaracta');
+
 Route::get('/jurados/{id}/edit', 'JuradoController@edit')->name('jurados.edit');
 
 Route::get('/elecciones/{id}/boleta', 'EleccionController@showBoleta')->name('elecciones.boleta');
@@ -84,6 +86,10 @@ Route::patch('/elecciones/{id}/guardar-edicion-resultados', [EleccionController:
 
 Route::get('/reporte', 'ReporteController@index');
 Route::get('/reporteGrafico/{id}', 'ReporteController@reporteGrafico');
+
+Route::get('/generar-backup', [EleccionController::class, 'generarBackup']);
+
+Route::get('/mesas/{id}/actapdf', 'MesaController@pdf')->name('mesas.actapdf');
 
 
 
