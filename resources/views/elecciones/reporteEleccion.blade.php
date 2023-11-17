@@ -167,7 +167,6 @@
         <h4 class="subs">Número de votos: <label class="outputs">{{$suma}}</label></h4 class="subs">
         {{--<h4 class="subs">Número de No votantes: <label class="outputs">{{$nroVotantes-$suma}}</label></h4 class="subs">--}}
 
-        <h4 class="subs">Frente Ganador: <label class="outputs">{{$frenteGanador->nombrefrente}}</label></h4 class="subs"> 
 
         <div class="container">
             <div class="table-column">
