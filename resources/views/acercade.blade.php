@@ -169,6 +169,14 @@
                         border-radius: 8px;
                         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                     }
+                    .segundo-section {
+                        padding: 20px;
+                        margin: 50px;
+                        background-color: #fff;
+                        border-radius: 8px;
+                        box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+}
+               
 
                     .about-us-container {
     display: flex;
@@ -196,6 +204,48 @@
 .about-us-text p {
     margin-bottom: 15px;
 }
+/* Agrega estos estilos para el botón */
+.contact-us-container {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#show-contact-info {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block; /* Hace que el botón sea un bloque para centrarlo */
+    margin: 0 auto; /* Centra el botón horizontalmente */
+}
+
+#show-contact-info:hover {
+    background-color: #0056b3;
+}
+
+#contact-info-box {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#contact-info-box p {
+    margin: 10px 0;
+    color: #333;
+}
+
 
 
                     @media screen and (max-width:992px) {
@@ -576,14 +626,25 @@
 }
 
 /* Agrega estos estilos para cada miembro del equipo */
-.team-member {
-    text-align: center;
-    margin-bottom: 20px;
-}
+
 
 .team-member p {
     font-weight: bold;
     margin-top: 10px;
+}
+.team-members-container {
+  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.team-member {
+    width: 48%; /* Ajusta el ancho según tus preferencias */
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    text-align: center; /* Centra el contenido */
+
 }
                     @media screen and (max-width:992px) {
                         nav ul {
@@ -877,6 +938,7 @@
                         background-color: white;
                         padding: 20px;
                     }
+                  
 
                     .styled-button {
                         width: 10%;
@@ -986,45 +1048,64 @@
                                     <p>¡Gracias por ser parte de nuestro viaje! Esperamos seguir creciendo y contribuyendo al mundo de la tecnología desde la hermosa ciudad de Cochabamba.</p>
                                 </div>
                             </div>
+                            <div class="contact-us-container">
+                                <button id="show-contact-info">Contactanos</button>
+
+                            <div id="contact-info-box" style="display: none;">
+                                <p>Para más información, puedes contactarnos:</p>
+                                <p>Representante Legal: Aylin Nicol Garcia Mancilla</p>
+                                <p>Número de Teléfono: +591 68471393</p>
+                                <p>Correo Electrónico: devgenius.tis@gmail.com</p>
+                            </div>
+                        </div>
+                        </div>
                         </section>
-                        <section>
+                        
+                        <section class="segundo-section">
                             <h2>Nuestro Equipo</h2>
                             <p>Conoce al increíble equipo que trabaja duro para brindarte la mejor experiencia a la hora de las elecciones...</p>
-                            <div class="team-member">
-                                <img src="images/Sergio.png" alt="Nombre del Miembro 1" class="rounded-image">
-                                <p>Sergio Andres Veizaga Sanchez</p>
-                            </div><br>
-                            <div class="team-member">
-                                <img src="images/Jael.png" alt="Nombre del Miembro 2" class="rounded-image">
-                                <p>Jael Alejandra Avendaño Fernandez</p>
-                            </div><br>
-                            <div class="team-member">
-                                <img src="images/Enrique.png" alt="Nombre del Miembro 3" class="rounded-image">
-                                <p>Pablo Enrique Delgadillo Fernandez</p>
-                            </div><br>
-                            <div class="team-member">
-                                <img src="images/Aylin.png" alt="Nombre del Miembro 4" class="rounded-image">
-                                <p>Aylin Nicol Garcia Mancilla</p>
-                            </div><br>
-                            <div class="team-member">
-                                <img src="images/Mauricio.png" alt="Nombre del Miembro 5" class="rounded-image">
-                                <p>Mauricio Ramos Crespo </p>
-                            </div><br>
-                            <div class="team-member">
-                                <img src="images/Elias.png" alt="Nombre del Miembro 6" class="rounded-image">
-                                <p>Elias Renterias Arce</p>
-                            </div><br>
-                            {{-- <div class="team-member">
-                                <a href="images/Logo_TE.png" target="_blank">Nombre del Miembro 1</a>
+                            <br><br><br>
+                            <div class="team-members-container">
+                                <div class="team-member">
+                                    <img src="images/Sergio.png" alt="Nombre del Miembro 1" class="rounded-image">
+                                    <p>Sergio Andres Veizaga Sanchez</p>
+                                </div>
+                                <div class="team-member">
+                                    <img src="images/Jael.png" alt="Nombre del Miembro 2" class="rounded-image">
+                                    <p>Jael Alejandra Avendaño Fernandez</p>
+                                </div>
+                                <div class="team-member">
+                                    <img src="images/Enrique.png" alt="Nombre del Miembro 3" class="rounded-image">
+                                    <p>Pablo Enrique Delgadillo Fernandez</p>
+                                </div>
+                                <div class="team-member">
+                                    <img src="images/Aylin.png" alt="Nombre del Miembro 4" class="rounded-image">
+                                    <p>Aylin Nicol Garcia Mancilla</p>
+                                </div>
+                                <div class="team-member">
+                                    <img src="images/Mauricio.png" alt="Nombre del Miembro 5" class="rounded-image">
+                                    <p>Mauricio Ramos Crespo </p>
+                                </div>
+                                <div class="team-member">
+                                    <img src="images/Elias.png" alt="Nombre del Miembro 6" class="rounded-image">
+                                    <p>Elias Renterias Arce</p>
+                                </div>
                             </div>
-                    
-                            <div class="team-member">
-                                <a href="cv_miembro2.pdf" target="_blank">Nombre del Miembro 2</a>
-                            </div> --}}
-
                         </section>
-<br><br><br>
+                        
 
+
+
+<script>
+    // JavaScript para mostrar y ocultar el cuadro de información de contacto
+    document.getElementById('show-contact-info').addEventListener('click', function() {
+        var contactInfoBox = document.getElementById('contact-info-box');
+        contactInfoBox.style.display = (contactInfoBox.style.display === 'none' || contactInfoBox.style.display === '') ? 'block' : 'none';
+    });
+    
+</script>
+
+<br><br><br>
 
                         <div class="footer">
                             <div class="footer-izq">
