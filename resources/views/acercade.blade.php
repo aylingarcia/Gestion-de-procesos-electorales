@@ -44,21 +44,6 @@
     </div>
 
     <div class=" menu container">
-        <form action="{{ isset($elecciones) ? url('/elecciones/' . $elecciones->id) : url('/elecciones') }}"
-            method="post" enctype="multipart/form-data">
-            @csrf
-            @if (isset($elecciones))
-                {{ method_field('PATCH') }}
-            @endif
-            @if(isset($eleccion))
-            <h2 class="form-title1">{{ $eleccion->nombre }}</h2>
-            @endif
-            <br><br>
-            <h2 class="form-title">Lista de Jurados</h2>
-
-
-            
-           
             <style>
 
 /* Estilos del encabezado */
@@ -352,7 +337,6 @@ input[type="reset"]:hover {
     /* Ajusta el tamaño de fuente según tus preferencias */
 
 }
-
 .footer-der a:hover {
     color: red;
     /* Cambia el color del texto a rojo al pasar el ratón sobre el enlace */
@@ -378,8 +362,6 @@ input[type="reset"]:hover {
     float: left;
     margin-right: 40px;
 }
-
-
 
 nav {
     display:flex;
@@ -700,17 +682,6 @@ caption {
 td:first-child {  
     background-color: #c4babada;
 }
-
-
-/* Estilo para la última columna (si es necesario) */
-/*td:last-child {
-    background-color: #ddd;
-}
-
-/* Estilo para una clase específica de celdas (si es necesario) */
-/*td.miClase {
-    background-color: yellow;
-}*/
 .vistatabla {
     width: 100%;
     /* Ancho de la tabla al 100% del contenedor */
@@ -900,59 +871,10 @@ td:first-child {
 <body>
 <!DOCTYPE html>
 <html>
-<head>
-
-</head>
-<body>
-<div class="centered-container">
-<div class="botones">
-                <a href="{{ url('mesas/create') }}" class="buttons">Crear Mesa</a>
-
-            </div>
-            
-<section class="elecciones-section">
-        <div class="container">
-
-            <table id="juradosTable" class="vistatabla">
-                <thead>
-                    <tr>
-                        <th>Id de elección</th>
-                        <th>N° Mesa</th>
-                        <th>Nombre</th>
-                        <th>Apellido Paterno</th>
-                        <th>Apellido Materno</th>
-                        <th>Cargo Jurado</th>
-                        <th>Cambiar Jurado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($jurados as $jurado)
-    <tr>
-        <td>{{ $jurado->iddeeleccion }}</td>
-        <td>{{ $jurado->idmesa }}</td>
-        <td>{{ $jurado->nombres }}</td>
-        <td>{{ $jurado->apellidoPaterno }}</td>
-        <td>{{ $jurado->apellidoMaterno }}</td>
-        <td>{{ $jurado->tipojurado }}</td>
-        
-        <td class="celda-botones">
-    <a href="{{ route('jurados.edit', ['id' => $jurado->id]) }}" class="buttons-dentro-tabla">
-        <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
-    </a>
-</td>
-
-
-    </tr>
-@endforeach
-                </tbody>
-            </table>
-        </div>
-        <br><br>
-        <br><br>
-        <br><br>
-    </section>
+    <head>
+    </head>
+    <body>
         <div class="footer">
-
             <div class="footer-izq">
                 Av. Oquendo y calle Jordán asd
                 <br>
@@ -963,6 +885,7 @@ td:first-child {
                 Design: DevGenius
 
             </div>
+
             <div class="footer-medio">
 
                 Copyright © 2023 Tribunal Electoral Universitario Todos los derechos Reservados
@@ -972,16 +895,8 @@ td:first-child {
             <a href="{{ url('/acercade') }}">Acerca de | Contactos</a>
             <!--<span>&nbsp;|&nbsp;</span> 
             <a href="#">Contactos</a>-->
-
             </div>
 
-        </div>
-        </tr>
-        </tbody>
-                    
-        </table>
-    </div>
-    </section>
-</body>
-
+        </div>      
+    </body>
 </html>
