@@ -989,34 +989,41 @@
                         </section>
                         <section>
                             <h2>Nuestro Equipo</h2>
-                            <p>Conoce al increíble equipo que trabaja duro para brindarte...</p>
+                            <p>Conoce al increíble equipo que trabaja duro para brindarte la mejor experiencia a la hora de las elecciones...</p>
                             <div class="team-member">
-                                <img src="images/Logo_TE.png" alt="Nombre del Miembro 1" class="rounded-image">
+                                <img src="images/Sergio.png" alt="Nombre del Miembro 1" class="rounded-image">
                                 <p>Sergio Andres Veizaga Sanchez</p>
-                            </div>
+                            </div><br>
                             <div class="team-member">
-                                <img src="imagen2.jpg" alt="Nombre del Miembro 2" class="rounded-image">
+                                <img src="images/Jael.png" alt="Nombre del Miembro 2" class="rounded-image">
                                 <p>Jael Alejandra Avendaño Fernandez</p>
-                            </div>
+                            </div><br>
                             <div class="team-member">
-                                <img src="imagen2.jpg" alt="Nombre del Miembro 3" class="rounded-image">
+                                <img src="images/Enrique.png" alt="Nombre del Miembro 3" class="rounded-image">
                                 <p>Pablo Enrique Delgadillo Fernandez</p>
-                            </div>
+                            </div><br>
                             <div class="team-member">
-                                <img src="imagen2.jpg" alt="Nombre del Miembro 4" class="rounded-image">
+                                <img src="images/Aylin.png" alt="Nombre del Miembro 4" class="rounded-image">
                                 <p>Aylin Nicol Garcia Mancilla</p>
-                            </div>
+                            </div><br>
                             <div class="team-member">
-                                <img src="imagen2.jpg" alt="Nombre del Miembro 5" class="rounded-image">
+                                <img src="images/Mauricio.png" alt="Nombre del Miembro 5" class="rounded-image">
                                 <p>Mauricio Ramos Crespo </p>
-                            </div>
+                            </div><br>
                             <div class="team-member">
-                                <img src="imagen2.jpg" alt="Nombre del Miembro 6" class="rounded-image">
+                                <img src="images/Elias.png" alt="Nombre del Miembro 6" class="rounded-image">
                                 <p>Elias Renterias Arce</p>
+                            </div><br>
+                            {{-- <div class="team-member">
+                                <a href="images/Logo_TE.png" target="_blank">Nombre del Miembro 1</a>
                             </div>
+                    
+                            <div class="team-member">
+                                <a href="cv_miembro2.pdf" target="_blank">Nombre del Miembro 2</a>
+                            </div> --}}
 
                         </section>
-
+<br><br><br>
 
 
                         <div class="footer">
