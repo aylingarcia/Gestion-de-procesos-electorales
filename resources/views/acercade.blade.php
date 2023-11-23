@@ -177,7 +177,7 @@
     text-align: center;
 }
 
-.logo {
+.logoDevGenius {
     max-width: 150px; /* Ajusta el tamaño del logo según sea necesario */
     margin-bottom: 20px; /* Espacio entre el logo y el texto */
 }
@@ -973,7 +973,7 @@
                                 historia...</p>
                                 <br>
                                 <div class="about-us-container">
-                                    <img src="images/logoEmpresa.png" alt="Logo de DevGenius" class="logo">
+                                    <img src="images/logoEmpresa.png" alt="Logo de DevGenius" class="logoDevGenius">
                                 <div class="about-us-text">
                                     <p>¡Bienvenido a DevGenius! Somos un equipo con sede en Cochabamba, Bolivia, una ciudad rica en cultura y diversidad. La historia de nuestro grupo se remonta a nuestros días en la Universidad Mayor de San Simón, donde nos conocimos gracias a una emocionante materia llamada "Taller de Ingeniería de Software".</p>
                                 
