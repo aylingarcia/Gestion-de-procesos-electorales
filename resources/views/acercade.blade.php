@@ -170,6 +170,34 @@
                         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                     }
 
+                    .about-us-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.logo {
+    max-width: 150px; /* Ajusta el tamaño del logo según sea necesario */
+    margin-bottom: 20px; /* Espacio entre el logo y el texto */
+}
+
+.about-us-text {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-us-text p {
+    margin-bottom: 15px;
+}
+
+
                     @media screen and (max-width:992px) {
                         nav ul {
                             position: fixed;
@@ -943,6 +971,21 @@
                             <h2>Nuestra Historia</h2>
                             <p>¡Bienvenido a nuestra página "Acerca de nosotros"! Aquí puedes conocer más sobre nuestra
                                 historia...</p>
+                                <br>
+                                <div class="about-us-container">
+                                    <img src="images/logoEmpresa.png" alt="Logo de DevGenius" class="logo">
+                                <div class="about-us-text">
+                                    <p>¡Bienvenido a DevGenius! Somos un equipo con sede en Cochabamba, Bolivia, una ciudad rica en cultura y diversidad. La historia de nuestro grupo se remonta a nuestros días en la Universidad Mayor de San Simón, donde nos conocimos gracias a una emocionante materia llamada "Taller de Ingeniería de Software".</p>
+                                
+                                    <p>Durante este taller universitario, descubrimos una pasión compartida por la innovación y la resolución de problemas. Nos dimos cuenta de que cada uno de nosotros aportaba habilidades únicas y perspectivas frescas al equipo. La colaboración en este proyecto no solo nos llevó al éxito académico, sino que también creó la base de lo que hoy es DevGenius.</p>
+                                
+                                    <p>Después de la universidad, decidimos llevar nuestra colaboración más allá de las aulas y emprender un viaje conjunto en el mundo profesional. Nuestro compromiso con la excelencia, la creatividad y el trabajo arduo nos ha llevado a explorar y abordar desafíos en el ámbito de la ingeniería de sistemas.</p>
+                                
+                                    <p>En DevGenius, no solo somos colegas, somos amigos que comparten una visión común. Estamos dedicados a aplicar nuestros conocimientos y habilidades para ofrecer soluciones tecnológicas innovadoras que impacten positivamente en nuestra comunidad y más allá.</p>
+                                
+                                    <p>¡Gracias por ser parte de nuestro viaje! Esperamos seguir creciendo y contribuyendo al mundo de la tecnología desde la hermosa ciudad de Cochabamba.</p>
+                                </div>
+                            </div>
                         </section>
                         <section>
                             <h2>Nuestro Equipo</h2>
