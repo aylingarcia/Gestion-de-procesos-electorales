@@ -25,7 +25,7 @@ class MesaController extends Controller
     public function index()
     {
         //
-        $mesascreadas = Mesa::orderBy('id_de_eleccion', 'asc')->paginate(100);
+        $mesascreadas = Mesa::where('estadoR', 1)->orderBy('id_de_eleccion', 'asc')->paginate(100);
         return view('mesas.index', compact('mesascreadas'));
     }
 
@@ -50,6 +50,7 @@ class MesaController extends Controller
      */
     public function store(Request $request)
 {
+    
     $idDeEleccion = $request->input('id_de_eleccion');
     $numeroMesas = $request->input('numeroMesas');
     $carrera = strtolower($request->input('carreramesa'));
@@ -142,6 +143,22 @@ class MesaController extends Controller
     return redirect('/mesas')->with('success', 'Las mesas se han guardado con éxito.');
 }
     
+    private function obtenerProximoNumeroMesa($numerosDeMesaExistente)
+    {
+        // Ordena los números de mesa existentes de manera ascendente
+        sort($numerosDeMesaExistente);
+
+        // Encuentra el primer hueco disponible
+        $proximoNumeroMesa = 1;
+        foreach ($numerosDeMesaExistente as $numero) {
+            if ($numero > $proximoNumeroMesa) {
+                break;
+            }
+            $proximoNumeroMesa++;
+        }
+
+        return $proximoNumeroMesa;
+    }
     // Función actualizada para asignar mesas por tipo
     private function asignarMesasPorTipo($mesaActual, $votantes, $numeroMesas, $idDeEleccion, $tipoVotante, $carrera, $request)
 {
@@ -170,7 +187,6 @@ class MesaController extends Controller
             // Asigna la cantidad correcta de votantes a la mesa
             $votantesAsignados = min(ceil($votantesTipo->count() / $numeroMesas), $votantesTipo->count() - (($i - 1) * ceil($votantesTipo->count() / $numeroMesas)));
             $datosMesas['numerodevotantes'] = $votantesAsignados;
-
             Mesa::insert($datosMesas);
 
             $mesaActual++;
