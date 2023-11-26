@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         factory(Votante::class, 1000)->create();
         factory(Comite::class, 50)->create();
         factory(Frente::class, 50)->create();
-        factory(Mesa::class, 100)->create();
-        factory(Jurado::class, 50)->create();
+        //factory(Mesa::class, 100)->create();
+        //factory(Jurado::class, 50)->create();
     }
 }

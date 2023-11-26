@@ -395,7 +395,7 @@
                 
         </div>
         <div class="botones centered">
-            <input type="submit" value="{{ isset($mesas) ? 'Actualizar' : 'Crear' }}" onclick="confirmacion()">
+            <input type="submit" value="{{ isset($mesas) ? 'Actualizar' : 'Crear' }}" >
             <input type="reset" value="Cancelar" onclick="cancelacion()">
             <label for=""></label><br><br>
             <label for=""></label><br><br>

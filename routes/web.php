@@ -98,7 +98,7 @@ Route::get('/generar-pdf1/{id}','EleccionController@generarPDF1')->name('eleccio
 
 Route::get('/acercade', [AcercadeController::class, 'index']);
 
-Route::get('/historial', 'EleccionController@historial');
+//Route::get('/historial', 'EleccionController@historial');
 
 Route::get('/historial', [EleccionController::class, 'historial'])->name('buscar');
 Route::get('/resultados', [EleccionController::class, 'buscar'])->name('resultados');
