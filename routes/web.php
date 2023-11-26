@@ -94,24 +94,14 @@ Route::get('/generar-backup', [EleccionController::class, 'generarBackup']);
 Route::get('/mesas/{id}/actapdf', 'MesaController@pdf')->name('mesas.actapdf');
 
 Route::get('/generar-pdf/{id}','EleccionController@generarPDF')->name('elecciones.pdf');
+Route::get('/generar-pdf1/{id}','EleccionController@generarPDF1')->name('elecciones1.pdf');
 
 Route::get('/acercade', [AcercadeController::class, 'index']);
 
+Route::get('/historial', 'EleccionController@historial');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get('/historial', [EleccionController::class, 'historial'])->name('buscar');
+Route::get('/resultados', [EleccionController::class, 'buscar'])->name('resultados');
 
 
 

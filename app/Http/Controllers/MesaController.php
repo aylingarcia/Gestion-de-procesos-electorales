@@ -25,7 +25,7 @@ class MesaController extends Controller
     public function index()
     {
         //
-        $mesascreadas = Mesa::orderBy('id_de_eleccion', 'asc')->paginate(100);
+        $mesascreadas = Mesa::where('estadoR', 1)->orderBy('id_de_eleccion', 'asc')->paginate(100);
         return view('mesas.index', compact('mesascreadas'));
     }
 
@@ -96,6 +96,7 @@ class MesaController extends Controller
         for ($i = 1; $i <= $numeroMesas; $i++) {
             // Encuentra el próximo número de mesa disponible
             $mesaActual = $this->obtenerProximoNumeroMesa($numerosDeMesaExistente);
+
             $datosMesas = $request->except('_token', 'numeroMesas');
             $datosMesas['numeromesa'] = $mesaActual;
             $datosMesas['id_de_eleccion'] = $idDeEleccion;

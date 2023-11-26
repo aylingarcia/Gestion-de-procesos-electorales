@@ -15,7 +15,8 @@
         }
 
         .contenedor {
-            max-width: 780px;
+            max-width: 1000px;
+            margin: 70px auto 80px; /* margen superior, centrado horizontalmente, margen inferior */
             background-color: #fff;
             padding: 50px;
             border-radius: 5px;
@@ -56,15 +57,15 @@
 
         .table-column {
             flex: 1; /* Take up 50% of the container */
+            padding: 10px;
         }
 
         /*tabla*/
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 10px auto;
+            margin: 20px auto;
             font-family: Arial, sans-serif;
-            font-size: 12px;
         }
         /*Bordes*/
         table,th,td {
@@ -73,7 +74,7 @@
         }
         /*Espaciado*/
         th,td {
-            padding: 2px;
+            padding: 8px;
             text-align: left;
         }
         /*Encabezado*/
@@ -100,21 +101,23 @@
         }
 
         input[type="submit"] {
-                background-color: #04243C;
-                color: #fff;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 3px;
-                cursor: pointer;
-                margin-bottom: 10px;
-                z-index: 999;
-                position: fixed;
-                top: 350px;
-                right: 100px;
-                border: none;
-                border-radius: 3px;
-                cursor: pointer;
+            background-color: #04243C;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
         }
+
+        .cancelar {
+            background-color: #A70606;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
         
 
 
@@ -126,35 +129,29 @@
         <h2>Reporte de la elección</h2>
         <br><br>
 
-        <h4 >Datos la elección</h4>
+        <h4 >Datos de la elección</h4>
 
-        <h4 class="subs">Título de la elección: <label class="outputs">{{$registro->nombre}}</label></h4 class="subs">
+        <h4>Título de la elección: <label class="outputs">{{$registro->nombre}}</label></h4>
         
-        <h4 class="subs">Fecha de la elección: <label class="outputs">{{ date('d/m/Y', strtotime($registro->fecha)) }}</label></h4 class="subs">
+        <h4 >Fecha de la elección: <label class="outputs">{{ date('d/m/Y', strtotime($registro->fecha)) }}</label></h4>
         
-        <h4 class="subs">Motivo de la elección: <label class="outputs">{{$registro->motivo}}</label></h4 class="subs">
+        <h4 >Motivo de la elección: <label class="outputs">{{$registro->motivo}}</label></h4>
         
-        <h4 class="subs">Cargo de autoridad: <label class="outputs">{{$registro->cargodeautoridad}}</label></h4 class="subs">
+        <h4 >Cargo de autoridad: <label class="outputs">{{$registro->cargodeautoridad}}</label></h4>
         
-        <h4 class="subs">Gestión: <label class="outputs">{{$registro->gestioninicio}} - {{$registro->gestionfin}}</label></h4 class="subs">
+        <h4>Gestión: <label class="outputs">{{$registro->gestioninicio}} - {{$registro->gestionfin}}</label></h4>
         
-        <h4 class="subs">Tipo de elección: <label class="outputs">{{ $registro->tipodeeleccion }}</label></h4 class="subs">
+        <h4>Tipo de elección: <label class="outputs">{{ $registro->tipodeeleccion }}</label></h4>
         
-        <h4 class="subs">Descripción: <label class="outputs">{{$registro->descripcion}}</label></h4>
+        <h4>Descripción: <label class="outputs">{{$registro->descripcion}}</label></h4>
 
         <br>
-        <h4>Datos de votantes y mesas</h4>
-
-        <h4 class="subs">Tipo de votantes: <label class="outputs">{{ $registro->tipodevotantes }}</label></h4 class="subs">
-        <h4 class="subs">Número de votantes habilitados: <label class="outputs">{{$nroVotantes}}</label></h4 class="subs">
-        <h4 class="subs">Número de mesas habilitadas: <label class="outputs">{{ $mesas }}</label></h4 class="subs">
-
 
         <h4 style="font-weight: bold">Resultados</h4>
 
-        <h4 class="subs">Número de votos: <label class="outputs">{{$suma}}</label></h4 class="subs">
-        {{--<h4 class="subs">Número de No votantes: <label class="outputs">{{$nroVotantes-$suma}}</label></h4 class="subs">--}}
-        <h4 class="subs">Frente Ganador: <label class="outputs">{{$frenteGanador}}</label></h4 class="subs">
+        <h4>Número de votos: <label class="outputs">{{$suma}}</label></h4>
+        {{--<h4>Número de No votantes: <label class="outputs">{{$nroVotantes-$suma}}</label></h4>--}}
+        <h4>Frente Ganador: <label class="outputs">{{$frenteGanador}}</label></h4>
 
         <div class="container">
             <div class="table-column">
@@ -216,12 +213,15 @@
                 
             </div>
         </div>
-
-        <h4 id="graf">Gráfico de frentes</h4>
         <br>
+        <h4 id="graf">Gráfico General</h4>
+        <br>
+
         
         <canvas id="myChart"></canvas>
 
+        <br>
+        <br>
         <h4>Comité Electoral</h4>
     
         <div class="container">
@@ -256,8 +256,117 @@
             </div>
         </div>
 
-        <h4>Lista de votantes</h4>
         <br>
+        <h4>Frentes</h4>
+
+        <div class="container">
+            <div class="table-column">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nro</th>
+                            <th>Nombre de Frente</th>
+                            <th>1er Candidato</th>
+                            <th>2do Candidato</th>
+                            <th>3er Candidato</th>
+                            <th>4to Candidato </th>
+                            <th>Cargo de Postulación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($frentes as $frente)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $frente->nombrefrente }}</td>
+                                <td>{{ $frente->nombrecandidato1 }}</td>
+                                <td>{{ $frente->nombrecandidato2 }}</td>
+                                <td>{{ $frente->nombrecandidato3 }}</td>
+                                <td>{{ $frente->nombrecandidato4 }}</td>
+                                <td>{{ $frente->cargopostulacion }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+
+        <br>
+        <h4>Mesas</h4>
+
+        <h4 >Número de mesas habilitadas: <label class="outputs">{{ $mesas }}</label></h4>
+
+        <div class="container">
+            <div class="table-column">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nro</th>
+                            <th>Mesa</th>
+                            <th>Tipo</th>
+                            <th>Apellidos</th>
+                            <th>Facultad</th>
+                            <th>Carrera</th>
+                            <th>Ubicación</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($mesasTotal as $mesas)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $mesas->numeromesa}}</td>
+                                <td>{{ $mesas->votantemesa }}</td>
+                                <td>{{ $mesas->votantesenmesa}}</td>
+                                <td>{{ $mesas->facultadmesa }}</td>
+                                <td>{{ $mesas->carreramesa }}</td>
+                                <td>{{ $mesas->ubicacionmesa }}</td>
+                                <td>{{ $mesas->numerodevotantes }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+
+        <br>
+        <h4>Jurados por cada mesa</h4>
+
+        <div class="container">
+            <div class="table-column">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nro</th>
+                            <th>Mesa</th>
+                            <th>Apellidos</th>
+                            <th>Nombres</th>
+                            <th>Código Sis</th>
+                            <th>CI</th>
+                            <th>Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($jurados as $jurado)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $jurado->idmesa }}</td>
+                                <td>{{ $jurado->apellidoPaterno }} {{ $jurado->apellidoMaterno }}</td>
+                                <td>{{ $jurado->nombres }}</td>
+                                <td>{{ $jurado->codSis }}</td>
+                                <td>{{ $jurado->CI }}</td>
+                                <td>{{ $jurado->tipojurado }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+
+        <br>
+        <h4>Votantes</h4>
 
         <h4 >Número de votantes habilitados: <label class="outputs">{{$nroVotantes}}</label></h4>
 
@@ -293,65 +402,35 @@
                         @endforeach
                     </tbody>
                 </table>
-                
             </div>
         </div>
-
-
-        <h4>Lista de frentes</h4>
-
-        <div class="container">
-            <div class="table-column">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nro</th>
-                            <th>Nombre de Frente</th>
-                            <th>1er Candidato</th>
-                            <th>2do Candidato</th>
-                            <th>3er Candidato</th>
-                            <th>4to Candidato </th>
-                            <th>Cargo de Postulación</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($frentes as $frente)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $frente->nombrefrente }}</td>
-                                <td>{{ $frente->nombrecandidato1 }}</td>
-                                <td>{{ $frente->nombrecandidato2 }}</td>
-                                <td>{{ $frente->nombrecandidato3 }}</td>
-                                <td>{{ $frente->nombrecandidato4 }}</td>
-                                <td>{{ $frente->cargopostulacion }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                
-            </div>
+        <div class="botones-imprimir">
+            <input type="submit" value="{{ 'Imprimir' }}" onclick="imprimirBoleta()" id="botonImprimir">
+            <input type="button" value="Volver al historial" onclick="confirmarCancelacion()" class= "cancelar">
         </div>
-
-        
-
-        
-
     </div>  
 
-    {{--<div class="botonImprimir">
-        <input type="submit" value="{{ 'Imprimir' }}" onclick="imprimirBoleta()" id="botonImprimir">
-    </div>--}}
     
+
     <script>
         function imprimirBoleta() {
-            document.getElementById('botonImprimir').style.display = 'none';
+            // Oculta los botones al imprimir
+
+            document.querySelector('.botones-imprimir').style.display = 'none';
             window.print();
 
+            // Muestra los botones después de un segundo
             setTimeout(function() {
-                document.getElementById('botonImprimir').style.display = 'block';
+                document.querySelector('.botones-imprimir').style.display = 'block';
             }, 1000);
         }
+
+        function confirmarCancelacion() {
+            // Redirige a la página de historial
+            window.location.href = "/historial";
+        }
     </script>
+
 
     
 

@@ -18,7 +18,7 @@ class VotanteController extends Controller
     public function index()
     {
         //
-        $votantescreados = Votante::orderBy('ideleccion', 'asc')->paginate(500);
+        $votantescreados = Votante::where('estado', 1)->orderBy('ideleccion', 'asc')->paginate(500);
         return view('votante.index', compact('votantescreados'));
     }
 
@@ -43,7 +43,7 @@ class VotanteController extends Controller
      */
     public function store(Request $request)
 {
-    //
+            
     $request->validate([
         'ideleccion' => 'required',
         'codSis' => 'required|unique:votantes,codSis,NULL,id,ideleccion,'.$request->ideleccion,

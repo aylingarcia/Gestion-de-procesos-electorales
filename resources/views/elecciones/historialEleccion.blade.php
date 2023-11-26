@@ -77,15 +77,7 @@
             border-radius: 3px;
             font-size: 16px;
         }
-        input[type="date"],
-        input[type="text"]{
-            width: 300px;
-            padding: 10px;
-            margin-left: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            font-size: 16px;
-        }
+
         .generar-reporte {
             width: 200px; 
             margin: 20px auto;
@@ -174,6 +166,50 @@
             cursor: pointer;
         }
 
+        .buscar {
+            position: absolute;
+            right: 100px;
+        }
+
+        button[type="submit"] {
+            background-color: #04243C;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="text"] {
+            border: #000000;
+            border-radius: 3px;
+            border: 2px solid #003770;
+
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .borrar {
+            background-color: #A70606;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .reporte {
+            background-color: #04243C;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        
+
+
 
         @media only screen and (max-width: 706px) {
             th,
@@ -212,18 +248,30 @@
     </style>
 </head>
 <body>
+    <script>
+        function confirmarCancelacion() {
+            // Redirige a la página de historial
+            window.location.href = "/historial";
+        }
+    </script>
     <div class="contenedor">
+        <br><br><br>
+        <center>
+            <h1 style="font-weight:bold">Historial de elecciones</h1>
+            <br>
+            <form class= "buscar" action="{{ route('resultados') }}" method="GET">
+                <input type="text" name="query" id="query" required value="{{ $query }}">
+                <button type="submit">Buscar</button>
+                <input type="button" value="Borrar" onclick="confirmarCancelacion()" class= "borrar"></button>
+            </form>
+        </center>
+
         
-        @if(isset($elecciones) && count($elecciones) > 0)
+        
+        @if(isset($resultados) && $resultados->isNotEmpty())
             <div class="container">
                 <div class="table-column">
                     <br><br>
-                    <center>
-                        <h1 style="font-weight:bold">Historial de elecciones</h1>
-                    </center>
-                    <br><br><br>
-                    
-                    
                     <table>
                         <thead>
                             <tr>
@@ -233,9 +281,58 @@
                                 <th>Fecha</th>
                                 <th>Tipo de elección</th>
                                 <th>Tipo de votantes</th>
-                                <th>Nro de votantes</th>
-                                <th>Frente ganador</th>
-                                <th>Acción</th>
+                                <th>Ver</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($resultados as $resultado)
+                                @if ($resultado instanceof \App\Models\Eleccion)
+                                    <tr class="fila-resaltada">
+                                        <td>{{ $resultado->id }}</td>
+                                        <td>{{ $resultado->nombre }}</td>
+                                        <td>{{ $resultado->motivo }}</td>
+                                        <td>{{ $resultado->fecha }}</td>
+                                        <td>{{ $resultado->tipodeeleccion }}</td>
+                                        <td>{{ $resultado->tipodevotantes }}</td>
+                                        <td>
+                                            <button class="buttons-dentro-tabla" title="Imprimir Reporte">
+                                                <a href="{{ route('elecciones.pdf', ['id' => $resultado->id]) }}" class="reporte">
+                                                    Reporte
+                                                </a>
+                                            </button>    
+                                            <button class="buttons-dentro-tabla" title="Imprimir Reporte">
+                                                <a  class="reporte">
+                                                    Convocatoria</a>
+                                            </button> 
+                                                                                                                    
+                                        </td>
+                                    </tr>
+                                @endif
+                            @empty
+                                <div>
+                                    <h3 style="color: #185a9f; text-align: center; padding: 10px;">Resultados Actuales: 0</h3>
+                                </div>
+                            @endforelse
+                        </tbody>
+                    </table> 
+                    <br><br>
+                </div>
+            </div>
+
+        @elseif(isset($elecciones) && count($elecciones) > 0 )
+            <div class="container">
+                <div class="table-column">
+                    <br><br>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nro</th>
+                                <th>Nombre</th>
+                                <th>Motivo</th>
+                                <th>Fecha</th>
+                                <th>Tipo de elección</th>
+                                <th>Tipo de votantes</th>
+                                <th>Ver</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -248,14 +345,17 @@
                                     <td>{{ $eleccion->fecha }}</td>
                                     <td>{{ $eleccion->tipodeeleccion }}</td>
                                     <td>{{ $eleccion->tipodevotantes }}</td>
-                                    <td>{{ $datosElecciones[$index]['nroVotantes'] }}</td>
-                                    <td>{{ $datosElecciones[$index]['frenteGanador'] }}</td>
+                                    {{--<td>{{ $datosElecciones[$index]['nroVotantes'] }}</td>
+                                    <td>{{ $datosElecciones[$index]['frenteGanador'] }}</td>--}}
                                     <td>
                                         <button class="buttons-dentro-tabla" title="Imprimir Reporte">
-                                            <a href="{{ asset('storage/pdfs/eleccion_' . $eleccion->id . '.pdf') }}" target="_blank">
-                                                <img src="/images/imprimir.png" alt="Imprimir" class="formato-imagen" />
-                                            </a>
-                                        </button>                                                                            
+                                            <a href="{{ route('elecciones.pdf', ['id' => $eleccion->id]) }}" class="reporte">
+                                                Reporte</a>
+                                        </button>     
+                                        <button class="buttons-dentro-tabla" title="Imprimir Reporte">
+                                            <a class="reporte">
+                                                Convocatoria</a>
+                                        </button>                                                                           
                                     </td>
                                 </tr>
                             @endforeach
@@ -269,4 +369,5 @@
         @endif
     </div>  
 </body>
+
 </html>
