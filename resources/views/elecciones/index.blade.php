@@ -645,10 +645,7 @@ td:first-child {
                                             }
                                         }
                                     </script>
-
-
-                                
-
+                       
                                     <div class="footer">
 
                                         <div class="footer-izq">
