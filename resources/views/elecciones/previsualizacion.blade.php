@@ -407,7 +407,7 @@
             <li><a href="{{ url('/') }}">Inicio</a></li>
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
-            <li><a href="#">Documentación</a></li>
+            <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
             <li><a href="#">Ingreso</a></li>
             <img src="/images/img.png" class="company-logo">
         </ul>
@@ -433,10 +433,13 @@
         <div class="column2">
             
         <a href="{{ route('elecciones.registrarResultados', ['id' => $eleccion->id]) }}" class="boton-descarga-pdf">
-        Registrar resultados</a>
+          Registrar resultados</a>
 
         <a href="{{ route('elecciones.editarResultados', ['id' => $eleccion->id]) }}" class="boton-descarga-pdf">
-    Editar resultados</a>
+          Editar resultados</a>
+
+        <a href="{{ route('elecciones1.pdf', ['id' => $eleccion->id]) }}" class="boton-descarga-pdf">
+        Generar reporte</a>
         </div>
     </div>
 
@@ -472,23 +475,18 @@
 
                 <div class="column">
                 <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px; font-weight: 400; word-wrap: break-word;">Convocatoria (PDF):</h2>
-                <div class="alineadosssss">
-                @if (isset($eleccion) && $eleccion->convocatoria)
-                 {{-- <p>
-                     {{ $eleccion->convocatoria }}
-                   <a href="{{ asset('storage/' . $eleccion->convocatoria) }}" download="Convocatoria.pdf" class="boton-descarga-pdf"></a>
-                
-                 </p> --}}
-                    <a href="{{ asset('storage/' . $eleccion->convocatoria) }}" download="Convocatoria.pdf"> 
-                        <img src="{{ asset('/images/descargar.png') }}" alt="Botón Descargar PDF" class="boton_descargar" title="Descargar Convocatoria"  style="cursor: pointer;">
-                    </a>
-                    
-                </div>
-                      <embed src="{{ asset('storage/' . $eleccion->convocatoria) }}" type="">
-                @endif
 
-            
-                    <br><br>        
+                 @if (isset($eleccion) && $eleccion->convocatoria)
+                  <div style="display: flex; align-items: center;">
+                  <p style="margin-bottom: 0; margin-right: 10px;">Nombre del archivo: {{ $eleccion->convocatoria }}</p>
+                    <a href="{{ asset('storage/' . $eleccion->convocatoria) }}" download="Convocatoria.pdf"> 
+                  <img src="{{ asset('/images/descargar.png') }}" alt="Botón Descargar PDF" class="boton_descargar" title="Descargar Convocatoria" style="cursor: pointer;">
+                   </a>
+                  </div>
+                 @endif
+                 <embed src="{{ asset('storage/' . $eleccion->convocatoria) }}" type="">
+                 <br><br>
+                        
                     <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;" >Tipo de Eleccion:</h2>
                     <label for="nom"> {{ $eleccion->tipodeeleccion }}</label>
                     <br><br>        
@@ -510,9 +508,9 @@
                 Copyright © 2023 Tribunal Electoral Universitario Todos los derechos Reservados
             </div>
             <div class="footer-der">
-                <a href="{{ url('/') }}">Acerca de</a>
-                <span>&nbsp;|&nbsp;</span>
-                <a href="{{ url('/') }}">Contactos</a>
+            <a href="{{ url('/acercade') }}">Acerca de | Contactos</a>
+            <!--<span>&nbsp;|&nbsp;</span> 
+            <a href="#">Contactos</a>-->
             </div>
         </div>
     </div>

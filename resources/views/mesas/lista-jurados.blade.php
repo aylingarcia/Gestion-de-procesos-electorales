@@ -19,7 +19,7 @@
             <div><a href="{{ url('/') }}">TRIBUNAL ELECTORAL</a></div>
             
             <div><a href="{{ url('/') }}">UNIVERSITARIO</a></div>
-        </div>s
+        </div>
         <ul>
             <li></li><li></li>
             <li></li><li></li>
@@ -50,7 +50,9 @@
             @if (isset($elecciones))
                 {{ method_field('PATCH') }}
             @endif
+            @if(isset($eleccion))
             <h2 class="form-title1">{{ $eleccion->nombre }}</h2>
+            @endif
             <br><br>
             <h2 class="form-title">Lista de Jurados</h2>
 
@@ -919,7 +921,7 @@ td:first-child {
                         <th>Nombre</th>
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
-                        <th>Tipo Jurado</th>
+                        <th>Cargo Jurado</th>
                         <th>Cambiar Jurado</th>
                     </tr>
                 </thead>
@@ -967,9 +969,9 @@ td:first-child {
 
             </div>
             <div class="footer-der">
-                <a href="{{ url('/') }}">Acerca de</a>
-                <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
-                <a href="{{ url('/') }}">Contactos</a>
+            <a href="{{ url('/acercade') }}">Acerca de | Contactos</a>
+            <!--<span>&nbsp;|&nbsp;</span> 
+            <a href="#">Contactos</a>-->
 
             </div>
 

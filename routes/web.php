@@ -9,6 +9,10 @@ use App\Http\Controllers\ComiteController;
 use App\Http\Controllers\FrenteController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\JuradoController;
+use App\Http\Controllers\DocumentacionController;
+use App\Http\Controllers\AcercadeController;
+use App\Models\Mesa;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +31,7 @@ use App\Http\Controllers\JuradoController;
 Auth::routes();
 
 Route::resource('/', 'WelcomeController');
+
 
 //Route::get('/elecciones', 'EleccionController@index');
 Route::get('/elecciones/{id}/archivar', 'EleccionController@archivar');
@@ -59,6 +64,8 @@ Route::get('/mesas/{id}/generate-jurados', 'MesaController@generateJurados')->na
 
 Route::get('/mesas/{id}/lista-jurados', 'MesaController@listaJurados');
 
+Route::get('/mesas/{id}/acta', 'MesaController@visualizaracta');
+
 Route::get('/jurados/{id}/edit', 'JuradoController@edit')->name('jurados.edit');
 
 Route::get('/elecciones/{id}/boleta', 'EleccionController@showBoleta')->name('elecciones.boleta');
@@ -69,6 +76,8 @@ Route::post('/votantes/importCsv', 'VotanteController@importCsv')->name('votante
 
 Route::get('/elecciones/{id}/previsualizacion', 'EleccionController@mostrarPrevisualizacion')->name('elecciones.previsualizacion');
 
+
+
 Route::get('/elecciones/{id}/registrar-resultados', 'EleccionController@registroResultados')
     ->name('elecciones.registrarResultados');
 
@@ -78,6 +87,15 @@ Route::get('/elecciones/{id}/editar-resultados', [EleccionController::class, 'ed
 Route::patch('/elecciones/{id}/guardar-edicion-resultados', [EleccionController::class, 'guardarEdicionResultados'])->name('elecciones.guardarEdicionResultados');
 
 
+
+Route::get('/mesas/{id}/registroResultados', 'MesaController@registroResultados')->name('mesas.registroResultados');
+
+Route::patch('/mesas/{id}/guardarResultados', 'MesaController@guardarResultados')->name('mesas.guardarResultados');
+
+Route::get('/mesas/{id}/editar-resultados', [MesaController::class, 'editarRegistroResultados'])->name('mesas.editarResultados');
+Route::patch('/mesas/{id}/guardar-edicion-resultados', [MesaController::class, 'guardarEdicionResultados'])->name('mesas.guardarEdicionResultados');
+Route::get('/mesas/{id}/previsualizacion', 'MesaController@mostrarPrevisualizacion')->name('mesas.previsualizacion');
+
 //Route::get('/registroResultados', function () {
   //return view('elecciones.registroResultados');
 //});
@@ -85,9 +103,33 @@ Route::patch('/elecciones/{id}/guardar-edicion-resultados', [EleccionController:
 Route::get('/reporte', 'ReporteController@index');
 Route::get('/reporteGrafico/{id}', 'ReporteController@reporteGrafico');
 
+Route::get('/generar-backup', [EleccionController::class, 'generarBackup']);
+
+Route::get('/mesas/{id}/actapdf', 'MesaController@pdf')->name('mesas.actapdf');
+
+Route::get('/generar-pdf/{id}','EleccionController@generarPDF')->name('elecciones.pdf');
+Route::get('/generar-pdf1/{id}','EleccionController@generarPDF1')->name('elecciones1.pdf');
+
+Route::get('/acercade', [AcercadeController::class, 'index']);
+
+Route::get('/historial', [EleccionController::class, 'historial'])->name('buscar');
+Route::get('/resultados', [EleccionController::class, 'buscar'])->name('resultados');
+
+
+Route::get('/cargar-backup', [EleccionController::class, 'mostrarFormCargarBackup'])->name('cargar.backup.form');
+
+Route::post('/cargar-backup', [EleccionController::class, 'cargarBackup'])->name('cargar.backup');
+
+Route::get('/registro', function () {
+  return view('auth.registroform');
+});
+Route::post('/registro', [RegisterController::class, 'registroform']);
 
 
 
+Route::get('/iniciarsesion', function () {
+  return view('auth.iniciarSe');
+});
 
 
 

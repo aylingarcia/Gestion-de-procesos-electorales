@@ -413,7 +413,7 @@
 
                 
         </div>
-        <input type="submit" value="Registrar"
+        <input type="submit" value="{{ isset($votante) ? 'Actualizar' : 'Registrar' }}"
                 onclick="confirmacion()">
           
         <input type="reset" value="Cancelar" onclick="cancelacion()">
@@ -444,9 +444,9 @@
 
         </div>
         <div class="footer-der">
-            <a href="{{ url('/') }}">Acerca de</a>
-            <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
-            <a href="{{ url('/') }}">Contactos</a>
+            <a href="{{ url('/acercade') }}">Acerca de | Contactos</a>
+            <!--<span>&nbsp;|&nbsp;</span> 
+            <a href="#">Contactos</a>-->
 
         </div>
 
