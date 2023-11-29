@@ -9,25 +9,23 @@
     <script src="{{ asset('js/Elecciones_Creadas.js') }}"></script>
 
     
-
-
     <script>
         function confirmarCancelacion() {
             var confirmacion = confirm("¿Seguro que deseas cancelar? Los cambios no se guardarán.");
             if (confirmacion) {
-
                 window.location.href = "/elecciones";
             }
         }
 
         function confirmarConfirmacion() {
-            var confirmacion = confirm("Estas seguro de registrar esta eleccion?");
+            var confirmacion = confirm("¿Estás seguro de registrar esta elección?");
             if (confirmacion) {
-
                 window.location.href = "/elecciones";
             }
         }
     </script>
+
+    
 
   
     <style>
@@ -376,7 +374,7 @@ nav ul li a:hover {
             <li></li><li></li>
             <li></li><li></li>
             <li></li><li></li>
-
+            @if(auth()->check())
         <li><a href="{{ url('/') }}">Inicio</a></li>
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
@@ -385,6 +383,7 @@ nav ul li a:hover {
             <li><a href="#">Contactos</a></li> --}}
             <li><a href="#">Ingreso</a></li>
             <img src="/images/img.png"  class="company-logo">
+            @endif
         </ul>
         <div class="menu-icon"></div>
     </nav>
@@ -413,60 +412,62 @@ nav ul li a:hover {
 
 
                     <div class="form-container3">
-                        <form method="POST" action="{{ route('register') }}">
-                            @csrf
+                    <form method="POST" action="{{ route('login') }}">
+    @csrf
 
-                            <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Cuenta de usuario o email:') }}</label>
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+    <div class="form-group row">
+    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Correo Electrónico:') }}</label>
+    <div class="col-md-6">
+    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus maxlength="255">
 
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <br>
-                            
-                           
-                            <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña:') }}</label>
+        @error('email')
+            <span class="invalid-feedback" role="alert" style="color: red; font-size: smaller;">
+                {{ $message }}
+            </span>
+        @enderror
+    </div>
+</div>
 
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+    <div class="form-group row">
+        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña:') }}</label>
+        <div class="col-md-6">
+        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" maxlength="50">
 
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            </div>
-                          
-                            <div style="text-align: center;">
+            @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+    </div>
+    
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Iniciar Sesion') }}
-                                    </button>
+   
+        </div>
+    </div>
 
-                                    <button type="submit2" class="btn btn-primary">
-                                        {{ __('Cancelar') }}
-                                        <br>
-                                    </button>
+<div style="text-align: center;">
+    <div class="form-group row mb-0">
+        <div class="col-md-8 offset-md-4">
+            <button type="submit" class="btn btn-primary">
+                {{ __('Iniciar Sesión') }}
+            </button>
+            <button type="button" class="btn btn-cancelar" onclick="window.location.href='/'">
+    {{ __('Cancelar') }}
+</button>
+
                                     <br>
+                                    <br>
+
+           
                                     <div>
                                 ¿No tienes una cuenta? <span class="register-link" onclick="window.location.href='/registro'"><br>Registrarse</span>
                           </div>
-                          <br><br>
-                       </div>
-                                </div>
-                            </div>
-                        </form>
+
+        </div>
+    </div>
+    </div>
+</form>
                     </div>
                 </div>
             </div>
@@ -484,14 +485,24 @@ nav ul li a:hover {
     
         
 
- 
-
         <script>
-    document.querySelector('.register-link').addEventListener('click', function(event) {
-        event.preventDefault(); // Evitar que el enlace realice la acción predeterminada
-        window.location.href = '/registro';
+    document.addEventListener('DOMContentLoaded', () => {
+        const cancelBtn = document.querySelector('.btn-cancelar');
+        const form = document.querySelector('form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        cancelBtn.addEventListener('click', () => {
+            form.reset(); // Resetea los valores del formulario
+            emailInput.value = ''; // Establece el valor del campo de correo electrónico en blanco
+            passwordInput.value = ''; // Establece el valor del campo de contraseña en blanco
+        });
     });
 </script>
+
+
+       
+
 <br><br>
         <br><br>
 

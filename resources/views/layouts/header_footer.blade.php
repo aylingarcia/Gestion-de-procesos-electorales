@@ -229,6 +229,12 @@
         height: auto;   /* Permite que la altura se ajuste automáticamente para mantener la proporción */
         border-radius: 8%;
     }
+    .ingresar a{
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+    }
 
         /*.show-on-mobile {
             display: none;
@@ -294,11 +300,28 @@
             <li></li><li></li>
             <li></li><li></li>
 
+            
+    @if(auth()->check())
             <li><a href="{{ url('/') }}">Inicio</a></li>
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
             <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
-            <li><a href="{{ url('/iniciarsesion') }}">Ingreso</a></li>
+            <li>
+        {{-- Si el usuario ha iniciado sesión, mostrar el enlace de Cerrar Sesión --}}
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Cerrar Sesión
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
+        {{-- Si el usuario no ha iniciado sesión, mostrar el enlace de Ingreso --}}
+        <div class="ingresar">
+            <a href="{{ url('/iniciarsesion') }}">Ingreso</a>
+        </div>
+        
+    @endif
+</li>
            
 
 <a href="{{ url('/iniciarsesion') }}">
@@ -333,4 +356,3 @@
     </div>
     
 </body>
-
