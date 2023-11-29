@@ -224,6 +224,17 @@
             /*cambios
             font-size: 20px;*/
         }
+        .logoini {
+        max-width: 90%;  /* Ajusta el porcentaje según sea necesario */
+        height: auto;   /* Permite que la altura se ajuste automáticamente para mantener la proporción */
+        border-radius: 8%;
+    }
+    .ingresar a{
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+    }
 
         /*.show-on-mobile {
             display: none;
@@ -289,12 +300,33 @@
             <li></li><li></li>
             <li></li><li></li>
 
+            
+    @if(auth()->check())
             <li><a href="{{ url('/') }}">Inicio</a></li>
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
             <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
-            <li><a href="{{ url('/registro') }}">Ingreso</a></li>
-            <img src="/images/img.png"  class="company-logo">
+            <li>
+        {{-- Si el usuario ha iniciado sesión, mostrar el enlace de Cerrar Sesión --}}
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Cerrar Sesión
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
+        {{-- Si el usuario no ha iniciado sesión, mostrar el enlace de Ingreso --}}
+        <div class="ingresar">
+            <a href="{{ url('/iniciarsesion') }}">Ingreso</a>
+        </div>
+        
+    @endif
+</li>
+           
+
+<a href="{{ url('/iniciarsesion') }}">
+    <img src="/images/img.png" class="logoini" alt="Logo de Iniciar Sesión">
+</a>
             <!--<li class="show-on-mobile"><a href="#">Acerca de</a></li>
             <li class="show-on-mobile"><a href="#">Contactos</a></li>-->
         </ul>
@@ -324,4 +356,3 @@
     </div>
     
 </body>
-
