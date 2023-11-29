@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear/Editar una elección</title>
+    <title>Crear editar resultados </title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 </head>
@@ -148,7 +148,7 @@
     /* Estilos del contenido */
     body {
         font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
+        background-color: white;
         margin: 0;
         padding: 0;
     }
@@ -168,13 +168,6 @@
         padding: 8px;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-
-     
-
-
-
-
-
 
     }
 
@@ -235,46 +228,75 @@
     }
 
     .footer {
-        background-color: #003770;
-        color: white;
-        padding: 15px;
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        font-size: 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+    background-color: #003770;
+    color: white;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    .footer-izq {
-        flex: 1;
-        text-align: left;
-        margin-left: 70px;
-    }
+.footer-izq {
+    flex: 1;
 
-    .footer-medio {
-        text-align: center;
-        flex: 1;
-    }
+    text-align: left;
+    margin-left: 70px;
+    /* Ajusta el valor de margen según cuánto espacio desees agregar */
 
-    .footer-der {
-        flex: 1;
-        text-align: center;
-    }
 
-    .footer-der a {
-        color: white;
-        text-decoration: none;
-        transition: color 0.3s;
-        font-size: 18px;
-    }
+}
 
-    .footer-der a:hover {
-        color: red;
-        font-size: 20px;
-    }
+.footer-medio {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    /* Evita el retorno de línea */
+    overflow: hidden;
+    /* Oculta el desbordamiento si el contenido es demasiado largo */
+    text-overflow: ellipsis;
+    /* Agrega puntos suspensivos (...) si el contenido es demasiado largo */
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    /* Evita el retorno de línea */
+    overflow: hidden;
+    /* Oculta el desbordamiento si el contenido es demasiado largo */
+    text-overflow: ellipsis;
+    /* Agrega puntos suspensivos (...) si el contenido es demasiado largo */
+    font-size: 18px;
+
+}
+
+.footer-der {
+    flex: 1;
+    text-align: center;
+}
+
+.footer-der a {
+    color: white;
+    /* Establece el color del texto en blanco por defecto */
+    text-decoration: none;
+    /* Elimina el subrayado predeterminado de los enlaces */
+    transition: color 0.3s;
+    /* Agrega una transición suave para el cambio de color */
+    font-size: 18px;
+    /* Ajusta el tamaño de fuente según tus preferencias */
+
+}
+
+.footer-der a:hover {
+    color: red;
+    /* Cambia el color del texto a rojo al pasar el ratón sobre el enlace */
+    font-size: 20px;
+    /* Tamaño de fuente al pasar el ratón sobre el enlace, puedes ajustarlo según tus preferencias */
+
+}
 
     .boton1,
     .boton {
@@ -328,6 +350,44 @@
         transform-origin: center;
         overflow: hidden;
     }
+
+    .boton-descarga-pdf {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #04243C;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .boton-descarga-pdf:hover {
+        background-color: #0056b3;
+    }
+
+    .no-votantes {
+    font-size: 20px; /* Ajusta el tamaño del texto según sea necesario */
+    color: #888; /* Cambia el color del texto si lo deseas */
+    }
+    .alineadosssss {
+                    text-align: center; 
+                } 
+
+                .boton_descargar {
+        display: inline-block;
+        width: 50px; /* Ajusta el ancho según tus necesidades */
+        height: 50px; /* Ajusta la altura según tus necesidades */
+        background-color: #ffffff; /* Cambia el color de fondo según tus preferencias */
+        color: #ffffff; /* Cambia el color del texto según tus preferencias */
+        text-decoration: none;
+        border-radius: 3px; /* Ajusta el radio del borde para que tenga esquinas redondeadas */
+        font-size: 12px; /* Ajusta el tamaño del texto según tus preferencias */
+        cursor: pointer;
+    }
+
+    .boton_descargar:hover {
+        background-color: #a8a8aa;
+    }
 </style>
 
 <body>
@@ -347,7 +407,7 @@
             <li><a href="{{ url('/') }}">Inicio</a></li>
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
-            <li><a href="#">Documentación</a></li>
+            <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
             <li><a href="#">Ingreso</a></li>
             <img src="/images/img.png" class="company-logo">
         </ul>
@@ -360,14 +420,26 @@
 
     <div class="acomodar">
         <div class="column1">
-            <h2 class="form-title1"> Eleccion Rector 2023</h2>
-            <h2 class="form-title"> Nº de Votantes:</h2>
+            <h2 class="form-title1"> {{ $eleccion->nombre }}</h2>
+            @if ($numVotantes > 0)
+    <h2 class="form-title"> Nº de Votantes: {{ $numVotantes }}</h2>
+@else
+    <h2 class="form-title">
+        Nº de Votantes:
+        <span class="no-votantes">No hay votantes registrados en esta elección</span>
+    </h2>
+@endif
         </div>
         <div class="column2">
-            <input type="submit" class="boton1" value="{{ isset($elecciones) ? 'Actualizar' : 'Registrar resultados' }}"
-                onclick="confirmarConfirmacion()">
-            <input type="submit" class="boton" value="{{ isset($elecciones) ? 'Actualizar' : 'Editar resultados' }}"
-                onclick="confirmarConfirmacion()">
+            
+        <a href="{{ route('elecciones.registrarResultados', ['id' => $eleccion->id]) }}" class="boton-descarga-pdf">
+          Registrar resultados</a>
+
+        <a href="{{ route('elecciones.editarResultados', ['id' => $eleccion->id]) }}" class="boton-descarga-pdf">
+          Editar resultados</a>
+
+        <a href="{{ route('elecciones1.pdf', ['id' => $eleccion->id]) }}" class="boton-descarga-pdf">
+        Generar reporte</a>
         </div>
     </div>
 
@@ -383,37 +455,47 @@
                 <div class="column">
                 <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;">Motivo de eleccion:</h2>
 
-                <label for="nom" > Motivo de eleccion:</label>
+                <label for="nom" > {{ $eleccion->motivo }}</label>
                     <br><br>
                     <h2 class="forms"style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;"> Cargo de Autoridad:</h2>
-                    <label for="nombre"> Cargo de Autoridad:</label>
+                    <label for="nombre"> {{ $eleccion->cargodeautoridad }} </label>
                     <br><br>
                     <h2 class="forms"style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;"> Gestion:</h2>
-                    <label for="nom"> Gestion:</label>
+                    <label for="nom">{{ $eleccion->gestioninicio }} - {{ $eleccion->gestionfin }} </label>
                     <br><br>
                     <h2 class="forms"style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;"> Tipo de Votantes:</h2>
-                    <label for="nom"> Tipo de Votantes:</label>
+                    <label for="nom"> {{ $eleccion->tipodevotantes }}</label>
                     <br><br>
                     <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;"> Fecha de inscripcion de frentes:</h2>
-                    <label for="nom"> Fecha de inscripcion de frentes:</label>
-                    <br><br>
+                    <label for="nom"> {{ $eleccion->fechainscripcion }}
+                    <br><br>  
                     <h2 class="forms"style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;">Fecha de eleccion:</h2>
-                    <label for="nom"> Fecha de eleccion:</label>
+                    <label for="nom"> {{ $eleccion->fecha }}</label>
                 </div>
 
                 <div class="column">
-                <h2 class="forms"style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;">Convocatoria (PDF):</h2>
+                <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px; font-weight: 400; word-wrap: break-word;">Convocatoria (PDF):</h2>
 
-                    <br><br>
-                    <br><br>
-                    <br><br>
-                    <br><br>
-                    
+                 @if (isset($eleccion) && $eleccion->convocatoria)
+                  <div style="display: flex; align-items: center;">
+                  <p style="margin-bottom: 0; margin-right: 10px;">Nombre del archivo: {{ $eleccion->convocatoria }}</p>
+                    <a href="{{ asset('storage/' . $eleccion->convocatoria) }}" download="Convocatoria.pdf"> 
+                  <img src="{{ asset('/images/descargar.png') }}" alt="Botón Descargar PDF" class="boton_descargar" title="Descargar Convocatoria" style="cursor: pointer;">
+                   </a>
+                  </div>
+                 @endif
+                 <embed src="{{ asset('storage/' . $eleccion->convocatoria) }}" type="">
+                 <br><br>
+                        
                     <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;" >Tipo de Eleccion:</h2>
-                    <label for="nom"> Tipo de Eleccion:</label>
+                    <label for="nom"> {{ $eleccion->tipodeeleccion }}</label>
+                    <br><br>        
+                    <h2 class="forms" style="color: rgba(4, 36, 60, 0.99); font-size: 20px;  font-weight: 400; word-wrap: break-word;" >Descripcion:</h2>
+                    <label for="nom"> {{ $eleccion->descripcion }}</label>
                 </div>
             </div>
         </form>
+
 
         <div class="footer">
             <div class="footer-izq">
@@ -426,9 +508,9 @@
                 Copyright © 2023 Tribunal Electoral Universitario Todos los derechos Reservados
             </div>
             <div class="footer-der">
-                <a href="{{ url('/') }}">Acerca de</a>
-                <span>&nbsp;|&nbsp;</span>
-                <a href="{{ url('/') }}">Contactos</a>
+            <a href="{{ url('/acercade') }}">Acerca de | Contactos</a>
+            <!--<span>&nbsp;|&nbsp;</span> 
+            <a href="#">Contactos</a>-->
             </div>
         </div>
     </div>

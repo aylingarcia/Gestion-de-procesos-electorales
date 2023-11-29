@@ -293,7 +293,7 @@
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
             <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
-            <li><a href="#">Ingreso</a></li>
+            <li><a href="{{ url('/registro') }}">Ingreso</a></li>
             <img src="/images/img.png"  class="company-logo">
             <!--<li class="show-on-mobile"><a href="#">Acerca de</a></li>
             <li class="show-on-mobile"><a href="#">Contactos</a></li>-->
@@ -317,9 +317,9 @@
             <br>-->
         </div>
         <div class="footer-der">
-            <a href="#">Acerca de</a>
-            <span>&nbsp;|&nbsp;</span> 
-            <a href="#">Contactos</a>
+            <a href="{{ url('/acercade') }}">Acerca de | Contactos</a>
+            <!--<span>&nbsp;|&nbsp;</span> 
+            <a href="#">Contactos</a>-->
         </div>
     </div>
     

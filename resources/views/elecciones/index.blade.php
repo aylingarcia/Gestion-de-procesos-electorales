@@ -519,7 +519,7 @@ td:first-child {
         <br>
         <br>
         <center>
-            <h1>Lista de Elecciones Creadas</h1>
+            <h1>Lista de Elecciones Activas</h1>
         </center>
         <br>
         <br>
@@ -545,11 +545,29 @@ td:first-child {
                 <a href="{{ url('/mesas') }}" class="buttons">Lista de Mesas</a>
             </div>
 
+            <div class="botones">
+                <a href="{{ url('/reporte') }}" class="buttons">Reportes</a>
+            </div>
 
             <div class="botones">
+                <a href="{{ url('/generar-backup') }}" class="buttons" download="backup.sql">Generar Backup</a>
+            </div>
+
+            <div class="botones">
+    <a href="{{ route('cargar.backup.form') }}" class="buttons">Cargar Backup</a>
+</div>
+
+
+
+            <div class="botones">
+                <a href="{{ url('/historial') }}" class="buttons" >Historial</a>
+            </div>
+
+
+            {{--<div class="botones">
                 <input type="text" id="search" placeholder="Buscar...">
                 <button class="buttons" onclick="search()">Buscar</button>
-            </div>
+            </div>--}}
         </div>
 
 
@@ -578,9 +596,9 @@ td:first-child {
 
                                     <td class="celda-botones">
 
-                                    <button class="buttons-dentro-tabla" title="Previsualizar registro"
-                                    onclick="previsuali()">
-                                        <img src="/images/previ.png" alt="Editar" class="formato-imagen" />
+                                    <button class="buttons-dentro-tabla" title="Previsualizar registro" 
+                                    onclick="window.location.href='{{ route('elecciones.previsualizacion', ['id' => $elecciones->id]) }}'">
+                                        <img src="/images/previ.png" alt="Previsualizar" class="formato-imagen" />
                                     </button>
 
                                     <button class="buttons-dentro-tabla" title="Imprimir Boleta"
@@ -595,7 +613,7 @@ td:first-child {
                                         </button>
 
                                         <button class="buttons-dentro-tabla" title="Archivar Elección"
-                                            onclick="confirmArchivar('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}')">
+                                            onclick="confirmarArchivado('{{ url('/elecciones/' . $elecciones->id . '/archivar') }}', {{ $elecciones->estadoRegistro }})">
                                             <img src="/images/archivar.png" alt="Archivar" class="formato-imagen" />
                                         </button>
 
@@ -614,7 +632,7 @@ td:first-child {
                                            <form id="delete-form-{{ $elecciones->id }}" action="{{ url('/elecciones/' . $elecciones->id) }}" method="post" style="display: inline;">
                                             @csrf
                                             {{ method_field('DELETE') }}
-                                           <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="return confirm ('Quieres borrar este votante?')">
+                                           <button class="buttons-dentro-tabla" title="Borrar Elección" onclick="return confirm ('Quieres borrar esta eleccion? se borraran todos los registros asociados a esta.')">
                                            <img src="/images/borrar.png" alt="Borrar" class="formato-imagen" />
                                            </button>
                                             </form>
@@ -623,28 +641,18 @@ td:first-child {
                                     </td>
 
                                     <script>
-                                        function confirmArchivar(archivarUrl) {
-                                            // Mostrar un cuadro de diálogo de confirmación
-                                            var confirmacion = confirm("¿Estás seguro de que deseas archivar esta elección?");
-
-                                            // Si el usuario hace clic en "Aceptar" en el cuadro de diálogo de confirmación
-                                            if (confirmacion) {
-                                                // Redirigir a la URL de archivar
-                                                window.location.href = archivarUrl;
+                                        function confirmarArchivado(url, estadoRegistro) {
+                                            if (estadoRegistro === 1) {
+                                                if (confirm("¿Estás seguro que deseas archivar esta elección?")) {
+                                                    window.location.href = url;
+                                                }
                                             } else {
-                                                // No se hace nada si el usuario hace clic en "Cancelar"
+                                                alert("No se puede archivar. Falta registrar los resultados a la elección.");
                                             }
                                         }
                                     </script>
 
-                                    <script>
-                                        function previsuali() {
-                                          
-                                                window.location.href = '/previsualizacion';
-                                           
-                                        }
-                                        
-                                    </script>
+                                
 
                                     <div class="footer">
 
@@ -665,9 +673,9 @@ td:first-child {
 
                                         </div>
                                         <div class="footer-der">
-                                            <a href="{{ url('/') }}">Acerca de</a>
-                                            <span>&nbsp;|&nbsp;</span> <!-- Para agregar un separador -->
-                                            <a href="{{ url('/') }}">Contactos</a>
+                                        <a href="{{ url('/acercade') }}">Acerca de | Contactos</a>
+                                        <!--<span>&nbsp;|&nbsp;</span> 
+                                        <a href="#">Contactos</a>-->
 
                                         </div>
 
