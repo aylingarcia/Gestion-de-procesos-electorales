@@ -501,7 +501,20 @@ td:first-child {
             <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
             {{-- <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contacto</a></li> --}}
-            <li><a href="#">Ingreso</a></li>
+            <li>
+    @if(auth()->check())
+        {{-- Si el usuario ha iniciado sesión, mostrar el enlace de Cerrar Sesión --}}
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Cerrar Sesión
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
+        {{-- Si el usuario no ha iniciado sesión, mostrar el enlace de Ingreso --}}
+        <a href="{{ url('/iniciarsesion') }}">Ingreso</a>
+    @endif
+</li>
             <img src="/images/img.png"  class="company-logo">
         </ul>
         <div class="menu-icon"></div>
@@ -518,7 +531,7 @@ td:first-child {
         </center>
         <br>
         <br>
-
+        @if(auth()->user()->name == 'admin')
         <div class="container botonesss">
 
 
@@ -529,7 +542,7 @@ td:first-child {
 
 
         </div>
-
+        @endif
         <br>
         <div class="container">
             <div class="row">
@@ -542,18 +555,21 @@ td:first-child {
                                 <th>Apellido Paterno</th>
                                 <th>Apellido Materno</th>
                                 <th>Cargo en Comite</th>
+                                @if(auth()->user()->name == 'admin')
                                 <th>Acciones</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($comitecreado as $comite)
+                            
                                 <tr>
                                     <td>{{ $comite->id_eleccion }}</td>
                                     <td>{{ $comite->nombreMiembro }}</td>
                                     <td>{{ $comite->apellidoPaterno }}</td>
                                     <td>{{ $comite->apellidoMaterno }}</td>
                                     <td>{{ $comite->cargoComite }}</td>
-
+                                    @if(auth()->user()->name == 'admin')
                                     <td class="celda-botones">
                                     {{-- <button class="buttons" style="background-color: 04243C; color: #FFF; padding: 5px 10px; border: none; cursor: pointer;" 
                                     onclick="window.location.href='{{ url('/comite/' . $comite->id . '/edit') }}'">Editar</button> --}}
@@ -590,21 +606,10 @@ td:first-child {
 
 
                                     </td>
-                                
-
-                                
-                                
-                                
-                                    
-          
-        
-
-
-
-
-
-
+                                    @endif
+                                 
                                 </tr>
+                                
                             @endforeach
                         </tbody>
                     </table>

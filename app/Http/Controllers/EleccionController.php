@@ -84,7 +84,14 @@ class EleccionController extends Controller
 
     $datosEleccion['estado'] = $request->input('estado', 1);
     $datosEleccion['estadoRegistro'] = $request->input('estadoRegistro', 0);
-    Eleccion::create($datosEleccion);
+    $eleccion = Eleccion::create($datosEleccion);
+
+    if ($request->hasFile('convocatoria')) {
+        $pdfPath = $request->file('convocatoria')->storeAs('uploads', $eleccion->id . '.pdf', 'public');
+
+        $eleccion->update(['convocatoria' => $pdfPath]);
+    }
+
 
     return redirect('/elecciones')->with('success', 'La elección se ha guardado con éxito.');
 }
@@ -230,6 +237,9 @@ class EleccionController extends Controller
         $eleccion->$nombreFrenteKey = $nombreFrente;
         $eleccion->$votosFrenteKey = $votosFrente;
     }
+    $eleccion->votosblancoselec = $request->input('votosblancoselec');
+    $eleccion->votosnuloselec = $request->input('votosnuloselec');
+
     $eleccion->estadoRegistro = 1;
     // Guardar la elección actualizada
        $eleccion->save();
@@ -263,6 +273,10 @@ public function guardarEdicionResultados(Request $request, $id)
         $eleccion->$nombreFrenteKey = $nombreFrente;
         $eleccion->$votosFrenteKey = $votosFrente;
     }
+
+    $eleccion->votosblancoselec = $request->input('votosblancoselec');
+    $eleccion->votosnuloselec = $request->input('votosnuloselec');
+
     $eleccion->estadoRegistro = 1;
     // Guardar la elección actualizada
     $eleccion->save();
@@ -274,18 +288,20 @@ public function guardarEdicionResultados(Request $request, $id)
 public function generarBackup()
 {
     try {
-        
         $backupFileName = 'backup-' . Carbon::now()->format('Y-m-d_His') . '.sql';
-
         $backupPath = storage_path('app/backups/' . $backupFileName);
-        
-        $tables = DB::select('SHOW TABLES');
 
-        foreach ($tables as $table) {
-            $tableName = reset($table);
-            
+        $tables = DB::select('SHOW TABLES');
+        $tableNames = array_map('current', json_decode(json_encode($tables), true));
+
+        // Si existe la tabla 'users', muévela al principio del array
+        if (($key = array_search('users', $tableNames)) !== false) {
+            unset($tableNames[$key]);
+            array_unshift($tableNames, 'users');
+        }
+
+        foreach ($tableNames as $tableName) {
             $structure = DB::select('SHOW CREATE TABLE ' . $tableName)[0]->{'Create Table'};
-            
             $data = DB::table($tableName)->get()->toArray();
             
             $sql = "";

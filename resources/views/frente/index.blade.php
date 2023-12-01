@@ -500,7 +500,20 @@ td:first-child {
             <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
             {{-- <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contacto</a></li> --}}
-            <li><a href="#">Ingreso</a></li>
+            <li>
+    @if(auth()->check())
+        {{-- Si el usuario ha iniciado sesión, mostrar el enlace de Cerrar Sesión --}}
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Cerrar Sesión
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
+        {{-- Si el usuario no ha iniciado sesión, mostrar el enlace de Ingreso --}}
+        <a href="{{ url('/iniciarsesion') }}">Ingreso</a>
+    @endif
+</li>
             <img src="/images/img.png"  class="company-logo">
         </ul>
         <div class="menu-icon"></div>
@@ -516,7 +529,7 @@ td:first-child {
         </center>
         <br>
         <br>
-
+        @if(auth()->user()->name == 'admin')
         <div class="container botonesss">
 
 
@@ -527,7 +540,7 @@ td:first-child {
 
 
         </div>
-
+                @endif
         <br>
         <div class="container">
             <div class="row">
@@ -542,11 +555,14 @@ td:first-child {
                                 <th>Nombre 3er Candidato</th>
                                 <th>Nombre 4to Candidato </th>
                                 <th>Cargo de Postulación</th>
+                                @if(auth()->user()->name == 'admin')
                                 <th>Acciones</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($frentescreados as $frente)
+                           
                                 <tr>
                                     <td>{{ $frente->ideleccionfrente }}</td>
                                     <td>{{ $frente->nombrefrente }}</td>
@@ -555,7 +571,7 @@ td:first-child {
                                     <td>{{ $frente->nombrecandidato3 }}</td>
                                     <td>{{ $frente->nombrecandidato4 }}</td>
                                     <td>{{ $frente->cargopostulacion }}</td>
-
+                                    @if(auth()->user()->name == 'admin')
                                     <td class="celda-botones">
 
 
@@ -584,17 +600,9 @@ td:first-child {
   
                                     
                                     </td>
-
-
-                                    
-                                    
-                                    
-
-
-
-
-
+                                    @endif
                                 </tr>
+                                
                             @endforeach
                         </tbody>
                     </table>

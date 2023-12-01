@@ -495,7 +495,20 @@ td:first-child {
             <li><a href="{{ url('/elecciones') }}">Elecciones</a></li>
             <li><a href="{{ url('/comunicados') }}">Comunicados</a></li>
             <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
-            <li><a href="#">Ingreso</a></li>
+            <li>
+    @if(auth()->check())
+        {{-- Si el usuario ha iniciado sesión, mostrar el enlace de Cerrar Sesión --}}
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Cerrar Sesión
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
+        {{-- Si el usuario no ha iniciado sesión, mostrar el enlace de Ingreso --}}
+        <a href="{{ url('/iniciarsesion') }}">Ingreso</a>
+    @endif
+</li>
             <img src="/images/img.png"  class="company-logo">
         </ul>
         <div class="menu-icon"></div>
@@ -511,14 +524,14 @@ td:first-child {
         </center>
         <br>
         <br>
-
+        @if(auth()->user()->name == 'admin')
         <div class="container botonesss">
             <div class="botones">
                 <a href="{{ url('documentaciones/create') }}" class="buttons">Añadir</a>
 
             </div>
         </div>
-
+        @endif
         <div class="container">
             <div class="row">
                 <div class="table-responsive">
@@ -530,7 +543,9 @@ td:first-child {
                                 <th>Elección</th>
                                 <th>Tipo de documento</th>
                                 <th>Añadido el:</th>
+                                @if(auth()->user()->name == 'admin')
                                 <th>Acciones</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -547,7 +562,7 @@ td:first-child {
                                    Sin fecha
                                 @endif
                             </td>
-
+                            @if(auth()->user()->name == 'admin')
                                     <td class="celda-botones">
                                     <button class="buttons-dentro-tabla" title="Editar documento" onclick="window.location.href='{{ url('/documentaciones/' . $documentacion->id . '/edit') }}'">
                                         <img src="/images/editar.png" alt="Editar" class="formato-imagen" />
@@ -561,6 +576,7 @@ td:first-child {
                                         </button>
                                     </form>
                                 </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table> 

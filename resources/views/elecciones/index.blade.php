@@ -506,7 +506,20 @@ td:first-child {
             <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
             {{-- <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contacto</a></li> --}}
-            <li><a href="#">Ingreso</a></li>
+            <li>
+    @if(auth()->check())
+        {{-- Si el usuario ha iniciado sesión, mostrar el enlace de Cerrar Sesión --}}
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Cerrar Sesión
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
+        {{-- Si el usuario no ha iniciado sesión, mostrar el enlace de Ingreso --}}
+        <a href="{{ url('/iniciarsesion') }}">Ingreso</a>
+    @endif
+</li>
             <img src="/images/img.png"  class="company-logo">
         </ul>
         <div class="menu-icon"></div>
@@ -523,12 +536,14 @@ td:first-child {
         </center>
         <br>
         <br>
-
+       
+        
         <div class="container botonesss">
+        @if(auth()->user()->name == 'admin')
             <div class="botones">
                 <a href="{{ route('elecciones.create') }}" class="buttons">Crear nueva elección</a>
             </div>
-
+        @endif
             <div class="botones">
                 <a href="{{ url('/votante') }}" class="buttons">Lista de votantes</a>
             </div>
@@ -552,7 +567,7 @@ td:first-child {
             <div class="botones">
                 <a href="{{ url('/historial') }}" class="buttons" >Historial</a>
             </div>
-
+            @if(auth()->user()->name == 'admin')
             <div class="botones">
                 <a href="{{ url('/generar-backup') }}" class="buttons" download="backup.sql">Generar Backup</a>
             </div>
@@ -564,7 +579,7 @@ td:first-child {
             <div class="botones">
                 <a href="{{ url('/logs') }}" class="buttons" >Bitacora</a>
             </div>
-
+            @endif
 
 
             
@@ -588,9 +603,12 @@ td:first-child {
                                 <th>Nombre de elección</th>
                                 <th>Cargo de Autoridad</th>
                                 <th>Gestion</th>
+                                @if(auth()->user()->name == 'admin')
                                 <th>Acciones</th>
+                                @endif 
                             </tr>
                         </thead>
+                       
                         <tbody>
                             @foreach ($eleccionescreadas as $elecciones)
                                 <tr>
@@ -599,7 +617,7 @@ td:first-child {
                                     <td>{{ $elecciones->cargodeautoridad }}</td>
                                     <td>{{ $elecciones->gestioninicio }} - {{ $elecciones->gestionfin }}</td>
                                     
-
+                                    @if(auth()->user()->name == 'admin')
                                     <td class="celda-botones">
 
                                     <button class="buttons-dentro-tabla" title="Previsualizar registro" 
@@ -645,7 +663,7 @@ td:first-child {
                                         {{-- Fin función borrar --}}
 
                                     </td>
-
+                                    @endif 
                                     <script>
                                         function confirmarArchivado(url, estadoRegistro) {
                                             if (estadoRegistro === 1) {

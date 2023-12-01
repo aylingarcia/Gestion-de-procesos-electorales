@@ -513,7 +513,20 @@ td:first-child {
             <li><a href="{{ url('/documentaciones') }}">Documentación</a></li>
             {{-- <li><a href="#">Acerca de</a></li>
             <li><a href="#">Contacto</a></li> --}}
-            <li><a href="#">Ingreso</a></li>
+            <li>
+    @if(auth()->check())
+        {{-- Si el usuario ha iniciado sesión, mostrar el enlace de Cerrar Sesión --}}
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Cerrar Sesión
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
+        {{-- Si el usuario no ha iniciado sesión, mostrar el enlace de Ingreso --}}
+        <a href="{{ url('/iniciarsesion') }}">Ingreso</a>
+    @endif
+</li>
             <img src="/images/img.png"  class="company-logo">
         </ul>
         <div class="menu-icon"></div>
@@ -571,6 +584,7 @@ td:first-child {
         </center>
         <br>
         <br>
+        @if(auth()->user()->name == 'admin')
         <div class="container botonesss">
 
 
@@ -581,7 +595,7 @@ td:first-child {
 
 
         </div>
-
+            @endif
 
 
         <br>
@@ -598,11 +612,14 @@ td:first-child {
                                 <th>Carrera</th>
                                 <th>Ubicacion</th>
                                 <th>Nº de votantes</th>
+                                @if(auth()->user()->name == 'admin')
                                 <th>Acciones</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
                         @foreach ($mesascreadas as $mesas)
+                        @if(auth()->user()->name == 'admin')
                                 <tr>
                                     <td>{{ $mesas->id_de_eleccion }}</td>
                                     <td>{{ $mesas->numeromesa}}</td>
@@ -675,6 +692,7 @@ td:first-child {
 
                                 
                           </tr>
+                          @endif
                           @endforeach
                         </tbody>
                     </table>
