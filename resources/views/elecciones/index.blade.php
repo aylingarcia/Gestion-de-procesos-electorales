@@ -537,7 +537,6 @@ td:first-child {
         <br>
         <br>
        
-        
         <div class="container botonesss">
         @if(auth()->user()->name == 'admin')
             <div class="botones">
@@ -605,10 +604,9 @@ td:first-child {
                                 <th>Gestion</th>
                                 @if(auth()->user()->name == 'admin')
                                 <th>Acciones</th>
-                                @endif 
+                                @endif
                             </tr>
                         </thead>
-                       
                         <tbody>
                             @foreach ($eleccionescreadas as $elecciones)
                                 <tr>
@@ -663,7 +661,7 @@ td:first-child {
                                         {{-- Fin función borrar --}}
 
                                     </td>
-                                    @endif 
+                                    @endif
                                     <script>
                                         function confirmarArchivado(url, estadoRegistro) {
                                             if (estadoRegistro === 1) {

@@ -9,7 +9,7 @@
     <br>
     <br>
     <br>
-    <title>Miembros del Comite</title>
+    <title>Lista de Miembros del Comite</title>
    
 
 </head>
@@ -527,7 +527,7 @@ td:first-child {
         <br>
         <br>
         <center>
-            <h1>Miembros del Comite</h1>
+            <h1>Lista de Miembros del Comite</h1>
         </center>
         <br>
         <br>
@@ -536,13 +536,13 @@ td:first-child {
 
 
             <div class="botones">
-                <a href="{{ url('comite/create') }}" class="buttons">Añadir miembro de comite</a>
+                <a href="{{ url('comite/create') }}" class="buttons">Añadir Miembro de Comite</a>
 
             </div>
 
 
         </div>
-        @endif
+                @endif
         <br>
         <div class="container">
             <div class="row">
@@ -562,7 +562,6 @@ td:first-child {
                         </thead>
                         <tbody>
                             @foreach ($comitecreado as $comite)
-                            
                                 <tr>
                                     <td>{{ $comite->id_eleccion }}</td>
                                     <td>{{ $comite->nombreMiembro }}</td>
@@ -606,10 +605,21 @@ td:first-child {
 
 
                                     </td>
-                                    @endif
-                                 
-                                </tr>
+                                @endif
+
                                 
+                                
+                                
+                                    
+          
+        
+
+
+
+
+
+
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

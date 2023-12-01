@@ -9,7 +9,7 @@
     <br>
     <br>
     <br>
-    <title>Miembros del Comite</title>
+    <title>Lista de Votantes</title>
     
     
 
@@ -531,10 +531,10 @@ td:first-child {
         </center>
         <br>
         <br>
-        @if(auth()->user()->name == 'admin')
+
         <div class="container botonesss">
 
-            
+        @if(auth()->user()->name == 'admin')
             <div class="botones">
             
 
@@ -543,10 +543,10 @@ td:first-child {
                 <a href="{{ url('/votantes/carga') }}" class="buttons">Añadir Votantes por CSV</a>
 
             </div>
-
+        @endif
 
         </div>
-        @endif
+               
         <br>
         <div class="container">
             <div class="row">
@@ -566,7 +566,6 @@ td:first-child {
                         </thead>
                         <tbody>
                             @foreach ($votantescreados as $votante)
-                            
                                 <tr>
                                     <td>{{ $votante->ideleccion }}</td>
                                     <td>{{ $votante->nombres }}</td>
@@ -602,8 +601,8 @@ td:first-child {
   
                                     
                                     </td>
-                                    @endif
-                                    
+                                        @endif
+
                                     
                                     
                                     
@@ -614,7 +613,6 @@ td:first-child {
 
 
                                 </tr>
-                                
                             @endforeach
                         </tbody>
                     </table>

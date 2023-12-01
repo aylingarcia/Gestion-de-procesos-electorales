@@ -300,7 +300,6 @@
                                                     Reporte
                                                 </a>
                                             </button>    
-                                            
                                             <button class="buttons-dentro-tabla" title="Imprimir Reporte">
                                                 <a href="{{ asset('storage/uploads/' . $resultado->id . '.pdf') }}" class="reporte" target="_blank">
                                                     Convocatoria

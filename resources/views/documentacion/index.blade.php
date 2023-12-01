@@ -538,7 +538,7 @@ td:first-child {
                     <table id="eleccionesTable" class="vistatabla">
                         <thead>
                             <tr>
-                                <th>id de Eleccion</th>
+                                <th>Id de Elección</th>
                                 <th>Título</th>
                                 <th>Elección</th>
                                 <th>Tipo de documento</th>
@@ -561,7 +561,7 @@ td:first-child {
                                 @else
                                    Sin fecha
                                 @endif
-                            </td>
+                            </td> 
                             @if(auth()->user()->name == 'admin')
                                     <td class="celda-botones">
                                     <button class="buttons-dentro-tabla" title="Editar documento" onclick="window.location.href='{{ url('/documentaciones/' . $documentacion->id . '/edit') }}'">

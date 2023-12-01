@@ -9,7 +9,7 @@
     <br>
     <br>
     <br>
-    <title>Mesas</title>
+    <title>Lista de Mesas</title>
     
     
 </head>
@@ -580,7 +580,7 @@ td:first-child {
         <br>
         <br>
         <center>
-            <h1>Lista de mesas</h1>
+            <h1>Lista de Mesas</h1>
         </center>
         <br>
         <br>
@@ -610,7 +610,7 @@ td:first-child {
                                 <th>Tipo Votante</th>
                                 <th>Votantes en mesa</th>
                                 <th>Carrera</th>
-                                <th>Ubicacion</th>
+                                <th>Ubicación</th>
                                 <th>Nº de votantes</th>
                                 @if(auth()->user()->name == 'admin')
                                 <th>Acciones</th>
@@ -619,7 +619,6 @@ td:first-child {
                         </thead>
                         <tbody>
                         @foreach ($mesascreadas as $mesas)
-                        @if(auth()->user()->name == 'admin')
                                 <tr>
                                     <td>{{ $mesas->id_de_eleccion }}</td>
                                     <td>{{ $mesas->numeromesa}}</td>
@@ -629,7 +628,7 @@ td:first-child {
                                     <td>{{ $mesas->ubicacionmesa }}</td>
                                     <td>{{ $mesas->numerodevotantes }}</td>
                                     
-
+                                    @if(auth()->user()->name == 'admin')
                                     <td class="celda-botones">
                                     
                                     {{-- <a href="{{ url('/mesas/' . $mesas->id . '/generate-jurados') }}" class="buttons" 
@@ -689,10 +688,9 @@ td:first-child {
                                  {{-- Fin función borrar --}}
                                  
                                  </td>                                                                  
-
+                                 @endif
                                 
                           </tr>
-                          @endif
                           @endforeach
                         </tbody>
                     </table>
