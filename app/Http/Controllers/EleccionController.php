@@ -84,7 +84,13 @@ class EleccionController extends Controller
 
     $datosEleccion['estado'] = $request->input('estado', 1);
     $datosEleccion['estadoRegistro'] = $request->input('estadoRegistro', 0);
-    Eleccion::create($datosEleccion);
+    $eleccion = Eleccion::create($datosEleccion);
+
+    if ($request->hasFile('convocatoria')) {
+        $pdfPath = $request->file('convocatoria')->storeAs('uploads', $eleccion->id . '.pdf', 'public');
+
+        $eleccion->update(['convocatoria' => $pdfPath]);
+    }
 
     return redirect('/elecciones')->with('success', 'La elección se ha guardado con éxito.');
 }
@@ -127,6 +133,11 @@ class EleccionController extends Controller
     {
         //
         $datosEleccion = request()->except(['_token','_method']);
+        if ($request->hasFile('convocatoria')) {
+            $pdfPath = $request->file('convocatoria')->storeAs('uploads', $id . '.pdf', 'public');
+    
+            $datosEleccion['convocatoria'] = $pdfPath;
+        }
         
         Eleccion::where('id',$id)->update($datosEleccion);
 
