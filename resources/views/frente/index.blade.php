@@ -185,7 +185,11 @@ nav ul li a:hover{
     /* Tamaño de fuente al pasar el ratón sobre el enlace, puedes ajustarlo según tus preferencias */
 
 }
+th small {
+    font-size: 70%;
+    vertical-align: super;
 
+  }
 
 @media screen and (max-width:992px){
     nav ul{
@@ -551,9 +555,9 @@ td:first-child {
                                 <th>IdElección</th>
                                 <th>Nombre de Frente</th>
                                 <th>Nombre Candidato</th>
-                                <th>Nombre 2do Candidato</th>
-                                <th>Nombre 3er Candidato</th>
-                                <th>Nombre 4to Candidato </th>
+                                <th>Nombre 2<small>do</small> Candidato</th>
+                                <th>Nombre 3<small>do</small> Candidato</th>
+                                <th>Nombre 4<small>do</small> Candidato</th>
                                 <th>Cargo de Postulación</th>
                                 <th>Acciones</th>
                             </tr>

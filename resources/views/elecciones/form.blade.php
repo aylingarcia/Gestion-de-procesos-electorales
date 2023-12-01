@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear/Editar una elección</title>
+    <title>Crear/Editar una Elección</title>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="{{ asset('js/Elecciones_Creadas.js') }}"></script>
 
@@ -536,7 +536,7 @@ input[type="reset"]:hover {
             </div>
             <input type="submit" value="{{ isset($elecciones) ? 'Actualizar' : 'Registrar' }}"
             onclick="return confirm ('¿Está seguro que registrar esta eleccion?')">
-            <input type="reset" value="Cancelar" onclick="confirmarCancelación()">
+            <input type="reset" value="Cancelar" onclick="confirmarCancelacion()">
             <label for=""></label><br><br>
             <label for=""></label><br><br>
         </form>
