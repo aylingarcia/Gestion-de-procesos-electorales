@@ -1,3 +1,4 @@
+@if(auth()->user()->name == 'admin')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -428,7 +429,7 @@
     <div class="footer">
 
         <div class="footer-izq">
-            Av. Oquendo y calle Jordán asd
+            Av. Oquendo y calle Jordán 
             <br>
             Mail: Tribunal_electoral@umss.edu
             <br>
@@ -506,3 +507,6 @@
     }
 </script> 
 </html> 
+@else
+<h1>Error 404</h1>
+@endif

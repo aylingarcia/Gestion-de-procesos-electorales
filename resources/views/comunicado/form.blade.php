@@ -1,5 +1,8 @@
 @extends('layouts.header_footer')
+
+
 <!DOCTYPE html>
+
 <html lang="en">
 
     <head>
@@ -98,6 +101,7 @@
     </style>
     <body>
         <div class="container">
+        
             <form action="{{ isset($comunicado) ? url('/comunicados/' . $comunicado->id) : url('/comunicados') }}"
                 method="post" enctype="multipart/form-data">
                 @csrf
@@ -140,6 +144,8 @@
                     <input type="reset" value="Cancelar" onclick="cancelacion()">
                 </div>
             </form>
+            
+            
         </div>
     </body>
     <script>

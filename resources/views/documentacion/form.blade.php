@@ -1,5 +1,6 @@
 @extends('layouts.header_footer')
 <!DOCTYPE html>
+
 <html lang="en">
 
     <head>
@@ -96,6 +97,7 @@
             
         }
     </style>
+    
     <body>
         <div class="container">
             <form action="{{ isset($documentacion) ? url('/documentaciones/' . $documentacion->id) : url('/documentaciones') }}"
@@ -150,7 +152,9 @@
                 </div>
             </form>
         </div>
+    
     </body>
+    
     <script>
 
         function cancelacion() {

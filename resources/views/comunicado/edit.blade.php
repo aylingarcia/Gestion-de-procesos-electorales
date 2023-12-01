@@ -2,5 +2,4 @@
     @csrf
     {{ method_field('PATCH') }}
     @include('comunicado.form');
-
 </form>

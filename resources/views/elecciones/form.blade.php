@@ -1,3 +1,4 @@
+@if(auth()->user()->name == 'admin')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -434,29 +435,25 @@ input[type="reset"]:hover {
                    @enderror
 
                    <label for="gestioninicio">Gestión (Inicio y Fin):</label>
-                   <select name="gestioninicio" id="gestionicio" required>
-                   <option value="">Selecciona un año</option>
-                    @for ($year = date('Y'); $year <= 2150; $year++)
-                       <option value="{{ $year }}"
-                         @if (isset($elecciones) && $elecciones->gestion && $year == explode(' - ', $elecciones->gestioninicio)[0])
-                    selected
-                    @endif>
-                    {{ $year }}
-                       </option>
-                    @endfor
-                    </select>
--
-                    <select name="gestionfin" id="gestionfin" required>
-                    <option value="">Selecciona un año</option>
-                    @for ($year = date('Y'); $year <= 2150; $year++)
-                        <option value="{{ $year }}"
-                          @if (isset($elecciones) && $elecciones->gestion && $year == explode(' - ', $elecciones->gestionfin)[1])
-                    selected
-                    @endif>
-                    {{ $year }}
+                    <select name="gestioninicio" id="gestioninicio" required>
+                        <option value="">Selecciona un año</option>
+                        @for ($yearIni = date('Y'); $yearIni <= 2150; $yearIni++)
+                        <option value="{{ $yearIni }}" @if (isset($elecciones) && $elecciones->gestion && $yearIni == explode(' - ', $elecciones->gestioninicio)[0])
+                            selected @endif>
+                            {{ $yearIni }}
                         </option>
-                    @endfor
-                     </select>
+                        @endfor
+                    </select>
+                    -
+                    <select name="gestionfin" id="gestionfin" required>
+                        <option value="">Selecciona un año</option>
+                        @for ($year = date('Y'); $year >= $yearIni; $year--)
+                        <option value="{{ $year }}" @if (isset($elecciones) && $elecciones->gestion && $year == explode(' - ', $elecciones->gestionfin)[1])
+                            selected @endif>
+                            {{ $year }}
+                        </option>
+                        @endfor
+                    </select>
 
                       <br><br>
 
@@ -723,7 +720,26 @@ input[type="reset"]:hover {
         }
     }
 
+    document.addEventListener('DOMContentLoaded', function () {
 
+        var gestionInicioSelect = document.getElementById('gestioninicio');
+        var gestionFinSelect = document.getElementById('gestionfin');
+
+        gestionInicioSelect.addEventListener('change', function () {
+
+        var inicioSeleccionado = parseInt(this.value);
+
+        gestionFinSelect.innerHTML = '<option value="">Selecciona un año</option>';
+        for (var year = inicioSeleccionado+1; year <= 2150; year++) {
+            var option = document.createElement('option');
+            option.value = year;
+            option.text = year;
+            gestionFinSelect.add(option);
+        }
+        });
+
+        gestionInicioSelect.dispatchEvent(new Event('change'));
+    });
 
 </script>
 
@@ -731,3 +747,6 @@ input[type="reset"]:hover {
 </body>
 
 </html>
+@else
+<h1>Error 404</h1>
+@endif

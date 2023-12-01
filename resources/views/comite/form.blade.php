@@ -1,3 +1,4 @@
+@if(auth()->user()->name == 'admin')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -456,7 +457,7 @@ input[type="reset"]:hover {
         <div class="footer">
 
             <div class="footer-izq">
-                Av. Oquendo y calle Jordán asd
+                Av. Oquendo y calle Jordán 
                 <br>
                 Mail: Tribunal_electoral@umss.edu
                 <br>
@@ -491,3 +492,6 @@ input[type="reset"]:hover {
           }
       </script> 
 </html>
+@else
+<h1>Error 404</h1>
+@endif
