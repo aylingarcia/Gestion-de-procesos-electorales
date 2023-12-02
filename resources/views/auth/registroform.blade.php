@@ -357,7 +357,7 @@ nav ul li a:hover {
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="form-title" style="font-weight: bold;">{{ __('Registrar') }}</div>
+                    <div class="form-title" style="font-weight: bold;">{{ __('Registrar Usuario') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
