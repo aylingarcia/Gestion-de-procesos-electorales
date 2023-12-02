@@ -541,7 +541,7 @@ input[type="reset"]:hover {
         <div class="footer">
 
             <div class="footer-izq">
-                Av. Oquendo y calle Jordán asd
+                Av. Oquendo y calle Jordán
                 <br>
                 Mail: Tribunal_electoral@umss.edu
                 <br>
