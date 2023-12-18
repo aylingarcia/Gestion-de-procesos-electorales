@@ -14,6 +14,8 @@ use App\Models\Jurado;
 use App\Models\Mesa;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\View;
+use FPDF;
 
 class MesaController extends Controller
 {
@@ -421,9 +423,7 @@ public function visualizaracta($id)
         $fechaFormateada = strftime("%d  de %B de %Y", strtotime($eleccion->fecha));
         setlocale(LC_TIME, '');
         
-        $horaActual = new DateTime();
-        $horaActual->sub(new DateInterval('PT2H'));
-        $horaActual = $horaActual->format('H:i');
+        $horaActual = (new DateTime())->format('H:i');
         
         $frentes = Frente::where('ideleccionfrente', $mesa->id_de_eleccion)->get();
         $jurados = Jurado::where('iddeeleccion', $mesa->id_de_eleccion)
@@ -433,35 +433,169 @@ public function visualizaracta($id)
 
         return view('mesas.acta', compact('mesa', 'eleccion', 'frentes', 'jurados','horaActual','fechaFormateada'));
     }
+    
     public function pdf($id)
-    {
-        
-        $mesa = Mesa::find($id);
+{
+    $mesa = Mesa::find($id);
 
-        if (!$mesa) {
-            return response()->json(['error' => 'Mesa no encontrada'], 404);
-        }
+    if (!$mesa) {
+        return response()->json(['error' => 'Mesa no encontrada'], 404);
+    }
 
-        // Obtener elección relacionada
-        $eleccion = Eleccion::find($mesa->id_de_eleccion);
-        
-        //Obtiene la fecha y cambia el formato a dia mes, año
-        setlocale(LC_TIME, 'es_ES');
-        $fechaFormateada = strftime("%d de %B de %Y", strtotime($eleccion->fecha));
-        setlocale(LC_TIME, '');
-        //Obtiene la hora y reduce 2 horas
-        $horaActual = new DateTime();
-        $horaActual->sub(new DateInterval('PT2H'));
-        $horaActual = $horaActual->format('H:i');
-        // Obtener los frentes relacionados con la elección
-        $frentes = Frente::where('ideleccionfrente', $mesa->id_de_eleccion)->get();
-        $jurados = Jurado::where('iddeeleccion', $mesa->id_de_eleccion)
+    // Obtener elección relacionada
+    $eleccion = Eleccion::find($mesa->id_de_eleccion);
+
+    // Obtener los frentes relacionados con la elección
+    $frentes = Frente::where('ideleccionfrente', $mesa->id_de_eleccion)->get();
+    $jurados = Jurado::where('iddeeleccion', $mesa->id_de_eleccion)
         ->where('idmesa', $mesa->numeromesa)
         ->orderBy('tipojurado', 'asc')
         ->get();
-        $pdf = PDF::loadView('mesas.actapdf', compact('mesa', 'eleccion', 'frentes', 'jurados','horaActual','fechaFormateada'));
-        return $pdf->stream();
+
+    //Obtiene la fecha y cambia el formato a día mes, año
+    setlocale(LC_TIME, 'es_ES');
+    $fechaFormateada = strftime("%d de %B de %Y", strtotime($eleccion->fecha));
+    setlocale(LC_TIME, '');
+
+    // Obtiene la hora actual
+    $horaActual = (new DateTime())->format('H:i');
+
+    // Crear objeto FPDF
+require public_path('fpdf/fpdf.php');
+$pdf = new \FPDF('P', 'mm', 'Legal'); // 'P' para orientación vertical, 'Legal' para tamaño de página legal
+$pdf->AddPage();
+$pdf->SetFont('Arial', 'B', 14);
+
+// Header
+$pdf->SetTextColor(0, 0, 0); // Negro
+$pdf->Cell(0, 10, utf8_decode('UNIVERSIDAD MAYOR DE SAN SIMÓN'), 0, 1, 'C');
+$pdf->Cell(0, 10, 'TRIBUNAL ELECTORAL UNIVERSITARIO', 0, 1, 'C');
+$pdf->SetTextColor(255, 255, 255); // Restablece el color a blanco
+$pdf->Ln(5);
+
+// Acta de Apertura
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->SetFillColor(227, 6, 19); // Rojo
+$pdf->SetTextColor(0, 0, 0); // Blanco
+$pdf->Cell(0, 10, 'ACTA DE APERTURA', 0, 1, 'C'); // Cambiado '1' a '0' para eliminar la celda
+$pdf->Ln(0);
+
+$pdf->SetFont('Arial', '', 10);
+$pdf->SetTextColor(0, 0, 0); // Negro
+$pdf->MultiCell(0, 10, utf8_decode("En Cochabamba, a hora $horaActual del día $fechaFormateada, de conformidad con la Convocatoria y el Reglamento Electoral Universitario, se dio inicio al funcionamiento de la mesa $mesa->numeromesa."));
+   
+// Tabla de Jurados
+    $pdf->Ln(0);
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetFillColor(227, 6, 19);
+    $pdf->SetTextColor(255, 255, 255);
+    $pdf->Cell(60, 10, 'Tipo de Jurado', 1, 0, 'C', true); // Cambiado a centrado
+    $pdf->Cell(70, 10, 'Nombre', 1, 0, 'C', true); // Cambiado a centrado
+    $pdf->Cell(60, 10, 'Firma', 1, 1, 'C', true); // Cambiado a centrado
+
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->SetFillColor(255, 255, 255); // Blanco
+    $pdf->SetTextColor(0, 0, 0); // Negro
+
+    foreach ($jurados as $jurado) {
+        $pdf->Cell(60, 10, $jurado->tipojurado, 1);
+        $pdf->Cell(70, 10, "$jurado->nombre $jurado->apellidoPaterno $jurado->apellidoMaterno", 1);
+        $pdf->Cell(60, 10, '', 1);  // Aquí deberías añadir la lógica para las firmas
+        $pdf->Ln();
     }
+
+    $pdf->Ln(5);
+
+    // Acta de Cierre y Resultados de Frentes
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->SetFillColor(227, 6, 19);
+    $pdf->SetTextColor(0, 0, 0);
+    $pdf->Cell(0, 10, 'ACTA DE CIERRE', 0, 1, 'C'); // Cambiado '1' a '0' para eliminar la celda
+    $pdf->Ln(0); // Añadido un salto de línea adicional
+
+    $pdf->SetFont('Arial', '', 10); // Establecer el mismo tamaño de fuente
+    $pdf->SetTextColor(0, 0, 0);
+    $pdf->MultiCell(0, 10, utf8_decode("Transcurrida la votación continua se procedió al cierre de la mesa $mesa->numeromesa efectuándose inmediatamente el escrutinio de votos, con los siguientes resultados:"));
+
+    // Resultados de Frentes
+$pdf->Ln(0);
+$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFillColor(227, 6, 19);
+$pdf->SetTextColor(255, 255, 255);
+
+// Ajuste del ancho de la celda para que coincida con la tabla de jurados
+$anchoCeldaFrentes = 60;
+
+// Calcular la posición X para centrar la tabla
+$posicionX = ($pdf->GetPageWidth() - $anchoCeldaFrentes * 2) / 2;
+
+$pdf->SetX($posicionX); // Establecer la posición X
+$pdf->Cell($anchoCeldaFrentes, 10, utf8_decode('Frente'), 1, 0, 'C', true); // Cambiado a centrado
+$pdf->Cell($anchoCeldaFrentes, 10, utf8_decode('Votos'), 1, 1, 'C', true); // Cambiado a centrado
+
+$pdf->SetFont('Arial', '', 10);
+$pdf->SetFillColor(255, 255, 255); // Blanco
+$pdf->SetTextColor(0, 0, 0); // Negro
+
+foreach ($frentes as $frente) {
+    $pdf->SetX($posicionX); // Establecer la posición X
+    $pdf->Cell($anchoCeldaFrentes, 10, utf8_decode($frente->nombrefrente), 1);
+    $pdf->Cell($anchoCeldaFrentes, 10, '', 1);  // Aquí deberías añadir la lógica para los votos
+    $pdf->Ln();
+}
+
+    $pdf->Ln(0);
+
+    // Resultados adicionales
+
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetTextColor(0, 0, 0);
+    $pdf->MultiCell(0, 10, utf8_decode('Votos Válidos:'));
+    $pdf->MultiCell(0, 10, 'Votos en Blanco:');
+    $pdf->MultiCell(0, 10, 'Votos Nulos:');
+    $pdf->MultiCell(0, 10, 'Total de Votos Emitidos:');
+    $pdf->Ln(0);
+
+    // Tabla de Jurados al final
+
+    $pdf->SetFont('Arial', '', 9); // Establecer el mismo tamaño de fuente
+    $pdf->SetTextColor(0, 0, 0);
+    $pdf->MultiCell(0, 10, utf8_decode("Con lo que concluyó el acto en conformidad suscribimos nuestras firmas:"));
+    $pdf->Ln(5);
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetFillColor(227, 6, 19);
+    $pdf->SetTextColor(255, 255, 255);
+    $pdf->Cell(60, 10, 'Tipo de Jurado', 1, 0, 'C', true); // Cambiado a centrado
+    $pdf->Cell(70, 10, 'Nombre', 1, 0, 'C', true); // Cambiado a centrado
+    $pdf->Cell(60, 10, 'Firma', 1, 1, 'C', true); // Cambiado a centrado
+
+    $pdf->SetFont('Arial', '', 9);
+    $pdf->SetFillColor(255, 255, 255); // Blanco
+    $pdf->SetTextColor(0, 0, 0); // Negro
+
+    foreach ($jurados as $jurado) {
+        $pdf->Cell(60, 10, $jurado->tipojurado, 1);
+        $pdf->Cell(70, 10, "$jurado->nombre $jurado->apellidoPaterno $jurado->apellidoMaterno", 1);
+        $pdf->Cell(60, 10, '', 1);  // Aquí deberías añadir la lógica para las firmas
+        $pdf->Ln();
+    }
+    $pdf->Ln(0);
+
+    // Observaciones
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->SetFillColor(227, 6, 19);
+    $pdf->SetTextColor(0, 0, 0);
+    $pdf->Cell(0, 10, 'Observaciones:', 0, 1, 'L'); // Cambiado '1' a '0' para eliminar la celda
+    $pdf->Ln(0);
+
+    $pdf->SetFont('Arial', '', 11);
+    $pdf->MultiCell(0, 10, "______________________________________________________________________________________");
+    $pdf->MultiCell(0, 10, "______________________________________________________________________________________");
+    $pdf->Ln(0);
+
+    // Output
+    $pdf->Output('D', 'Acta.pdf');
+}
     
 
     public function registroResultados($id) {
